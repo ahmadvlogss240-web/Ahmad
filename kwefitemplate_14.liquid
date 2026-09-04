@@ -1,0 +1,2332 @@
+{% comment %}
+================================================================================
+  KWEFI TEMPLATE  ·  Light theme  ·  Single-product PDP
+
+  HOW TO USE
+  1. Replace every [BRACKETED] placeholder with your product copy.
+  2. Swap image URLs (src="...") with your CDN assets.
+  3. Tune brand colors via the CSS variables in the :root block at the top.
+  4. Add / remove feature cards, FAQ items, studies cards as needed.
+  5. Drop into Shopify as a section (search for "Kwefi Template").
+
+  STRUCTURE
+  · Hero (gallery + info + 2 offer cards + bonus gifts + CTA + 30-day guarantee + UGC)
+  · Trust marquee
+  · Featured cards grid (4 product highlights)
+  · Detail image slider (specs / parts / ingredients)
+  · Comparison table
+  · Studies / "Inside The Box" expandable cards
+  · Guarantee section
+  · FAQ
+  · Footer
+  · Gift explainer modal · Sticky CTA
+
+================================================================================
+{% endcomment %}
+{% raw %}
+<script>(function(){
+var v = document.querySelector('meta[name="viewport"]');
+if (!v) { v = document.createElement('meta'); v.setAttribute('name','viewport'); document.head.appendChild(v); }
+var c = v.getAttribute('content') || '';
+if (c.indexOf('width=device-width') === -1) { v.setAttribute('content','width=device-width, initial-scale=1, viewport-fit=cover'); }
+
+/* ===== SEO: inject meta tags + Product JSON-LD into <head> ===== */
+var head = document.head;
+var HERO_IMG = 'https://cdn.shopify.com/s/files/1/1053/7543/2968/files/Luxury_essentials_on_white_backg__202607280959.jpg?v=1785226210';
+var PRODUCT_TITLE = 'Ajvora™ Tracker Card | Apple Find My + Android Find Hub';
+var PRODUCT_DESC = 'Never lose your wallet again. Ultra-thin 2mm smart tracker works with Apple Find My & Android Find Hub. IP67 waterproof, wireless rechargeable. 30-day money-back guarantee.';
+var SHORT_DESC = 'Ultra-thin smart tracker card. Apple Find My + Android Find Hub compatible.';
+
+function setMeta(name, content, isProperty){
+  if(!content) return;
+  var attr = isProperty ? 'property' : 'name';
+  var tag = document.querySelector('meta[' + attr + '="' + name + '"]');
+  if(!tag){ tag = document.createElement('meta'); tag.setAttribute(attr, name); head.appendChild(tag); }
+  tag.setAttribute('content', content);
+}
+function setLink(rel, href){
+  var tag = document.querySelector('link[rel="' + rel + '"]');
+  if(!tag){ tag = document.createElement('link'); tag.setAttribute('rel', rel); head.appendChild(tag); }
+  tag.setAttribute('href', href);
+}
+
+// Title (only override if theme title is missing/generic)
+if(!document.title || document.title.length < 8){ document.title = PRODUCT_TITLE; }
+
+// Standard meta
+setMeta('description', PRODUCT_DESC);
+setMeta('robots', 'index,follow,max-image-preview:large');
+setMeta('theme-color', '#ffffff');
+setLink('canonical', window.location.href.split('?')[0].split('#')[0]);
+
+// Open Graph
+setMeta('og:type', 'product', true);
+setMeta('og:title', PRODUCT_TITLE, true);
+setMeta('og:description', PRODUCT_DESC, true);
+setMeta('og:image', HERO_IMG, true);
+setMeta('og:image:alt', 'Ajvora Tracker Card in a wallet', true);
+setMeta('og:site_name', 'Ajvora', true);
+setMeta('og:locale', 'en_US', true);
+setMeta('og:url', window.location.href.split('?')[0].split('#')[0], true);
+
+// Twitter Card
+setMeta('twitter:card', 'summary_large_image');
+setMeta('twitter:title', PRODUCT_TITLE);
+setMeta('twitter:description', SHORT_DESC);
+setMeta('twitter:image', HERO_IMG);
+setMeta('twitter:image:alt', 'Ajvora Tracker Card');
+
+// JSON-LD Product Schema
+try {
+  var old = document.getElementById('kwProductSchema');
+  if(old) old.remove();
+  var ld = document.createElement('script');
+  ld.type = 'application/ld+json';
+  ld.id = 'kwProductSchema';
+  ld.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Ajvora™ Tracker Card",
+    "description": "Ultra-thin 2mm smart tracker card compatible with Apple Find My and Android Find Hub. Wireless rechargeable 100 mAh battery, IP67 waterproof, credit-card size (80 x 50 x 2 mm), 12.2g.",
+    "brand": { "@type": "Brand", "name": "Ajvora" },
+    "sku": "AJV-TRACKER-01",
+    "category": "Electronics > GPS & Trackers",
+    "image": [
+      HERO_IMG,
+      "https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_28._Juli_2026_12_58_56.png?v=1785236374",
+      "https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_28._Juli_2026_13_34_44.png?v=1785238539",
+      "https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_28._Juli_2026_12_25_30.png?v=1785234387",
+      "https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_28._Juli_2026_12_12_50.png?v=1785233766"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "12000",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "EUR",
+      "lowPrice": "49.99",
+      "highPrice": "65.99",
+      "offerCount": "2",
+      "availability": "https://schema.org/InStock"
+    }
+  });
+  head.appendChild(ld);
+} catch(e){}
+})();</script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,500&display=swap');
+html,body{overflow-x:hidden;max-width:100%}
+
+
+.kw{
+  /* ====== EDIT BRAND COLORS HERE ====== */
+  --accent:#374151;
+  --accent-deep:#111827;
+  --accent-soft:rgba(17,24,39,0.06);
+  --green:#16a34a;
+  --green-deep:#15803d;
+  --green-soft:rgba(22,163,74,0.08);
+  --red:#dc2626;
+
+  /* ====== NEUTRAL PALETTE (light theme) ====== */
+  --bg:#ffffff;
+  --bg-soft:#f8f8f8;
+  --ink:#111827;
+  --tx:#4b5563;
+  --tx-dim:#9ca3af;
+  --card:#f8f8f8;
+  --card-line:#e5e7eb;
+
+  /* ====== TYPOGRAPHY ====== */
+  --display:'Anton',Impact,sans-serif;
+  --head:'Manrope',sans-serif;
+  --sans:'Inter',-apple-system,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.55;
+  width:100vw;max-width:100vw;
+  margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);
+}
+.kw *,.kw *::before,.kw *::after{box-sizing:border-box}
+.kw img{max-width:100%;height:auto;display:block}
+
+/* ====== PRIMITIVES ====== */
+.kw-eyebrow{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;padding:6px 13px;border-radius:100px;background:var(--accent-soft);color:var(--accent);border:1px solid rgba(17,24,39,0.12)}
+.kw-title{font-family:var(--display);font-weight:400;line-height:1.04;letter-spacing:0.005em;text-transform:uppercase;color:var(--ink);margin:12px 0}
+.kw-title em{color:var(--accent);font-style:normal}
+.kw-cta{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;background:#111827 !important;background-color:#111827 !important;color:#ffffff !important;-webkit-text-fill-color:#ffffff;text-decoration:none;padding:16px 24px;border-radius:100px;font-family:var(--head);font-weight:800;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;box-shadow:0 14px 32px -12px rgba(17,24,39,0.35);transition:transform .15s ease,background .15s ease;border:none;cursor:pointer;opacity:1;filter:none}
+.kw-cta:hover,.kw-cta:focus,.kw-cta:visited,.kw-cta:active{color:#ffffff !important;-webkit-text-fill-color:#ffffff;text-decoration:none;opacity:1;background:#111827 !important;background-color:#111827 !important}
+.kw-cta:hover{transform:translateY(-2px);background:#000 !important;background-color:#000 !important}
+.kw-cta *{color:#ffffff !important;-webkit-text-fill-color:#ffffff}
+.kw-cta-label{display:flex;align-items:center;gap:8px;color:#ffffff !important;-webkit-text-fill-color:#ffffff}
+.kw-cta-label::after{content:"\2192";font-size:18px;color:#ffffff !important;-webkit-text-fill-color:#ffffff}
+.kw-cta-total{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1;text-transform:none;letter-spacing:0;color:#ffffff !important}
+.kw-cta-total-label{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0.9;color:#ffffff !important;-webkit-text-fill-color:#ffffff}
+.kw-cta-total-row{display:flex;align-items:baseline;gap:7px;margin-top:2px}
+.kw-cta-total-strike{font-size:12px;text-decoration:line-through;opacity:0.85;font-weight:600;color:#ffffff !important;-webkit-text-fill-color:#ffffff}
+.kw-cta-total-price{font-size:20px;font-weight:900;color:#ffffff !important;-webkit-text-fill-color:#ffffff}
+
+/* Sections */
+.kw-sec{padding:72px 24px}
+.kw-sec.alt{background:var(--bg-soft)}
+.kw-sec-inner{max-width:1080px;margin:0 auto}
+.kw-head{text-align:center;margin-bottom:40px}
+.kw-head .kw-title{font-size:36px}
+.kw-head-sub{font-size:15px;color:var(--tx);max-width:540px;margin:0 auto;line-height:1.6}
+
+/* ====== HERO ====== */
+.kw-buy{padding:40px 24px 64px}
+.kw-buy-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
+.kw-gallery{position:sticky;top:20px}
+.kw-stage{position:relative;aspect-ratio:1/1;border-radius:18px;overflow:hidden;background:var(--card);border:1px solid var(--card-line);touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.kw-stage img{width:100%;height:100%;object-fit:contain;padding:16px}
+.kw-stage-track{position:absolute;inset:0;z-index:1;display:flex;will-change:transform;transition:transform .32s cubic-bezier(.22,.61,.36,1);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.kw-stage-track.is-dragging{transition:none}
+.kw-stage-slide{flex:0 0 100%;height:100%;display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box}
+.kw-stage-slide img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;pointer-events:none;-webkit-user-drag:none;user-select:none;padding:0}
+.kw-stage-tag{position:absolute;top:10px;left:10px;z-index:5;font-family:var(--mono);font-weight:700;font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;padding:4px 8px;border-radius:100px;background:rgba(255,255,255,0.9);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,0.06);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);pointer-events:none;line-height:1.2;max-width:calc(100% - 20px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kw-thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}
+.kw-thumb{aspect-ratio:1;border-radius:10px;overflow:hidden;border:1.5px solid var(--card-line);background:var(--card);cursor:pointer;padding:4px;transition:border-color .15s ease}
+.kw-thumb.is-active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.kw-thumb img{width:100%;height:100%;object-fit:contain}
+
+.kw-rating{display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;cursor:pointer;transition:opacity .15s}
+.kw-rating:hover{opacity:0.78}
+.kw-stars{display:inline-flex;gap:1px;color:#f59e0b}
+.kw-stars svg{width:15px;height:15px}
+.kw-rating-tx{font-size:12px;color:var(--tx);font-weight:600}
+.kw-rating-tx strong{color:var(--ink)}
+
+.kw-name{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:40px;line-height:1.0;letter-spacing:0.01em;margin:4px 0 12px;color:var(--ink)}
+.kw-name em{color:var(--accent);font-style:normal}
+
+.kw-benefit-tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 16px}
+.kw-benefit-tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--head);font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding:8px 14px;border-radius:6px;color:var(--ink);background:var(--bg);border:1px solid var(--card-line);line-height:1}
+.kw-benefit-tag--trust{color:var(--green-deep);background:var(--green-soft);border-color:rgba(22,163,74,0.35)}
+
+.kw-sub-lead{font-size:15px;color:var(--ink);line-height:1.5;margin:0 0 16px;font-weight:500}
+.kw-sub-lead strong{font-weight:800}
+
+.kw-sub-list{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-direction:column;gap:10px}
+.kw-sub-list li{position:relative;padding-left:26px;font-size:14.5px;color:var(--tx);line-height:1.45}
+.kw-sub-list li::before{content:"";position:absolute;left:2px;top:6px;width:10px;height:6px;border-left:1.8px solid var(--ink);border-bottom:1.8px solid var(--ink);transform:rotate(-45deg)}
+.kw-sub-list li strong{color:var(--ink);font-weight:700}
+
+.kw-info-pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.kw-info-pill{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--card-line);border-radius:10px;padding:9px 13px;font-family:var(--head);font-weight:700;font-size:12.5px;color:var(--ink)}
+.kw-info-pill .ico{font-size:15px;line-height:1}
+
+/* ====== OFFER CARDS ====== */
+.kw-offer{display:flex;flex-direction:column;gap:14px;margin-bottom:16px}
+.kw-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* ====== OFFER TIER CARDS (quantity selector — matches reference screenshot) ====== */
+.kwo-title{font-family:var(--head);font-weight:800;font-size:16px;color:var(--ink);margin:0 0 12px;letter-spacing:-.01em}
+.kwo-list{display:flex;flex-direction:column;gap:8px}
+.kwo-card{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:#f4f5f7;border:2px solid transparent;border-radius:12px;padding:12px 14px;cursor:pointer;transition:background .15s ease,border-color .15s ease,box-shadow .15s ease;-webkit-tap-highlight-color:transparent}
+.kwo-card:hover{background:#eef0f3}
+.kwo-card.is-selected{background:#fff;border-color:#1e40af;box-shadow:0 4px 16px -6px rgba(30,64,175,.20)}
+.kwo-thumb{position:relative;width:48px;height:48px;border-radius:8px;overflow:hidden;background:#f4f5f7;border:1px solid rgba(15,23,42,.06);flex-shrink:0;padding:3px;box-sizing:border-box}
+.kwo-thumb img{width:100%;height:100%;object-fit:contain;display:block}
+.kwo-card.is-selected .kwo-thumb{background:#fff;border-color:rgba(30,64,175,.15)}
+.kwo-body{min-width:0}
+.kwo-name{font-family:var(--head);font-weight:800;font-size:15px;color:var(--ink);letter-spacing:-.01em;line-height:1.25}
+.kwo-benefits{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:6px}
+.kwo-benefit{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;color:#4b5563;font-family:var(--sans);font-weight:500;letter-spacing:.01em;white-space:nowrap}
+.kwo-benefit svg{width:12px;height:12px;color:#1e293b;flex-shrink:0}
+.kwo-price{display:flex;flex-direction:column;align-items:flex-end;line-height:1.15;flex-shrink:0}
+.kwo-price-main{font-family:var(--head);font-weight:800;font-size:17px;color:#1e40af;letter-spacing:-.01em}
+.kwo-price-strike{font-size:11.5px;color:#9ca3af;text-decoration:line-through;font-weight:600;margin-top:1px}
+.kwo-tag{position:absolute;top:-9px;right:12px;background:#1e40af;color:#fff;font-family:var(--head);font-weight:700;font-size:10px;padding:4px 9px;border-radius:100px;letter-spacing:.02em;display:inline-flex;align-items:center;gap:4px;line-height:1;white-space:nowrap;box-shadow:0 3px 10px rgba(30,64,175,.28)}
+.kwo-tag svg{width:11px;height:11px;color:#fbbf24}
+@media (max-width:520px){
+  .kwo-card{padding:11px 12px;gap:10px;border-radius:11px}
+  .kwo-thumb{width:44px;height:44px}
+  .kwo-name{font-size:14px}
+  .kwo-benefits{gap:3px 10px;margin-top:5px}
+  .kwo-benefit{font-size:10px;gap:3px}
+  .kwo-benefit svg{width:11px;height:11px}
+  .kwo-price-main{font-size:15.5px}
+  .kwo-price-strike{font-size:11px}
+  .kwo-tag{font-size:9.5px;padding:3px 8px;top:-8px}
+}
+.kw-card{position:relative;background:var(--bg);border:2px solid var(--card-line);border-radius:14px;padding:20px 14px 14px;cursor:pointer;text-align:center;display:flex;flex-direction:column;transition:all .18s ease}
+.kw-card:hover{border-color:#cfd5dc}
+.kw-card.is-selected{border-color:var(--ink);background:var(--bg-soft);box-shadow:0 0 0 1px var(--ink),0 10px 28px rgba(17,24,39,0.10)}
+.kw-card-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-family:var(--head);font-weight:800;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:6px;white-space:nowrap;display:none}
+.kw-card.is-recommended .kw-card-badge{display:block}
+.kw-card-save{position:absolute;top:10px;right:10px;background:var(--accent);color:#fff;font-family:var(--head);font-weight:900;font-size:10px;letter-spacing:0.04em;padding:3px 7px;border-radius:5px;text-transform:uppercase;line-height:1.2}
+.kw-card-name{font-family:var(--display);font-weight:400;font-size:30px;color:var(--ink);line-height:1;letter-spacing:0.01em;margin-bottom:4px;text-transform:uppercase}
+.kw-card-name .sub{font-family:var(--head);font-weight:800;font-size:11px;display:block;color:var(--tx-dim);letter-spacing:0.08em;margin-top:6px;text-transform:uppercase}
+.kw-card.is-selected .kw-card-name .sub{color:var(--ink)}
+.kw-card-img{width:100%;aspect-ratio:1/1;border-radius:10px;display:flex;align-items:center;justify-content:center;margin:10px 0;overflow:hidden;background:var(--card)}
+.kw-card-img img{width:100%;height:100%;object-fit:contain}
+.kw-card-check{display:flex;align-items:center;justify-content:center;gap:5px;font-family:var(--head);font-weight:800;font-size:10px;color:var(--ink);margin-bottom:9px;letter-spacing:0.04em;opacity:0;height:14px;text-transform:uppercase}
+.kw-card.is-recommended .kw-card-check{opacity:1}
+.kw-card-check svg{width:13px;height:13px;color:var(--ink)}
+.kw-card-divider{border-top:1px solid var(--card-line);margin:0 -14px 10px}
+.kw-card-price{font-family:var(--head);font-weight:800;font-size:24px;color:var(--ink);display:flex;align-items:baseline;justify-content:center;gap:7px}
+.kw-card-price .strike{font-size:14px;color:var(--red);text-decoration:line-through;font-weight:600}
+.kw-card-perunit{font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--accent);margin-top:4px;letter-spacing:0.02em}
+.kw-card-bill{font-family:var(--sans);font-size:10.5px;color:var(--tx-dim);margin-top:3px}
+/* Pre-order price label on cards */
+.kw-card-pre{font-family:var(--head);font-weight:700;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--tx-dim);margin-bottom:3px;display:flex;align-items:center;justify-content:center;gap:5px}
+.kw-card-pre::before{content:"";width:5px;height:5px;background:var(--tx-dim);border-radius:50%}
+
+/* ====== PRE-ORDER FRAMING ====== */
+/* "Sold Out" disabled pill above the active CTA */
+.kw-sold{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;background:#e9eaec;color:#6b7280;padding:14px 22px;border-radius:100px;font-family:var(--head);font-weight:800;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;cursor:not-allowed;margin-bottom:10px;border:none;position:relative;overflow:hidden}
+.kw-sold::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(0,0,0,0.02) 0px,rgba(0,0,0,0.02) 8px,transparent 8px,transparent 16px);pointer-events:none}
+.kw-sold-label{display:inline-flex;align-items:center;gap:9px;position:relative}
+.kw-sold-dot{width:8px;height:8px;border-radius:50%;background:#9ca3af;animation:kwSoldDot 1.6s ease-in-out infinite}
+@keyframes kwSoldDot{0%,100%{opacity:1}50%{opacity:0.35}}
+.kw-sold-price{font-family:var(--head);font-weight:700;font-size:12px;display:inline-flex;align-items:center;gap:7px;position:relative}
+.kw-sold-price .strike{text-decoration:line-through;opacity:0.75;font-weight:600}
+
+/* Ship-date note under the pre-order CTA */
+.kw-pre-note{display:flex;align-items:center;justify-content:center;gap:7px;text-align:center;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--tx-dim);margin-top:10px}
+.kw-pre-note svg{width:14px;height:14px;color:var(--accent);flex-shrink:0}
+.kw-pre-note strong{color:var(--ink);font-weight:800}
+
+/* Pulsing low-stock warning */
+.kw-stock{display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--head);font-weight:600;font-size:12.5px;color:var(--tx);margin-top:14px;letter-spacing:0.03em}
+.kw-stock-dot{display:inline-block;width:8px;height:8px;background:var(--ink);border-radius:50%;animation:kwStockPulse 1.6s ease-in-out infinite;box-shadow:0 0 0 0 rgba(17,24,39,0.35)}
+@keyframes kwStockPulse{0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 0 0 rgba(17,24,39,0.35)}50%{opacity:0.55;transform:scale(1.25);box-shadow:0 0 0 6px rgba(17,24,39,0)}}
+
+/* Bonus gifts */
+.kw-gifts-head{display:flex;align-items:center;gap:14px;margin-top:6px;margin-bottom:14px}
+.kw-gifts-head .line{flex:1;height:1px;background:var(--card-line)}
+.kw-gifts-head .ttl{font-family:var(--head);font-weight:800;font-size:11.5px;color:var(--ink);white-space:nowrap;letter-spacing:0.06em;text-transform:uppercase}
+.kw-gifts-head .ttl em{color:var(--accent);font-style:normal}
+.kw-gifts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.kw-gift{text-align:center;transition:all .3s ease;cursor:pointer}
+.kw-gift-card{position:relative;background:var(--card);border:1.5px dashed var(--card-line);border-radius:10px;padding:10px 6px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:8px}
+.kw-gift-tag{position:absolute;top:0;left:0;right:0;background:var(--ink);color:#fff;font-family:var(--head);font-size:10px;font-weight:800;padding:4px 6px;border-radius:8.5px 8.5px 0 0;z-index:2;letter-spacing:0.04em;text-align:center;display:flex;align-items:center;justify-content:center;gap:5px}
+.kw-gift-tag .strike{text-decoration:line-through;opacity:0.7}
+.kw-gift-img{width:88%;height:88%;border-radius:6px;display:flex;align-items:center;justify-content:center;transition:filter .3s ease;overflow:hidden}
+.kw-gift-img img{width:100%;height:100%;object-fit:contain}
+.kw-gift-label{font-family:var(--head);font-size:11px;font-weight:700;color:var(--ink);line-height:1.25}
+.kw-gift.is-locked .kw-gift-img{filter:blur(7px) grayscale(0.5);opacity:0.6}
+.kw-gift.is-locked .kw-gift-label{color:var(--tx-dim)}
+.kw-gift.is-locked .kw-gift-card{border-color:var(--card-line);background:#f3f3f3}
+.kw-gift-lock{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:rgba(255,255,255,0.6);backdrop-filter:blur(1px);z-index:3;padding:6px;text-align:center}
+.kw-gift.is-locked .kw-gift-lock{display:flex}
+.kw-gift-lock-circle{width:30px;height:30px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(0,0,0,0.18)}
+.kw-gift-lock-circle svg{width:14px;height:14px;color:#fff}
+.kw-gift-unlock-msg{font-family:var(--head);font-size:9px;font-weight:700;color:#fff;background:var(--accent);padding:3px 6px;border-radius:5px;line-height:1.2;box-shadow:0 1px 3px rgba(0,0,0,0.2);max-width:96%}
+.kw-gift-info{position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.92);color:var(--ink);font-family:var(--head);font-weight:900;font-size:11px;display:flex;align-items:center;justify-content:center;z-index:4;border:1px solid var(--card-line);transition:all .15s;font-style:italic;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.kw-gift:hover .kw-gift-info{background:var(--accent);border-color:var(--accent);color:#fff;transform:scale(1.1)}
+
+.kw-claim{margin-top:14px;text-align:center;font-family:var(--head);font-size:13px;color:var(--ink);font-weight:700}
+.kw-claim .val{color:var(--ink);font-weight:900}
+.kw-upgrade-link{color:var(--ink);font-weight:800;cursor:pointer;border-bottom:2px solid var(--ink);padding-bottom:1px;transition:.2s;text-transform:uppercase;letter-spacing:0.04em;font-family:var(--head);font-size:11.5px}
+
+/* Trust strip + 30-day guarantee box */
+.kw-mb-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin:16px 0 12px;font-family:var(--head);font-weight:700;font-size:11px;letter-spacing:0.04em;text-transform:uppercase;color:var(--green-deep)}
+.kw-mb{display:flex;gap:14px;align-items:center;background:var(--green-soft);border:1px solid rgba(22,163,74,0.35);border-radius:14px;padding:18px}
+.kw-mb-ico{flex-shrink:0;width:56px;height:56px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;position:relative}
+.kw-mb-ico::before{content:"30";position:absolute;font-family:var(--display);font-size:18px;color:#fff;line-height:1;letter-spacing:0.02em}
+.kw-mb-ico::after{content:"DAY";position:absolute;font-family:var(--head);font-size:7.5px;font-weight:900;color:#fff;letter-spacing:0.1em;bottom:11px}
+.kw-mb-title{font-family:var(--head);font-weight:800;font-size:16px;color:var(--ink);line-height:1.25}
+.kw-mb-title strong{color:var(--green);font-weight:900}
+.kw-mb-text{font-size:13px;color:var(--tx);line-height:1.5;margin-top:4px}
+.kw-mb-text strong{color:var(--ink);font-weight:700}
+
+.kw-mini-trust{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px}
+.kw-mini-trust span{font-family:var(--head);font-weight:700;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--tx);display:inline-flex;align-items:center;gap:6px}
+.kw-mini-trust svg{width:13px;height:13px;color:var(--accent)}
+
+/* Compact UGC */
+.kw-ugc-compact{margin-top:16px}
+.kw-ugc-compact-h{font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--tx-dim);text-align:center;margin-bottom:10px}
+.kw-ugc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kw-vid{display:flex;flex-direction:column;gap:6px}
+.kw-vid-frame{position:relative;aspect-ratio:9/16;border-radius:10px;overflow:hidden;background:#000;cursor:pointer;border:1px solid var(--card-line)}
+.kw-vid-frame video{width:100%;height:100%;object-fit:cover;display:block}
+.kw-vid-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:opacity .2s ease}
+.kw-vid-play svg{width:32px;height:32px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.6))}
+.kw-vid-frame.playing .kw-vid-play{opacity:0;pointer-events:none}
+.kw-vid-cap{text-align:center}
+.kw-vid-name{font-family:var(--head);font-weight:800;font-size:11px;color:var(--ink)}
+.kw-vid-meta{font-size:9.5px;color:var(--tx-dim);line-height:1.3;margin-top:1px}
+
+/* Product details accordion (single panel, single product) */
+.kw-acc{margin:14px 0 2px;border:1px solid var(--card-line);border-radius:12px;background:var(--bg);overflow:hidden}
+.kw-acc summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:var(--head);font-weight:800;font-size:13.5px;color:var(--ink);letter-spacing:0.02em}
+.kw-acc summary::-webkit-details-marker{display:none}
+.kw-acc summary .lbl{display:flex;align-items:center;gap:9px}
+.kw-acc summary .lbl .ico{width:28px;height:28px;border-radius:8px;background:var(--accent-soft);color:var(--accent);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(17,24,39,0.12)}
+.kw-acc summary .lbl .ico svg{width:16px;height:16px}
+.kw-acc summary .plus{color:var(--tx-dim);font-size:20px;line-height:1;transition:transform .2s,color .15s}
+.kw-acc[open] summary .plus{transform:rotate(45deg);color:var(--accent)}
+.kw-acc-body{padding:14px 16px 16px;border-top:1px solid var(--card-line)}
+.kw-acc-body img{width:100%;height:auto;display:block;border-radius:10px;background:var(--card);border:1px solid var(--card-line)}
+.kw-coa-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.kw-coa-grid img{width:100%;height:auto;display:block;border-radius:8px;background:var(--card);border:1px solid var(--card-line)}
+.kw-coa-caption{font-family:var(--mono);font-size:10px;color:var(--tx-dim);letter-spacing:0.06em;text-transform:uppercase;text-align:center;margin-top:8px;line-height:1.5}
+.kw-coa-caption strong{color:var(--ink);font-weight:700}
+
+/* ====== TRUST MARQUEE ====== */
+.kw-trust{padding:22px 0;overflow:hidden;border-top:1px solid var(--card-line);border-bottom:1px solid var(--card-line);background:var(--bg-soft)}
+.kw-trust-track{display:flex;width:max-content;align-items:center;animation:kwMarquee 22s linear infinite;will-change:transform}
+.kw-trust:hover .kw-trust-track{animation-play-state:paused}
+@keyframes kwMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.kw-trust-item{font-family:var(--head);font-weight:800;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:10px;flex-shrink:0;white-space:nowrap}
+.kw-trust-item svg{width:20px;height:20px;color:var(--accent)}
+.kw-trust-item::after{content:"\2022";color:var(--tx-dim);margin:0 32px;font-size:14px;font-weight:900;line-height:1}
+@media (max-width:640px){.kw-trust-item{font-size:12.5px;gap:7px}.kw-trust-item::after{margin:0 18px}}
+
+/* ====== FEATURED CARDS (image on top, text below) ====== */
+.kw-feat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.kw-feat{background:var(--card);border:1px solid var(--card-line);border-radius:16px;display:flex;flex-direction:column;overflow:hidden;transition:transform .18s,border-color .18s,box-shadow .18s}
+.kw-feat:hover{transform:translateY(-2px);border-color:#cfd5dc;box-shadow:0 12px 32px rgba(0,0,0,0.08)}
+.kw-feat-img{width:100%;aspect-ratio:16/9;background:var(--bg);overflow:hidden;position:relative;flex-shrink:0}
+.kw-feat-img img{width:100%;height:100%;object-fit:cover;display:block}
+.kw-feat-body{padding:24px 26px 26px;display:flex;flex-direction:column;justify-content:center;flex:1}
+.kw-feat--noimg .kw-feat-body{padding:32px 28px;justify-content:center;text-align:left;min-height:240px}
+.kw-feat-h{font-family:var(--head);font-weight:800;font-size:19px;color:var(--ink);margin:0 0 8px;line-height:1.25}
+.kw-feat-t{font-size:14px;color:var(--tx);line-height:1.55;margin:0;font-weight:500}
+
+/* ====== FEATURE ICON CARDS (horizontal scroll) ====== */
+.kw-islider-wrap{margin-top:6px}
+.kw-islider{display:flex;gap:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:6px 2px;scroll-snap-type:x mandatory;scroll-padding-left:2px}
+.kw-islider::-webkit-scrollbar{display:none}
+.kw-islide{flex:0 0 72%;display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 20px 24px;background:var(--bg);border:1px solid var(--card-line);border-radius:16px;box-shadow:0 4px 14px -6px rgba(17,24,39,0.06);scroll-snap-align:start;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.kw-islide:hover{transform:translateY(-4px);border-color:#cfd5dc;box-shadow:0 14px 32px -12px rgba(17,24,39,0.12)}
+.kw-islide-ico{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:14px;background:var(--accent-soft);border:1px solid rgba(17,24,39,0.12);color:var(--accent-deep);margin-bottom:16px;transition:background .22s,color .22s,transform .22s}
+.kw-islide:hover .kw-islide-ico{background:#111827;color:#fff;transform:scale(1.05)}
+.kw-islide-ico svg{width:28px;height:28px;stroke-width:1.8}
+.kw-islide-h{font-family:var(--head);font-weight:800;font-size:14.5px;color:var(--ink);letter-spacing:-0.005em;margin:0 0 6px;line-height:1.25}
+.kw-islide-t{font-size:12.5px;color:var(--tx);line-height:1.45;margin:0;font-weight:500}
+@media(min-width:861px){.kw-islider{overflow-x:visible;gap:14px}.kw-islide{flex:1 1 0;min-width:0}}
+
+/* ====== COMPARISON TABLE ====== */
+.kw-cmp{background:var(--bg);border:1px solid var(--card-line);border-radius:18px;overflow:hidden;box-shadow:0 12px 40px -12px rgba(17,24,39,0.10),0 2px 6px rgba(17,24,39,0.03)}
+.kw-cmp-head{display:grid;grid-template-columns:1.4fr 1fr 1.2fr;background:var(--card)}
+.kw-cmp-head>div{padding:16px 14px;font-family:var(--head);font-weight:800;font-size:11.5px;text-transform:uppercase;letter-spacing:0.08em;text-align:left;color:var(--tx-dim)}
+.kw-cmp-head>div.us{color:var(--ink);background:#fff;border-bottom:2px solid var(--ink);position:relative}
+.kw-cmp-head>div.us::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--ink)}
+.kw-cmp-row{display:grid;grid-template-columns:1.4fr 1fr 1.2fr;border-top:1px solid var(--card-line);transition:background .18s ease}
+.kw-cmp-row:hover{background:var(--bg-soft)}
+.kw-cmp-row>div{padding:16px 14px;font-size:13.5px;display:flex;align-items:center;gap:9px;line-height:1.4}
+.kw-cmp-row .feat{font-family:var(--head);font-weight:700;color:var(--ink)}
+.kw-cmp-row .bad{color:var(--tx-dim);font-weight:500}
+.kw-cmp-row .bad::before{content:"";display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:20px;height:20px;border-radius:50%;background:rgba(220,38,38,0.10);color:var(--red);font-weight:900;font-size:11px;font-family:var(--head);letter-spacing:0;line-height:1;padding-bottom:1px}
+.kw-cmp-row .bad::before{content:"\2715"}
+.kw-cmp-row .good{color:var(--ink);font-weight:600;background:transparent}
+.kw-cmp-row .good::before{content:"";display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;font-weight:900;font-size:11px;font-family:var(--head);line-height:1}
+.kw-cmp-row .good::before{content:"\2713"}
+.kw-cmp-badge{display:flex;align-items:center;justify-content:center;gap:10px;margin:20px auto 0;padding:14px 22px;background:var(--green-soft);border:1px solid rgba(22,163,74,0.35);border-radius:100px;font-family:var(--head);font-weight:700;font-size:13.5px;color:#166534;letter-spacing:0.01em;max-width:fit-content;box-shadow:0 4px 14px -4px rgba(22,163,74,0.25)}
+.kw-cmp-badge svg{width:18px;height:18px;color:var(--green);flex-shrink:0}
+
+/* ====== PERFECT FOR (use-case cards) ====== */
+.kw-perfect{padding:80px 24px;border-top:1px solid var(--card-line);background:var(--bg)}
+.kw-perfect-inner{max-width:1080px;margin:0 auto}
+.kw-perfect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+.kw-perfect-card{background:var(--bg);border:1px solid var(--card-line);border-radius:18px;padding:32px 28px;display:flex;flex-direction:column;align-items:flex-start;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;box-shadow:0 2px 8px rgba(17,24,39,0.03)}
+.kw-perfect-card:hover{transform:translateY(-4px);border-color:#cfd5dc;box-shadow:0 18px 40px -14px rgba(17,24,39,0.14)}
+.kw-perfect-ico{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:14px;background:var(--accent-soft);border:1px solid rgba(17,24,39,0.12);color:var(--accent-deep);margin-bottom:20px;transition:background .22s ease,color .22s ease,transform .22s ease,border-color .22s ease}
+.kw-perfect-card:hover .kw-perfect-ico{background:#111827;color:#fff;border-color:#111827;transform:scale(1.05) rotate(-3deg)}
+.kw-perfect-ico svg{width:28px;height:28px}
+.kw-perfect-h{font-family:var(--head);font-weight:800;font-size:19px;color:var(--ink);letter-spacing:-0.005em;margin:0 0 8px;line-height:1.2}
+.kw-perfect-t{font-size:14px;color:var(--tx);line-height:1.55;margin:0;font-weight:500}
+@media (max-width:860px){.kw-perfect-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
+@media (max-width:520px){.kw-perfect-grid{grid-template-columns:1fr}.kw-perfect-card{padding:24px 22px}.kw-perfect-ico{width:48px;height:48px;margin-bottom:16px}.kw-perfect-ico svg{width:24px;height:24px}}
+
+/* ====== GUARANTEE ====== */
+.kw-guar{background:var(--bg-soft);border-top:1px solid var(--card-line);border-bottom:1px solid var(--card-line);padding:56px 28px}
+.kw-guar-inner{max-width:1080px;width:100%;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.kw-guar-copy{max-width:520px}
+.kw-guar .kw-title{font-size:36px}
+.kw-guar p{color:var(--tx);font-size:15px;line-height:1.6;margin:0 0 24px;max-width:460px}
+.kw-guar p strong{color:var(--ink)}
+.kw-guar .kw-cta{width:auto;display:inline-flex}
+.kw-seal{flex-shrink:0;width:150px;height:150px}
+.kw-seal svg{width:100%;height:100%}
+.kw-seal .ring{transform-origin:70px 70px;animation:kwSeal 28s linear infinite}
+@keyframes kwSeal{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+/* ====== FAQ ====== */
+.kw-faq-list{max-width:760px;margin:0 auto;border-top:1px solid var(--card-line)}
+.kw-faq-item{border-bottom:1px solid var(--card-line);transition:background .2s ease}
+.kw-faq-item[open]{background:var(--bg-soft)}
+.kw-faq-item summary{list-style:none;cursor:pointer;padding:20px 14px;display:flex;align-items:center;justify-content:space-between;gap:14px;font-family:var(--head);font-weight:700;font-size:15.5px;letter-spacing:-0.005em;color:var(--ink);transition:color .18s ease}
+.kw-faq-item summary:hover{color:var(--accent-deep)}
+.kw-faq-item summary::-webkit-details-marker{display:none}
+.kw-faq-plus{color:var(--tx-dim);font-size:24px;line-height:1;font-weight:300;transition:transform .28s cubic-bezier(.4,0,.2,1),color .18s;flex-shrink:0}
+.kw-faq-item[open] .kw-faq-plus{transform:rotate(45deg);color:var(--accent)}
+.kw-faq-a{padding:0 14px 22px;font-size:14.5px;line-height:1.65;color:var(--tx);animation:kwFaqReveal .32s cubic-bezier(.4,0,.2,1) both}
+.kw-faq-a strong{color:var(--ink);font-weight:700}
+.kw-faq-list-items{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-direction:column;gap:8px}
+.kw-faq-list-items li{position:relative;padding-left:20px;color:var(--tx);font-size:14.5px}
+.kw-faq-list-items li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--accent);border-radius:50%}
+@keyframes kwFaqReveal{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+@media (max-width:640px){
+  .kw-faq-item summary{padding:16px 10px;font-size:14.5px;gap:10px}
+  .kw-faq-a{padding:0 10px 18px;font-size:14px}
+  .kw-faq-plus{font-size:22px}
+}
+
+/* ====== STICKY + FOOTER ====== */
+.kw-sticky{position:fixed;bottom:0;left:0;right:0;z-index:9998;display:none;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);border-top:1px solid var(--card-line);box-shadow:0 -4px 16px rgba(0,0,0,0.06)}
+.kw-sticky-info{line-height:1.2}
+.kw-sticky-info b{font-family:var(--head);font-weight:800;color:var(--ink);font-size:14px}
+.kw-sticky-info span{display:block;font-size:10.5px;color:var(--tx);font-weight:600}
+.kw-sticky .kw-cta{width:auto;padding:14px 22px;font-size:13px}
+.kw-foot{background:var(--bg-soft);color:var(--ink);padding:56px 24px;text-align:center;border-top:1px solid var(--card-line)}
+.kw-foot-inner{max-width:620px;margin:0 auto}
+.kw-foot-tag{font-family:var(--display);font-weight:400;font-size:24px;color:var(--ink);margin:0 0 8px;letter-spacing:0.02em;text-transform:uppercase}
+.kw-foot-tag span{color:var(--accent)}
+.kw-foot-sub{font-size:13px;color:var(--tx);margin:0 0 22px}
+.kw-foot-form{display:flex;gap:8px;max-width:400px;margin:0 auto}
+.kw-foot-form input{flex:1;background:var(--bg);border:1px solid var(--card-line);border-radius:100px;padding:14px 18px;color:var(--ink);font-family:var(--sans);font-size:14px;outline:none}
+.kw-foot-form input::placeholder{color:var(--tx-dim)}
+.kw-foot-form input:focus{border-color:var(--accent)}
+.kw-foot-form button{background:var(--accent);color:#fff;border:none;border-radius:100px;padding:0 22px;cursor:pointer;font-family:var(--head);font-weight:800;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;transition:background .15s ease}
+.kw-foot-form button:hover{background:var(--accent-deep)}
+.kw-foot-cols{display:flex;flex-wrap:wrap;justify-content:center;gap:28px 56px;margin:40px auto 0;text-align:left;max-width:600px}
+.kw-foot-col-h{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--tx-dim);margin:0 0 12px}
+.kw-foot-col a{display:block;color:var(--tx);text-decoration:none;font-size:13px;font-weight:500;margin-bottom:9px;transition:color .15s ease}
+.kw-foot-col a:hover{color:var(--accent)}
+.kw-foot-bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 20px;margin-top:40px;padding-top:22px;border-top:1px solid var(--card-line)}
+.kw-foot-copy{font-family:var(--mono);font-size:10.5px;color:var(--tx-dim);letter-spacing:0.04em}
+
+/* ====== GIFT EXPLAINER MODAL (white backdrop) ====== */
+.kw-giftmodal-backdrop{position:fixed;inset:0;background:rgba(255,255,255,0.78);backdrop-filter:blur(8px);z-index:10001;display:none;align-items:center;justify-content:center;padding:24px;opacity:0;transition:opacity .25s}
+.kw-giftmodal-backdrop.is-open{display:flex;opacity:1}
+.kw-giftmodal{background:var(--bg);border:1px solid var(--card-line);border-radius:18px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;position:relative;transform:scale(0.9);transition:transform .35s cubic-bezier(.34,1.56,.64,1);box-shadow:0 30px 80px rgba(0,0,0,0.18)}
+.kw-giftmodal-backdrop.is-open .kw-giftmodal{transform:scale(1)}
+.kw-giftmodal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:var(--card);border:1px solid var(--card-line);color:var(--ink);font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;z-index:2;font-family:var(--head)}
+.kw-giftmodal-close:hover{background:#eef0f3;transform:rotate(90deg)}
+.kw-giftmodal-hero{padding:30px 24px 0;text-align:center}
+.kw-giftmodal-tag{display:inline-block;font-family:var(--head);font-weight:800;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);background:var(--green-soft);border:1px solid rgba(22,163,74,0.35);padding:4px 10px;border-radius:5px;margin-bottom:14px}
+.kw-giftmodal-tag .strike{text-decoration:line-through;opacity:0.7;margin-right:5px}
+.kw-giftmodal-img{width:140px;height:140px;margin:0 auto 14px;border-radius:16px;background:var(--card);border:1px solid var(--card-line);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.kw-giftmodal-img img{width:100%;height:100%;object-fit:contain}
+.kw-giftmodal-title{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:30px;line-height:1.05;color:var(--ink);letter-spacing:0.01em;margin:0 0 8px}
+.kw-giftmodal-title em{color:var(--accent);font-style:normal}
+.kw-giftmodal-sub{font-size:14px;color:var(--tx);line-height:1.55;margin:0 24px 22px;text-align:center}
+.kw-giftmodal-sub strong{color:var(--ink);font-weight:700}
+.kw-giftmodal-body{padding:0 24px 26px}
+.kw-giftmodal-section{margin-bottom:20px}
+.kw-giftmodal-section:last-child{margin-bottom:0}
+.kw-giftmodal-h{font-family:var(--head);font-weight:800;font-size:11.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:11px;display:inline-flex;align-items:center;gap:7px}
+.kw-giftmodal-h::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.kw-giftmodal-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start;padding:12px 14px;background:var(--card);border:1px solid var(--card-line);border-radius:10px;margin-bottom:8px}
+.kw-giftmodal-row:last-child{margin-bottom:0}
+.kw-giftmodal-row .name{font-family:var(--head);font-weight:800;font-size:14px;color:var(--ink);line-height:1.2}
+.kw-giftmodal-row .name small{display:block;font-family:var(--sans);font-weight:500;font-size:12px;color:var(--tx);margin-top:4px;line-height:1.45}
+.kw-giftmodal-row .dose{font-family:var(--mono);font-weight:700;font-size:12px;color:var(--accent);letter-spacing:0.02em;white-space:nowrap;background:var(--accent-soft);border:1px solid rgba(17,24,39,0.12);border-radius:6px;padding:3px 8px}
+.kw-giftmodal-row.no-dose{grid-template-columns:1fr}
+.kw-giftmodal-feats{list-style:none;padding:0;margin:0}
+.kw-giftmodal-feats li{position:relative;padding-left:28px;font-size:13.5px;color:var(--tx);line-height:1.5;margin-bottom:10px}
+.kw-giftmodal-feats li::before{content:"\2713";position:absolute;left:0;top:0;width:18px;height:18px;background:var(--green);color:#fff;font-weight:900;font-size:11px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.kw-giftmodal-feats li strong{color:var(--ink);font-weight:700}
+.kw-giftmodal-foot{display:flex;align-items:center;gap:8px;font-family:var(--head);font-weight:800;font-size:11.5px;letter-spacing:0.04em;color:var(--green);padding:12px 14px;background:var(--green-soft);border:1px solid rgba(22,163,74,0.35);border-radius:10px;margin-top:18px;text-transform:uppercase;line-height:1.3}
+.kw-giftmodal-foot svg{width:16px;height:16px;flex-shrink:0}
+
+/* Toast + confetti */
+.kw-toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.7);background:var(--bg);border:2px solid var(--ink);border-radius:18px;padding:22px 30px;box-shadow:0 20px 60px rgba(0,0,0,0.2);z-index:10000;text-align:center;opacity:0;pointer-events:none;transition:opacity .35s,transform .45s cubic-bezier(.34,1.56,.64,1);max-width:90vw}
+.kw-toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.kw-toast-icon{font-size:36px;line-height:1;margin-bottom:8px}
+.kw-toast-title{font-family:var(--display);font-weight:400;font-size:24px;color:var(--ink);letter-spacing:0.02em;text-transform:uppercase}
+#kwConfetti{position:fixed;inset:0;pointer-events:none;z-index:9999}
+
+/* ====== KWEFI PREMIUM CART DRAWER ====== */
+.kwd{position:fixed;inset:0;z-index:10050;pointer-events:none;visibility:hidden}
+.kwd [hidden]{display:none !important}
+.kwd.is-open{pointer-events:auto;visibility:visible}
+.kwd-backdrop{position:absolute;inset:0;background:rgba(10,15,26,0.55);opacity:0;transition:opacity .3s ease;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.kwd.is-open .kwd-backdrop{opacity:1}
+.kwd-panel{position:absolute;top:0;right:0;bottom:0;width:min(460px,100vw);background:#ffffff;display:flex;flex-direction:column;box-shadow:-30px 0 80px -20px rgba(10,15,26,0.35);transform:translateX(100%);transition:transform .38s cubic-bezier(.16,1,.3,1);will-change:transform}
+.kwd.is-open .kwd-panel{transform:translateX(0)}
+
+/* Header */
+.kwd-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 16px;border-bottom:1px solid rgba(15,23,42,.05);flex-shrink:0}
+.kwd-title{margin:0;font-family:var(--head,'Inter',sans-serif);font-weight:800;font-size:20px;color:#0f172a;letter-spacing:-.02em;line-height:1.1}
+.kwd-title-sub{display:block;margin-top:3px;font-family:var(--sans,'Inter',sans-serif);font-size:12px;color:#64748b;font-weight:500}
+.kwd-close{background:transparent;border:0;width:38px;height:38px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#0f172a;cursor:pointer;transition:background .15s ease;flex-shrink:0}
+.kwd-close:hover{background:rgba(15,23,42,.06)}
+.kwd-close svg{width:20px;height:20px}
+
+/* Benefits row */
+.kwd-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 24px;background:linear-gradient(180deg,#f8fafc 0%, #ffffff 100%);border-bottom:1px solid rgba(15,23,42,.05);flex-shrink:0}
+.kwd-benefit{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.kwd-benefit-icon{width:32px;height:32px;border-radius:50%;background:#eef2ff;color:#1e40af;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.kwd-benefit-icon svg{width:16px;height:16px}
+.kwd-benefit span{font-family:var(--head,'Inter',sans-serif);font-size:10.5px;font-weight:700;color:#0f172a;letter-spacing:.01em;line-height:1.15}
+
+/* Progress bar */
+.kwd-progress{padding:14px 24px 12px;background:#ffffff;border-bottom:1px solid rgba(15,23,42,.05);flex-shrink:0}
+.kwd-progress-msg{font-family:var(--head,'Inter',sans-serif);font-size:12px;font-weight:700;color:#0f172a;text-align:center;margin-bottom:8px;letter-spacing:.01em}
+.kwd-progress-msg.is-met{color:#059669}
+.kwd-progress-track{height:6px;background:#e5e7eb;border-radius:100px;overflow:hidden}
+.kwd-progress-fill{height:100%;background:linear-gradient(90deg,#1e40af 0%,#3b82f6 100%);border-radius:100px;transition:width .4s cubic-bezier(.16,1,.3,1)}
+.kwd-progress-fill.is-met{background:linear-gradient(90deg,#059669 0%,#10b981 100%)}
+
+/* Scroll area */
+.kwd-scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+
+/* Empty state */
+.kwd-empty{padding:70px 32px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.kwd-empty-icon{width:68px;height:68px;border-radius:50%;background:#f1f5f9;color:#94a3b8;display:inline-flex;align-items:center;justify-content:center;margin-bottom:4px}
+.kwd-empty-icon svg{width:32px;height:32px}
+.kwd-empty-title{margin:0;font-family:var(--head,'Inter',sans-serif);font-weight:800;font-size:17px;color:#0f172a}
+.kwd-empty-sub{margin:0;font-size:13px;color:#64748b}
+.kwd-empty-cta{margin-top:8px;background:#0f172a;color:#fff;border:0;border-radius:100px;padding:12px 24px;font-family:var(--head,'Inter',sans-serif);font-weight:700;font-size:13px;cursor:pointer;letter-spacing:.02em;transition:background .15s ease}
+.kwd-empty-cta:hover{background:#020617}
+
+/* Cart items */
+.kwd-body{padding:6px 0 4px}
+.kwd-items{list-style:none;margin:0;padding:0}
+.kwd-item{display:grid;grid-template-columns:80px 1fr auto;gap:14px;padding:18px 24px;align-items:flex-start;border-bottom:1px solid rgba(15,23,42,.05);transition:opacity .15s ease}
+.kwd-item-img{width:80px;height:80px;border-radius:12px;overflow:hidden;background:#f4f5f7;border:1px solid rgba(15,23,42,.06);flex-shrink:0;padding:4px;box-sizing:border-box}
+.kwd-item-img img{width:100%;height:100%;object-fit:contain;display:block}
+.kwd-item-info{min-width:0;display:flex;flex-direction:column;gap:5px;padding-top:2px}
+.kwd-item-title{margin:0;font-family:var(--head,'Inter',sans-serif);font-weight:800;font-size:14px;color:#0f172a;letter-spacing:-.005em;line-height:1.3}
+.kwd-item-sub{font-size:11.5px;color:#64748b;font-weight:500;line-height:1.35}
+.kwd-item-qty{display:inline-flex;align-items:center;gap:0;background:#f1f5f9;border-radius:100px;padding:4px;margin-top:6px;width:fit-content;border:1px solid rgba(15,23,42,.05)}
+.kwd-qty-btn{width:26px;height:26px;border-radius:50%;background:transparent;border:0;color:#0f172a;font-size:15px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-weight:700;transition:background .15s ease}
+.kwd-qty-btn:hover{background:#fff}
+.kwd-qty-btn:disabled{opacity:.4;cursor:not-allowed}
+.kwd-qty-val{min-width:24px;text-align:center;font-size:13px;font-weight:800;color:#0f172a}
+.kwd-item-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:24px;padding-top:2px}
+.kwd-item-remove{background:transparent;border:0;color:#94a3b8;cursor:pointer;padding:4px;transition:color .15s ease;line-height:0}
+.kwd-item-remove:hover{color:#ef4444}
+.kwd-item-remove svg{width:16px;height:16px;display:block}
+.kwd-item-price-block{text-align:right}
+.kwd-item-price{font-family:var(--head,'Inter',sans-serif);font-weight:800;font-size:15px;color:#0f172a;line-height:1.1;display:block}
+.kwd-item-price-strike{font-size:11.5px;color:#94a3b8;text-decoration:line-through;font-weight:600;display:block;margin-top:2px}
+
+/* Upsell */
+.kwd-upsell{padding:22px 24px 8px;background:#fafbfc;border-top:1px solid rgba(15,23,42,.05)}
+.kwd-upsell-title{margin:0;font-family:var(--head,'Inter',sans-serif);font-weight:800;font-size:14px;color:#0f172a;letter-spacing:-.01em}
+.kwd-upsell-sub{margin:2px 0 12px;font-size:11.5px;color:#64748b;font-weight:500}
+.kwd-upsell-list{display:flex;flex-direction:column;gap:10px}
+.kwd-upsell-item{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;background:#fff;border:1px solid rgba(15,23,42,.06);border-radius:12px;padding:10px 12px;transition:border-color .15s ease,box-shadow .15s ease}
+.kwd-upsell-item:hover{border-color:rgba(30,64,175,.25);box-shadow:0 3px 10px rgba(30,64,175,.06)}
+.kwd-upsell-img{width:52px;height:52px;border-radius:8px;overflow:hidden;background:#f4f5f7;border:1px solid rgba(15,23,42,.05);padding:3px;box-sizing:border-box}
+.kwd-upsell-img img{width:100%;height:100%;object-fit:contain;display:block}
+.kwd-upsell-info{min-width:0}
+.kwd-upsell-name{font-family:var(--head,'Inter',sans-serif);font-weight:700;font-size:12.5px;color:#0f172a;line-height:1.25;margin:0}
+.kwd-upsell-price{font-size:11.5px;color:#1e40af;font-weight:800;margin-top:2px}
+.kwd-upsell-add{background:#0f172a;color:#fff;border:0;border-radius:100px;padding:8px 14px;font-family:var(--head,'Inter',sans-serif);font-weight:700;font-size:11px;cursor:pointer;letter-spacing:.02em;transition:background .15s ease;white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
+.kwd-upsell-add:hover{background:#1e40af}
+.kwd-upsell-add svg{width:11px;height:11px}
+.kwd-upsell-add:disabled{opacity:.5;cursor:default}
+
+/* Footer / summary */
+.kwd-footer{border-top:1px solid rgba(15,23,42,.08);padding:18px 24px calc(18px + env(safe-area-inset-bottom));background:#fff;flex-shrink:0;box-shadow:0 -12px 30px -18px rgba(10,15,26,.15)}
+.kwd-summary{margin-bottom:14px}
+.kwd-summary-row{display:flex;justify-content:space-between;align-items:center;font-family:var(--sans,'Inter',sans-serif);font-size:13px;color:#64748b;padding:4px 0}
+.kwd-summary-row--savings{color:#059669;font-weight:700}
+.kwd-summary-row--savings span:last-child{font-weight:800}
+.kwd-shipping-note{color:#64748b;font-size:12px;font-weight:600}
+.kwd-shipping-note.is-free{color:#059669;font-weight:700;font-size:13px}
+.kwd-summary-total{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0 4px;margin-top:6px;border-top:1px solid rgba(15,23,42,.06);font-family:var(--head,'Inter',sans-serif)}
+.kwd-summary-total span:first-child{font-size:14px;font-weight:700;color:#0f172a}
+.kwd-summary-total span:last-child{font-size:22px;font-weight:900;color:#0f172a;letter-spacing:-.02em}
+.kwd-summary-note{margin:2px 0 0;font-size:10.5px;color:#94a3b8;text-align:right;font-weight:500;letter-spacing:.02em}
+
+/* Checkout button */
+.kwd-checkout{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:linear-gradient(180deg,#0f172a 0%,#020617 100%) !important;color:#fff !important;-webkit-text-fill-color:#fff;text-decoration:none;padding:18px 22px;border:0;border-radius:16px;font-family:var(--head,'Inter',sans-serif);font-weight:900;font-size:15px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 12px 30px -10px rgba(15,23,42,.4);transition:transform .18s ease,box-shadow .18s ease}
+.kwd-checkout:hover{transform:translateY(-2px);box-shadow:0 18px 40px -10px rgba(15,23,42,.5)}
+.kwd-checkout:active{transform:translateY(0)}
+.kwd-checkout .kwd-checkout-lock{width:16px;height:16px}
+.kwd-checkout .kwd-checkout-arrow{width:18px;height:18px}
+
+/* Trust badges */
+.kwd-trust{margin-top:12px;text-align:center}
+.kwd-trust-badge{display:inline-flex;align-items:center;gap:6px;color:#059669;font-family:var(--head,'Inter',sans-serif);font-weight:700;font-size:11.5px;letter-spacing:.02em;margin-bottom:8px}
+.kwd-trust-badge svg{width:14px;height:14px}
+.kwd-pay{display:flex;justify-content:center;align-items:center;gap:5px;flex-wrap:wrap}
+.kwd-pay span{font-size:9px;color:#64748b;letter-spacing:.05em;text-transform:uppercase;font-weight:700;padding:4px 7px;border:1px solid rgba(15,23,42,.08);border-radius:5px;background:#fafafa}
+
+/* Adding overlay */
+.kwd.is-adding .kwd-body,
+.kwd.is-adding .kwd-upsell{opacity:.55;pointer-events:none;transition:opacity .15s ease}
+
+/* Mobile */
+@media (max-width:520px){
+  .kwd-panel{width:100vw}
+  .kwd-header{padding:18px 18px 14px}
+  .kwd-title{font-size:18px}
+  .kwd-benefits{padding:12px 18px;gap:6px}
+  .kwd-benefit span{font-size:9.5px}
+  .kwd-benefit-icon{width:28px;height:28px}
+  .kwd-progress{padding:12px 18px 10px}
+  .kwd-item{grid-template-columns:70px 1fr auto;padding:16px 18px;gap:12px}
+  .kwd-item-img{width:70px;height:70px}
+  .kwd-upsell{padding:20px 18px 6px}
+  .kwd-footer{padding:16px 18px calc(16px + env(safe-area-inset-bottom))}
+  .kwd-checkout{padding:16px 18px;font-size:14px;letter-spacing:.04em}
+  .kwd-summary-total span:last-child{font-size:20px}
+}
+body.kwd-lock{overflow:hidden}
+
+
+/* ====== COMPLETE-MEAL STATS SECTION (dark split) ====== */
+.kw-meal{background:#000;color:#fff;overflow:hidden}
+.kw-meal-inner{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:580px;width:100%}
+.kw-meal-copy{padding:80px 56px;display:flex;flex-direction:column;justify-content:center}
+.kw-meal-title{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:64px;line-height:1.08;letter-spacing:-0.01em;color:#fff;margin:0 0 56px;max-width:540px}
+.kw-meal-title em{font-style:italic;font-weight:400}
+.kw-meal-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:36px 28px;max-width:580px;margin:0 0 44px}
+.kw-meal-stat{display:flex;flex-direction:column;gap:10px}
+.kw-meal-num{font-family:'Playfair Display',Georgia,serif;font-size:42px;line-height:1.05;font-weight:500;color:#fff;letter-spacing:-0.02em;white-space:nowrap}
+.kw-meal-lbl{font-family:var(--sans);font-size:13.5px;line-height:1.4;color:#cfd0d2;font-weight:400}
+.kw-meal-img{position:relative;background:#000;overflow:hidden;min-height:580px}
+.kw-meal-img img,.kw-meal-img video{width:100%;height:100%;object-fit:cover;display:block}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width:860px){
+  .kw-buy-inner{grid-template-columns:1fr;gap:24px}
+  .kw-gallery{position:static}
+  .kw-name{font-size:34px}
+}
+@media (max-width:640px){
+  .kw-buy{padding:24px 16px 48px}
+  .kw-cards{gap:10px}
+  .kw-card{padding:18px 10px 12px}
+  .kw-card-name{font-size:24px}
+  .kw-card-price{font-size:20px}
+  .kw-gifts{gap:8px}
+  .kw-gift-label{font-size:10px}
+  .kw-sec{padding:52px 16px}
+  .kw-head .kw-title,.kw-guar .kw-title{font-size:27px}
+  .kw-name{font-size:30px;line-height:1.05}
+  .kw-sub-list li{font-size:13px;padding-left:26px}
+  .kw-feat-grid{grid-template-columns:1fr;gap:14px}
+  .kw-feat-body{padding:18px 20px 22px}
+  .kw-feat--noimg .kw-feat-body{padding:28px 20px;min-height:200px}
+  .kw-feat-h{font-size:17px;margin-bottom:6px}
+  .kw-feat-t{font-size:13.5px;line-height:1.5}
+  .kw-cmp{border-radius:14px}
+  .kw-cmp-head,.kw-cmp-row{grid-template-columns:1.2fr 0.9fr 1fr}
+  .kw-cmp-head>div,.kw-cmp-row>div{padding:11px 8px;font-size:11.5px;gap:6px;line-height:1.35}
+  .kw-cmp-row .bad::before,.kw-cmp-row .good::before{width:16px;height:16px;font-size:9.5px}
+  .kw-cmp-badge{font-size:12px;padding:11px 16px;gap:8px}
+  .kw-cmp-badge svg{width:15px;height:15px}
+  .kw-guar-inner{flex-direction:column;text-align:center;padding:20px 4px;gap:22px}
+  .kw-guar-copy{max-width:100%}
+  .kw-guar p{margin:0 auto 16px}
+  .kw-guar .kw-cta{width:100%}
+  .kw-seal{order:-1;width:108px;height:108px}
+  .kw-foot{padding-bottom:92px}
+  .kw-perfect{padding:52px 16px}
+  .kw-sticky{display:flex}
+  .kw-giftmodal-backdrop{padding:14px}
+  .kw-giftmodal{border-radius:14px}
+  .kw-giftmodal-hero{padding:24px 18px 0}
+  .kw-giftmodal-img{width:110px;height:110px}
+  .kw-giftmodal-title{font-size:24px}
+  .kw-sold{padding:11px 16px;font-size:11px;letter-spacing:0.05em;gap:8px}
+  .kw-sold-price{font-size:11px;gap:5px}
+  .kw-sold-dot{width:7px;height:7px}
+  .kw-pre-note{font-size:10px;letter-spacing:0.05em;gap:5px;flex-wrap:wrap;padding:0 8px}
+  .kw-pre-note svg{width:12px;height:12px}
+  .kw-stock{font-size:11.5px;margin-top:12px}
+  .kw-card-pre{font-size:8.5px;letter-spacing:0.08em}
+  .kw-meal-inner{grid-template-columns:1fr;min-height:0}
+  .kw-meal-copy{padding:44px 22px;order:2}
+  .kw-meal-title{font-size:38px;margin-bottom:32px}
+  .kw-meal-stats{gap:26px 18px;max-width:100%;margin-bottom:32px}
+  .kw-meal-num{font-size:28px}
+  .kw-meal-lbl{font-size:12px}
+  .kw-meal-img{order:1;min-height:0;aspect-ratio:1/1}
+}
+</style>
+
+<div class="kw"><div class="kw-wrap">
+
+  <section class="kw-buy"><div class="kw-buy-inner">
+
+    <!-- GALLERY -->
+    <div class="kw-gallery">
+      <div class="kw-stage">
+        <span class="kw-stage-tag" id="kwStageTag">BEST SELLER</span>
+        <img id="kwStage" src="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/Luxury_essentials_on_white_backg__202607280959.jpg?v=1785226210" alt="Ajvora Tracker Card in a leather wallet with essentials" fetchpriority="high">
+      </div>
+      <div class="kw-thumbs" id="kwThumbs">
+        <div class="kw-thumb is-active" data-img="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_28._Juli_2026_12_25_30.png?v=1785234387" data-tag="APPLE FIND MY"><img src="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_28._Juli_2026_12_25_30.png?v=1785234387" alt="Ajvora Tracker Card compatible with Apple Find My" loading="lazy"></div>
+        <div class="kw-thumb" data-img="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_7._Aug._2026_01_18_39.png?v=1786058344" data-tag="ULTRA THIN"><img src="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_7._Aug._2026_01_18_39.png?v=1786058344" alt="Ajvora ultra-thin 2mm card design" loading="lazy"></div>
+        <div class="kw-thumb" data-img="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_28._Juli_2026_13_34_44.png?v=1785238539" data-tag="MAGNETIC CHARGING"><img src="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_28._Juli_2026_13_34_44.png?v=1785238539" alt="Ajvora Tracker Card with wireless magnetic charging" loading="lazy"></div>
+        <div class="kw-thumb" data-img="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/Luxury_essentials_on_white_backg__202607280959.jpg?v=1785226210" data-tag="BEST SELLER"><img src="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/Luxury_essentials_on_white_backg__202607280959.jpg?v=1785226210" alt="Ajvora Tracker Card thumbnail — hero view" loading="lazy"></div>
+        <div class="kw-thumb" data-img="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_28._Juli_2026_12_12_50.png?v=1785233766" data-tag="IP67 WATERPROOF"><img src="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_28._Juli_2026_12_12_50.png?v=1785233766" alt="Ajvora Tracker Card with IP67 waterproof rating" loading="lazy"></div>
+      </div>
+
+    </div>
+
+    <!-- PRODUCT INFO -->
+    <div class="kw-info">
+      <div class="kw-rating" id="kwRating">
+        <span class="kw-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+        </span>
+        <span class="kw-rating-tx"><strong>4.8&#9733; (12,000+ Reviews)</strong> &middot; Trusted by Thousands</span>
+      </div>
+
+      <h1 class="kw-name">Ajvora&trade;<br><em style="color:#000">Tracker Card</em> Always One Tap Away.</h1>
+
+      <div class="kw-benefit-tags">
+        <span class="kw-benefit-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;flex-shrink:0"><path d="M17.5 12.5c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.7-.8-2.9-.8-1.5 0-2.9.9-3.6 2.2-1.6 2.7-.4 6.7 1.1 8.9.7 1.1 1.6 2.3 2.7 2.2 1.1 0 1.5-.7 2.8-.7 1.3 0 1.7.7 2.8.7 1.2 0 1.9-1.1 2.6-2.2.8-1.2 1.2-2.5 1.2-2.5z"/><path d="M14.5 5.5c.6-.7 1-1.7.9-2.7-.8 0-1.9.5-2.5 1.2-.5.6-1 1.6-.9 2.6.9.1 1.8-.4 2.5-1.1z"/></svg>Apple Find My</span>
+        <span class="kw-benefit-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;flex-shrink:0"><path d="M7 16v-4a5 5 0 0 1 10 0v4"/><rect x="5" y="16" width="3" height="5" rx="1"/><rect x="16" y="16" width="3" height="5" rx="1"/><line x1="9" y1="8" x2="8" y2="6.5"/><line x1="15" y1="8" x2="16" y2="6.5"/><circle cx="10" cy="12" r=".8" fill="currentColor" stroke="none"/><circle cx="14" cy="12" r=".8" fill="currentColor" stroke="none"/></svg>Android Find Hub</span>
+        <span class="kw-benefit-tag kw-benefit-tag--trust"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>30-Day Guarantee</span>
+      </div>
+
+      <p class="kw-sub-lead">Never lose your wallet again. Track it instantly with <strong>Apple Find My</strong> and <strong>Android Find Hub</strong>.</p>
+
+      <ul class="kw-sub-list">
+        <li><strong>Ultra-Thin 2 mm Design</strong></li>
+        <li><strong>Works with Apple Find My</strong></li>
+        <li><strong>Works with Android Find Hub</strong></li>
+        <li><strong>Magnetic Wireless Charging</strong></li>
+        <li><strong>Waterproof &amp; Durable (IP67)</strong></li>
+      </ul>
+
+      <!-- ========== OFFER CARDS — 4 options (2 variants × 2 tiers) — UI only ========== -->
+      <div class="kw-offer" id="kwOffer">
+        <h3 class="kwo-title">1. Choose Your Offer</h3>
+        <div class="kwo-list" id="kwCards">
+
+          <!-- Card 1 — Apple Find My + Charger -->
+          <label class="kwo-card is-selected" data-plan="1" data-variant-id="58376943993096">
+            <input type="radio" name="kwo-plan" value="1" checked hidden>
+            <div class="kwo-thumb">
+              <img src="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_6._Aug._2026_17_04_04.png?v=1786028714" alt="Apple Find My tracker card" loading="lazy">
+            </div>
+            <div class="kwo-body">
+              <div class="kwo-name">Apple Find My + Charger</div>
+              <div class="kwo-benefits">
+                <span class="kwo-benefit">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 12.5c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.7-.8-2.9-.8-1.5 0-2.9.9-3.6 2.2-1.6 2.7-.4 6.7 1.1 8.9.7 1.1 1.6 2.3 2.7 2.2 1.1 0 1.5-.7 2.8-.7 1.3 0 1.7.7 2.8.7 1.2 0 1.9-1.1 2.6-2.2.8-1.2 1.2-2.5 1.2-2.5z"/></svg>
+                  Apple Find My
+                </span>
+              </div>
+            </div>
+            <div class="kwo-price">
+              <span class="kwo-price-main">&euro;49.99</span>
+            </div>
+          </label>
+
+          <!-- Card 2 — Apple & Android + Charger -->
+          <label class="kwo-card" data-plan="2" data-variant-id="58376943960328">
+            <input type="radio" name="kwo-plan" value="2" hidden>
+            <div class="kwo-thumb">
+              <img src="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_6._Aug._2026_17_04_04.png?v=1786028714" alt="Apple and Android tracker card" loading="lazy">
+            </div>
+            <div class="kwo-body">
+              <div class="kwo-name">Apple &amp; Android + Charger</div>
+              <div class="kwo-benefits">
+                <span class="kwo-benefit">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 12.5c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.7-.8-2.9-.8-1.5 0-2.9.9-3.6 2.2-1.6 2.7-.4 6.7 1.1 8.9.7 1.1 1.6 2.3 2.7 2.2 1.1 0 1.5-.7 2.8-.7 1.3 0 1.7.7 2.8.7 1.2 0 1.9-1.1 2.6-2.2.8-1.2 1.2-2.5 1.2-2.5z"/></svg>
+                  Apple Find My
+                </span>
+                <span class="kwo-benefit">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16v-4a5 5 0 0 1 10 0v4"/><rect x="5" y="16" width="3" height="5" rx="1"/><rect x="16" y="16" width="3" height="5" rx="1"/></svg>
+                  Android Find Hub
+                </span>
+              </div>
+            </div>
+            <div class="kwo-price">
+              <span class="kwo-price-main">&euro;59.99</span>
+            </div>
+          </label>
+
+          <!-- Card 3 — Buy 2 Get 1 FREE – Apple Find My + Charger -->
+          <label class="kwo-card" data-plan="3" data-variant-id="58377214591240">
+            <input type="radio" name="kwo-plan" value="3" hidden>
+            <div class="kwo-thumb">
+              <img src="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_7._Aug._2026_00_47_04.png?v=1786056451" alt="Apple Find My bundle · 3 cards" loading="lazy">
+            </div>
+            <div class="kwo-body">
+              <div class="kwo-name">Buy 2 Get 1 FREE &ndash; Apple Find My + Charger</div>
+              <div class="kwo-benefits">
+                <span class="kwo-benefit">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="12" cy="11" r="2" fill="currentColor" stroke="none"/></svg>
+                  FREE 1x Tracking Card
+                </span>
+                <span class="kwo-benefit">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="11" rx="1"/><path d="M16 10h4l3 3v4h-7"/><circle cx="6" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></svg>
+                  FREE Shipping
+                </span>
+              </div>
+            </div>
+            <div class="kwo-price">
+              <span class="kwo-price-main">&euro;99.99</span>
+              <span class="kwo-price-strike">&euro;149.97</span>
+            </div>
+          </label>
+
+          <!-- Card 4 — Buy 2 Get 1 FREE – Apple & Android + Charger -->
+          <label class="kwo-card" data-plan="4" data-variant-id="58377219145992">
+            <input type="radio" name="kwo-plan" value="4" hidden>
+            <span class="kwo-tag">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+              Best Value
+            </span>
+            <div class="kwo-thumb">
+              <img src="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_7._Aug._2026_00_36_34.png?v=1786055822" alt="Apple and Android bundle · 3 cards" loading="lazy">
+            </div>
+            <div class="kwo-body">
+              <div class="kwo-name">Buy 2 Get 1 FREE &ndash; Apple &amp; Android + Charger</div>
+              <div class="kwo-benefits">
+                <span class="kwo-benefit">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="12" cy="11" r="2" fill="currentColor" stroke="none"/></svg>
+                  FREE 1x Tracking Card
+                </span>
+                <span class="kwo-benefit">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="11" rx="1"/><path d="M16 10h4l3 3v4h-7"/><circle cx="6" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></svg>
+                  FREE Shipping
+                </span>
+              </div>
+            </div>
+            <div class="kwo-price">
+              <span class="kwo-price-main">&euro;119.99</span>
+              <span class="kwo-price-strike">&euro;179.97</span>
+            </div>
+          </label>
+
+        </div>
+
+        <!-- Bonus gifts — framed as a pre-order reward -->
+        <div class="kw-gifts-head">
+          <span class="line"></span>
+          <span class="ttl">Free Gifts &mdash; <em>Pre-Order Only</em></span>
+          <span class="line"></span>
+        </div>
+
+        <div class="kw-gifts" id="kwGifts">
+          <div class="kw-gift" data-gift="0">
+            <div class="kw-gift-card">
+              <div class="kw-gift-tag"><span class="strike">[$x.xx]</span>FREE</div>
+              <div class="kw-gift-img"><img src="https://placehold.co/200x200/fafafa/9ca3af?text=Gift+1" alt="Free bonus gift 1" loading="lazy"></div>
+              <div class="kw-gift-lock">
+                <div class="kw-gift-lock-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+                <div class="kw-gift-unlock-msg"></div>
+              </div>
+              <span class="kw-gift-info">i</span>
+            </div>
+            <div class="kw-gift-label">[Gift 1 Name]</div>
+          </div>
+
+          <div class="kw-gift" data-gift="1">
+            <div class="kw-gift-card">
+              <div class="kw-gift-tag"><span class="strike">[$xx.xx]</span>FREE</div>
+              <div class="kw-gift-img"><img src="https://placehold.co/200x200/fafafa/9ca3af?text=Gift+2" alt="Free bonus gift 2" loading="lazy"></div>
+              <div class="kw-gift-lock">
+                <div class="kw-gift-lock-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+                <div class="kw-gift-unlock-msg"></div>
+              </div>
+              <span class="kw-gift-info">i</span>
+            </div>
+            <div class="kw-gift-label">[Gift 2 Name]</div>
+          </div>
+
+          <div class="kw-gift" data-gift="2">
+            <div class="kw-gift-card">
+              <div class="kw-gift-tag"><span class="strike">[$xx.xx]</span>FREE</div>
+              <div class="kw-gift-img"><img src="https://placehold.co/200x200/fafafa/9ca3af?text=Gift+3" alt="Free bonus gift 3" loading="lazy"></div>
+              <div class="kw-gift-lock">
+                <div class="kw-gift-lock-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+                <div class="kw-gift-unlock-msg"></div>
+              </div>
+              <span class="kw-gift-info">i</span>
+            </div>
+            <div class="kw-gift-label">[Gift 3 Name]</div>
+          </div>
+
+          <div class="kw-gift" data-gift="3">
+            <div class="kw-gift-card">
+              <div class="kw-gift-tag"><span class="strike">[$xx.xx]</span>FREE</div>
+              <div class="kw-gift-img"><img src="https://placehold.co/200x200/fafafa/9ca3af?text=Gift+4" alt="Free bonus gift 4" loading="lazy"></div>
+              <div class="kw-gift-lock">
+                <div class="kw-gift-lock-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+                <div class="kw-gift-unlock-msg"></div>
+              </div>
+              <span class="kw-gift-info">i</span>
+            </div>
+            <div class="kw-gift-label">[Gift 4 Name]</div>
+          </div>
+        </div>
+
+        <div class="kw-claim" id="kwClaim"></div>
+      </div>
+
+      <!-- Sold Out (visual cue — current variant unavailable) -->
+      <button class="kw-sold" type="button" disabled aria-disabled="true">
+        <span class="kw-sold-label"><span class="kw-sold-dot"></span>Currently Sold Out</span>
+        <span class="kw-sold-price"><span class="strike" id="kwSoldStrike"></span></span>
+      </button>
+
+      <!-- Add to Cart CTA (native Shopify form) -->
+      <form class="kw-cta-form" action="/cart/add" method="post" enctype="multipart/form-data" novalidate style="margin:0;">
+        <input type="hidden" name="form_type" value="product">
+        <input type="hidden" name="utf8" value="&#x2713;">
+        <input type="hidden" name="id" value="58376943993096" data-kw-variant-input>
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="kw-cta" id="kwCta">
+          <span class="kw-cta-label" id="kwCtaLabel">Add to Cart</span>
+          <span class="kw-cta-total">
+            <span class="kw-cta-total-label">Total</span>
+            <span class="kw-cta-total-row">
+              <span class="kw-cta-total-strike" id="kwCtaStrike"></span>
+              <span class="kw-cta-total-price" id="kwCtaPrice">&euro;49.99</span>
+            </span>
+          </span>
+        </button>
+      </form>
+
+      <div class="kw-pre-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Reserve yours &middot; Estimated arrival date <span id="kwFlag" aria-hidden="true" style="margin-right:6px;font-size:14px;line-height:1;"></span><strong id="kwShipDate">&mdash;</strong>
+      </div>
+
+      <div class="kw-stock"><span class="kw-stock-dot"></span>Low stock remaining &mdash; lock yours in</div>
+
+      <div class="kw-mb-trust" style="margin-top:18px;">&#10003; Secure Checkout &middot; &#10003; Free Shipping Worldwide</div>
+
+      <div class="kw-mb">
+        <div class="kw-mb-ico"></div>
+        <div>
+          <div class="kw-mb-title">Love it or your money back. <strong>30-Day Guarantee.</strong></div>
+          <div class="kw-mb-text"><strong>Try it for 30 days.</strong> If it doesn't earn its spot, send it back for a full refund. No calls. No forms.</div>
+        </div>
+      </div>
+
+      <div class="kw-mini-trust">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>[Trust 1]</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>[Trust 2]</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/></svg>[Trust 3]</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2C7 8 7 13 12 22 17 13 17 8 12 2z"/></svg>[Trust 4]</span>
+      </div>
+
+      <!-- Compact UGC strip -->
+      <div class="kw-ugc-compact">
+        <div class="kw-ugc-compact-h">&#9733; [Early customers / Testimonials]</div>
+        <div class="kw-ugc-grid">
+          <div class="kw-vid">
+            <div class="kw-vid-frame" onclick="kwPlayVid(this)">
+              <video src="" playsinline preload="none" poster="https://placehold.co/300x540/fafafa/9ca3af?text=UGC+1"></video>
+              <div class="kw-vid-play"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="40" fill="rgba(255,255,255,0.4)"/><circle cx="40" cy="40" r="36" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"/><polygon points="32,26 58,40 32,54" fill="#fff"/></svg></div>
+            </div>
+            <div class="kw-vid-cap"><div class="kw-vid-name">[Name, age]</div><div class="kw-vid-meta">[1-line quote]</div></div>
+          </div>
+          <div class="kw-vid">
+            <div class="kw-vid-frame" onclick="kwPlayVid(this)">
+              <video src="" playsinline preload="none" poster="https://placehold.co/300x540/fafafa/9ca3af?text=UGC+2"></video>
+              <div class="kw-vid-play"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="40" fill="rgba(255,255,255,0.4)"/><circle cx="40" cy="40" r="36" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"/><polygon points="32,26 58,40 32,54" fill="#fff"/></svg></div>
+            </div>
+            <div class="kw-vid-cap"><div class="kw-vid-name">[Name, age]</div><div class="kw-vid-meta">[1-line quote]</div></div>
+          </div>
+          <div class="kw-vid">
+            <div class="kw-vid-frame" onclick="kwPlayVid(this)">
+              <video src="" playsinline preload="none" poster="https://placehold.co/300x540/fafafa/9ca3af?text=UGC+3"></video>
+              <div class="kw-vid-play"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="40" fill="rgba(255,255,255,0.4)"/><circle cx="40" cy="40" r="36" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"/><polygon points="32,26 58,40 32,54" fill="#fff"/></svg></div>
+            </div>
+            <div class="kw-vid-cap"><div class="kw-vid-name">[Name, age]</div><div class="kw-vid-meta">[1-line quote]</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div></section>
+
+  <section class="kw-trust">
+    <div class="kw-trust-track">
+      <span class="kw-trust-item">&#128167; Waterproof (IP67)</span>
+      <span class="kw-trust-item">&#128260; 30-Day Money-Back Guarantee</span>
+      <span class="kw-trust-item">&#11088; 12,000+ Verified Customers</span>
+      <span class="kw-trust-item">&#128666; Free Worldwide Shipping</span>
+      <span class="kw-trust-item">&#128274; Secure Checkout</span>
+    </div>
+  </section>
+
+  <section class="kw-meal">
+    <div class="kw-meal-inner">
+      <div class="kw-meal-copy">
+        <h2 class="kw-meal-title">Everything You Need.<br><em>Nothing You Don&rsquo;t.</em></h2>
+        <div class="kw-meal-stats">
+          <div class="kw-meal-stat"><div class="kw-meal-num">2 mm</div><div class="kw-meal-lbl">Ultra-thin wallet design</div></div>
+          <div class="kw-meal-stat"><div class="kw-meal-num">80 &times; 50</div><div class="kw-meal-lbl">Standard card size (mm)</div></div>
+          <div class="kw-meal-stat"><div class="kw-meal-num">12.2 g</div><div class="kw-meal-lbl">Lightweight &amp; comfortable</div></div>
+          <div class="kw-meal-stat"><div class="kw-meal-num">100 mAh</div><div class="kw-meal-lbl">Rechargeable battery</div></div>
+          <div class="kw-meal-stat"><div class="kw-meal-num">2 Systems</div><div class="kw-meal-lbl">Apple Find My + Android Find Hub</div></div>
+          <div class="kw-meal-stat"><div class="kw-meal-num">24/7</div><div class="kw-meal-lbl">Track your valuables anytime</div></div>
+        </div>
+      </div>
+      <div class="kw-meal-img">
+        <video src="https://cdn.shopify.com/videos/c/o/v/758d2d00865540039bd355c49dd88894.mp4" autoplay muted loop playsinline preload="metadata" poster=""></video>
+      </div>
+    </div>
+  </section>
+
+  <section class="kw-sec"><div class="kw-sec-inner">
+    <div class="kw-head">
+      <h2 class="kw-title">Small Card. <em>Big Protection.</em></h2>
+      <p class="kw-head-sub">Powerful tracking technology in an ultra-thin design that fits naturally into your wallet and helps you keep track of your valuables every day.</p>
+    </div>
+
+    <div class="kw-feat-grid">
+      <div class="kw-feat">
+        <div class="kw-feat-img"><img src="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_29._Juli_2026_22_33_27.png?v=1785357457" alt="Choose your Ajvora Tracker Card — Apple Find My or Dual Apple + Android version" loading="lazy"></div>
+        <div class="kw-feat-body">
+          <h3 class="kw-feat-h">Choose The Tracker That Fits You</h3>
+          <p class="kw-feat-t">Pick the Apple Find My Card or the Dual Apple + Android version to match your devices and lifestyle.</p>
+        </div>
+      </div>
+
+      <div class="kw-feat">
+        <div class="kw-feat-img"><img src="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_29._Juli_2026_22_35_06.png?v=1785357450" alt="Ajvora ultra-thin 2mm design fits any wallet naturally" loading="lazy"></div>
+        <div class="kw-feat-body">
+          <h3 class="kw-feat-h">Designed To Stay Invisible</h3>
+          <p class="kw-feat-t">Just 2&nbsp;mm thin, the card slips into your wallet naturally without adding extra bulk.</p>
+        </div>
+      </div>
+
+      <div class="kw-feat">
+        <div class="kw-feat-img"><img src="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_29._Juli_2026_22_36_24.png?v=1785357443" alt="Ajvora wireless rechargeable smart tracker card" loading="lazy"></div>
+        <div class="kw-feat-body">
+          <h3 class="kw-feat-h">Recharge Instead Of Replace</h3>
+          <p class="kw-feat-t">Wireless charging keeps your tracker ready without constantly buying disposable batteries.</p>
+        </div>
+      </div>
+
+      <div class="kw-feat">
+        <div class="kw-feat-img"><img src="https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_29._Juli_2026_22_52_40.png?v=1785358401" alt="Ajvora Tracker Card protecting wallet, passport and luggage" loading="lazy"></div>
+        <div class="kw-feat-body">
+          <h3 class="kw-feat-h">Keep Your Essentials Safe</h3>
+          <p class="kw-feat-t">Protect your wallet, passport, luggage and everyday valuables with reliable location tracking.</p>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="kw-sec alt"><div class="kw-sec-inner">
+    <div class="kw-head">
+      <h2 class="kw-title">Why Choose <em>Ajvora?</em></h2>
+    </div>
+    <div class="kw-islider-wrap">
+      <div class="kw-islider">
+        <div class="kw-islide">
+          <div class="kw-islide-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <h3 class="kw-islide-h">Peace of Mind, Always</h3>
+          <p class="kw-islide-t">Stop the &ldquo;did I lose it?&rdquo; panic before it starts</p>
+        </div>
+
+        <div class="kw-islide">
+          <div class="kw-islide-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12.5 11 15.5 16.5 9.5"/></svg></div>
+          <h3 class="kw-islide-h">Set Up in Minutes</h3>
+          <p class="kw-islide-t">Pair once and forget it &mdash; no apps to babysit</p>
+        </div>
+
+        <div class="kw-islide">
+          <div class="kw-islide-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
+          <h3 class="kw-islide-h">The Thoughtful Gift</h3>
+          <p class="kw-islide-t">Loved by parents, students, and frequent travelers</p>
+        </div>
+
+        <div class="kw-islide">
+          <div class="kw-islide-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="14" height="10" rx="1"/><path d="M15 10h5l3 3v4h-8"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg></div>
+          <h3 class="kw-islide-h">Ships in 24 Hours</h3>
+          <p class="kw-islide-t">Free tracked delivery, straight to your door</p>
+        </div>
+
+        <div class="kw-islide">
+          <div class="kw-islide-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="7" x2="12" y2="17"/><path d="M15 9.5C15 8.5 14 8 12 8s-3 .8-3 2c0 2.5 6 1.5 6 4 0 1.3-1.5 2-3 2s-3-.7-3-2"/></svg></div>
+          <h3 class="kw-islide-h">No Hidden Fees</h3>
+          <p class="kw-islide-t">Buy once, use forever &mdash; no subscriptions</p>
+        </div>
+
+        <div class="kw-islide">
+          <div class="kw-islide-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-1v-6h3M4 12v4a2 2 0 0 0 2 2h1v-6H4"/><path d="M18 18v1a2 2 0 0 1-2 2h-4"/></svg></div>
+          <h3 class="kw-islide-h">Real Human Support</h3>
+          <p class="kw-islide-t">A real person replies within 24 hours</p>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="kw-sec"><div class="kw-sec-inner" style="max-width:820px;">
+    <div class="kw-head"><h2 class="kw-title">Why Choose <em>Ajvora?</em></h2></div>
+    <div class="kw-cmp">
+      <div class="kw-cmp-head"><div>Feature</div><div>Typical Wallet Tracker</div><div class="us">Ajvora Tracker Card</div></div>
+      <div class="kw-cmp-row"><div class="feat">Dual Network Support</div><div class="bad">Apple or Android only</div><div class="good">Works with Apple Find My &amp; Android Find Hub</div></div>
+      <div class="kw-cmp-row"><div class="feat">Ultra-Thin Wallet Design</div><div class="bad">Thick &amp; Bulky</div><div class="good">Ultra-Thin 2&nbsp;mm Card Design</div></div>
+      <div class="kw-cmp-row"><div class="feat">Accurate Real-Time Tracking</div><div class="bad">Basic Bluetooth Range</div><div class="good">Real-Time via Global Find Network</div></div>
+      <div class="kw-cmp-row"><div class="feat">Wireless Rechargeable</div><div class="bad">Replaceable Battery</div><div class="good">Wireless Rechargeable (100&nbsp;mAh)</div></div>
+      <div class="kw-cmp-row"><div class="feat">Long Battery Life</div><div class="bad">Short Battery Life</div><div class="good">Long-Lasting Rechargeable Battery</div></div>
+      <div class="kw-cmp-row"><div class="feat">Fits Perfectly in Wallets</div><div class="bad">Too Thick for Most Wallets</div><div class="good">Credit Card Size (80&nbsp;&times;&nbsp;50&nbsp;&times;&nbsp;2&nbsp;mm)</div></div>
+      <div class="kw-cmp-row"><div class="feat">Lightweight Design</div><div class="bad">Heavier</div><div class="good">Only 12.2&nbsp;g</div></div>
+      <div class="kw-cmp-row"><div class="feat">Premium Build Quality</div><div class="bad">Standard Plastic</div><div class="good">Durable PC Material</div></div>
+    </div>
+    <div class="kw-cmp-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Compatible with Apple Find My &amp; Android Find Hub
+    </div>
+  </div></section>
+
+  <section class="kw-perfect" id="kwStudies">
+    <div class="kw-perfect-inner">
+      <div class="kw-head">
+        <h2 class="kw-title">Perfect <em>For</em></h2>
+        <p class="kw-head-sub">Designed to protect the things you carry every day.</p>
+      </div>
+
+      <div class="kw-perfect-grid">
+        <div class="kw-perfect-card">
+          <div class="kw-perfect-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6H5a2 2 0 0 1 0-4h16V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/><circle cx="17" cy="14" r="1.2" fill="currentColor" stroke="none"/></svg></div>
+          <h3 class="kw-perfect-h">Wallet</h3>
+          <p class="kw-perfect-t">Keep your wallet protected wherever you go.</p>
+        </div>
+
+        <div class="kw-perfect-card">
+          <div class="kw-perfect-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2z"/><path d="M9 8V5a3 3 0 0 1 6 0v3"/><path d="M8 13h8"/><path d="M8 17h5"/></svg></div>
+          <h3 class="kw-perfect-h">Backpack</h3>
+          <p class="kw-perfect-t">Never lose your backpack again.</p>
+        </div>
+
+        <div class="kw-perfect-card">
+          <div class="kw-perfect-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="14" rx="2"/><path d="M9 7V4h6v3"/><line x1="9" y1="11" x2="9" y2="17"/><line x1="15" y1="11" x2="15" y2="17"/><line x1="7" y1="21" x2="7" y2="22"/><line x1="17" y1="21" x2="17" y2="22"/></svg></div>
+          <h3 class="kw-perfect-h">Luggage</h3>
+          <p class="kw-perfect-t">Travel with confidence and track your luggage.</p>
+        </div>
+
+        <div class="kw-perfect-card">
+          <div class="kw-perfect-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="12" r="4.5"/><path d="M12.5 12H21"/><path d="M19 12v3"/><path d="M16 12v2"/></svg></div>
+          <h3 class="kw-perfect-h">Keys</h3>
+          <p class="kw-perfect-t">Attach it to your key holder and find it instantly.</p>
+        </div>
+
+        <div class="kw-perfect-card">
+          <div class="kw-perfect-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17V13l2-5a2 2 0 0 1 2-1h6a2 2 0 0 1 2 1l2 5v4"/><rect x="3" y="13" width="18" height="4" rx="1.5"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="16.5" cy="18.5" r="1.5"/></svg></div>
+          <h3 class="kw-perfect-h">Car</h3>
+          <p class="kw-perfect-t">Perfect for keeping track of important items in your car.</p>
+        </div>
+
+        <div class="kw-perfect-card">
+          <div class="kw-perfect-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="10" rx="1.5"/><path d="M2 18h20l-1 2H3z"/><path d="M10 3h4v3h-4z"/></svg></div>
+          <h3 class="kw-perfect-h">Laptop Bag</h3>
+          <p class="kw-perfect-t">Know where your laptop bag is at any time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kw-guar"><div class="kw-guar-inner">
+    <div class="kw-guar-copy">
+      <h2 class="kw-title">Try It Risk-Free <em>for 30 Days.</em></h2>
+      <p>Use the product for 30 days. <strong>If it doesn't deliver, send it back for a full refund.</strong> No phone calls. No "tell us why" forms.</p>
+      <a href="#kwOffer" class="kw-cta" style="width:auto;"><span class="kw-cta-label">[Get Started]</span></a>
+    </div>
+    <div class="kw-seal">
+      <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><defs><path id="kwSealArc" d="M70,70 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/></defs>
+        <g class="ring">
+          <circle cx="70" cy="70" r="62" fill="none" stroke="rgba(17,24,39,0.20)" stroke-width="1"/>
+          <circle cx="70" cy="70" r="44" fill="none" stroke="rgba(17,24,39,0.10)" stroke-width="1"/>
+          <text fill="#111827" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" letter-spacing="2.5"><textPath href="#kwSealArc" startOffset="0">30-DAY &#183; MONEY-BACK &#183; GUARANTEE &#183; </textPath></text>
+        </g>
+        <g transform="translate(70,70)">
+          <path d="M0,-22 C12,-22 18,-16 18,-4 C18,12 6,20 0,24 C-6,20 -18,12 -18,-4 C-18,-16 -12,-22 0,-22 Z" fill="none" stroke="#16a34a" stroke-width="2.4" stroke-linejoin="round"/>
+          <path d="M-8,-2 L-2,6 L9,-9" fill="none" stroke="#16a34a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+      </svg>
+    </div>
+  </div></section>
+
+  <section class="kw-sec"><div class="kw-sec-inner">
+    <div class="kw-head"><h2 class="kw-title">Everything You <em>Need to Know</em></h2></div>
+    <div class="kw-faq-list">
+      <details class="kw-faq-item">
+        <summary>Does it work with iPhone and Android?<span class="kw-faq-plus">+</span></summary>
+        <div class="kw-faq-a">Yes. The tracker supports both <strong>Apple Find My</strong> and <strong>Android Find Hub</strong>, allowing you to locate it on compatible iOS and Android devices.</div>
+      </details>
+      <details class="kw-faq-item">
+        <summary>How long does the battery last?<span class="kw-faq-plus">+</span></summary>
+        <div class="kw-faq-a">The built-in <strong>rechargeable battery</strong> is designed for long-lasting use. Simply recharge it wirelessly whenever needed.</div>
+      </details>
+      <details class="kw-faq-item">
+        <summary>Will it fit inside my wallet?<span class="kw-faq-plus">+</span></summary>
+        <div class="kw-faq-a">Yes. The tracker is only <strong>2 mm thin</strong> and measures <strong>80 &times; 50 mm</strong>, making it perfect for wallets, card holders, luggage, and other personal belongings.</div>
+      </details>
+      <details class="kw-faq-item">
+        <summary>Is it waterproof?<span class="kw-faq-plus">+</span></summary>
+        <div class="kw-faq-a">Yes. It has an <strong>IP67 water-resistant rating</strong>, protecting it from rain, splashes, and everyday use.</div>
+      </details>
+      <details class="kw-faq-item">
+        <summary>What&rsquo;s included in the box?<span class="kw-faq-plus">+</span></summary>
+        <div class="kw-faq-a">
+          <ul class="kw-faq-list-items">
+            <li>1 &times; Smart Tracker Card</li>
+            <li>1 &times; User Manual</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div></section>
+
+  <section class="kw-foot"><div class="kw-foot-inner">
+    <p class="kw-foot-tag">[Tagline.] <span>[Hero word.]</span> [Closer.]</p>
+    <p class="kw-foot-sub">[Newsletter / inbox prompt.]</p>
+    <form class="kw-foot-form" onsubmit="return false;">
+      <input type="email" placeholder="Your email" aria-label="Your email">
+      <button type="submit">Join</button>
+    </form>
+    <div class="kw-foot-cols">
+      <div class="kw-foot-col"><p class="kw-foot-col-h">Shop</p><a href="#">[Product link]</a></div>
+      <div class="kw-foot-col"><p class="kw-foot-col-h">Legal</p><a href="#">Refund Policy</a><a href="#">Shipping</a><a href="#">Terms</a><a href="#">Privacy</a></div>
+      <div class="kw-foot-col"><p class="kw-foot-col-h">Follow</p><a href="#" aria-label="Social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></div>
+    </div>
+    <div class="kw-foot-bottom"><span class="kw-foot-copy">&copy; [Brand] &middot; [Optional regulatory line]</span></div>
+  </div></section>
+
+</div></div>
+
+<div class="kw-giftmodal-backdrop" id="kwGiftModal" role="dialog" aria-modal="true" aria-labelledby="kwGiftModalTitle" aria-hidden="true">
+  <div class="kw-giftmodal" role="document">
+    <button type="button" class="kw-giftmodal-close" id="kwGiftModalClose" aria-label="Close">&times;</button>
+    <div class="kw-giftmodal-hero">
+      <span class="kw-giftmodal-tag" id="kwGiftModalTag">FREE BONUS</span>
+      <div class="kw-giftmodal-img"><img id="kwGiftModalImg" src="" alt=""></div>
+      <h3 class="kw-giftmodal-title" id="kwGiftModalTitle"></h3>
+    </div>
+    <p class="kw-giftmodal-sub" id="kwGiftModalSub"></p>
+    <div class="kw-giftmodal-body" id="kwGiftModalBody"></div>
+  </div>
+</div>
+
+<canvas id="kwConfetti"></canvas>
+<div class="kw-toast" id="kwToast" role="alert" aria-live="polite">
+  <div class="kw-toast-icon">&#127881;</div>
+  <div class="kw-toast-title">Best Value Unlocked!</div>
+</div>
+
+<!-- ============================================================
+     KWEFI PREMIUM CART DRAWER
+     ============================================================ -->
+<div class="kwd" id="kwDrawer" aria-hidden="true" role="dialog" aria-label="Your Cart">
+  <div class="kwd-backdrop" data-kwd-close></div>
+  <aside class="kwd-panel" role="document" aria-labelledby="kwdTitle">
+
+    <header class="kwd-header">
+      <div>
+        <h2 class="kwd-title" id="kwdTitle">Your Cart</h2>
+        <span class="kwd-title-sub" id="kwdSubtitle">0 items</span>
+      </div>
+      <button type="button" class="kwd-close" data-kwd-close aria-label="Close cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </header>
+
+    <div class="kwd-benefits" aria-label="Purchase benefits">
+      <div class="kwd-benefit">
+        <div class="kwd-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="11" rx="1"/><path d="M16 10h4l3 3v4h-7"/><circle cx="6" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></svg></div>
+        <span>Free Shipping</span>
+      </div>
+      <div class="kwd-benefit">
+        <div class="kwd-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+        <span>Secure Checkout</span>
+      </div>
+      <div class="kwd-benefit">
+        <div class="kwd-benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+        <span>30-Day Guarantee</span>
+      </div>
+    </div>
+
+    <div class="kwd-progress" id="kwdProgress">
+      <div class="kwd-progress-msg" id="kwdProgressMsg">Add &euro;100.00 more for FREE Shipping</div>
+      <div class="kwd-progress-track"><div class="kwd-progress-fill" id="kwdProgressFill" style="width:0%"></div></div>
+    </div>
+
+    <div class="kwd-scroll">
+      <div class="kwd-empty" id="kwdEmpty">
+        <div class="kwd-empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </div>
+        <p class="kwd-empty-title">Your cart is empty</p>
+        <p class="kwd-empty-sub">Add an offer to see it here.</p>
+        <button type="button" class="kwd-empty-cta" data-kwd-close>Continue Shopping</button>
+      </div>
+
+      <div class="kwd-body" id="kwdBody" hidden>
+        <ul class="kwd-items" id="kwdItems"></ul>
+
+        <section class="kwd-upsell" id="kwdUpsell" hidden>
+          <h3 class="kwd-upsell-title">Complete Your Order</h3>
+          <p class="kwd-upsell-sub">Customers often add these</p>
+          <div class="kwd-upsell-list" id="kwdUpsellList"></div>
+        </section>
+      </div>
+    </div>
+
+    <footer class="kwd-footer" id="kwdFooter" hidden>
+      <div class="kwd-summary">
+        <div class="kwd-summary-row">
+          <span>Subtotal</span>
+          <span id="kwdSubtotal">&euro;0.00</span>
+        </div>
+        <div class="kwd-summary-row kwd-summary-row--savings" id="kwdSavingsRow" hidden>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>You save</span>
+          <span id="kwdSavings">&euro;0.00</span>
+        </div>
+        <div class="kwd-summary-row">
+          <span>Shipping</span>
+          <span id="kwdShipping" class="kwd-shipping-note">Calculated at checkout</span>
+        </div>
+        <div class="kwd-summary-total">
+          <span>Total</span>
+          <span id="kwdTotal">&euro;0.00</span>
+        </div>
+        <p class="kwd-summary-note">Incl. VAT &middot; 100% Money-Back Guarantee</p>
+      </div>
+
+      <button type="button" class="kwd-checkout" id="kwdCheckout" aria-label="Go to secure checkout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="kwd-checkout-lock"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <span>Secure Checkout</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="kwd-checkout-arrow"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+
+      <div class="kwd-trust">
+        <div class="kwd-trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          30-Day Money-Back Guarantee
+        </div>
+        <div class="kwd-pay">
+          <span>VISA</span><span>Mastercard</span><span>Amex</span><span>PayPal</span><span>Klarna</span><span>Apple&nbsp;Pay</span><span>G&nbsp;Pay</span>
+        </div>
+      </div>
+    </footer>
+
+  </aside>
+</div>
+
+
+<div class="kw-sticky" id="kwSticky">
+  <div class="kw-sticky-info"><b id="kwStickyPrice">&euro;49.99</b><span id="kwStickyName">Apple Find My + Charger</span></div>
+  <form class="kw-cta-form" action="/cart/add" method="post" enctype="multipart/form-data" novalidate style="margin:0;">
+    <input type="hidden" name="form_type" value="product">
+    <input type="hidden" name="utf8" value="&#x2713;">
+    <input type="hidden" name="id" value="58376943993096" data-kw-variant-input>
+    <input type="hidden" name="quantity" value="1">
+    <button type="submit" class="kw-cta" id="kwStickyCta"><span class="kw-cta-label">Add to Cart</span></button>
+  </form>
+</div>
+
+<script>(function(){
+'use strict';
+
+/* ====== PLANS — visual copy for each offer card, no products connected ====== */
+var PLANS = {
+  '1': { variantId:'58376943993096', name:'Apple Find My + Charger',                        price:'€49.99',  strike:'',         total:'€49.99',  totalStrike:'',         stickyPrice:'€49.99',  label:'Add to Cart' },
+  '2': { variantId:'58376943960328', name:'Apple & Android + Charger',                      price:'€59.99',  strike:'',         total:'€59.99',  totalStrike:'',         stickyPrice:'€59.99',  label:'Add to Cart' },
+  '3': { variantId:'58377214591240', name:'Buy 2 Get 1 FREE – Apple Find My + Charger',     price:'€99.99',  strike:'€149.97',  total:'€99.99',  totalStrike:'€149.97',  stickyPrice:'€99.99',  label:'Add to Cart' },
+  '4': { variantId:'58377219145992', name:'Buy 2 Get 1 FREE – Apple & Android + Charger',   price:'€119.99', strike:'€179.97',  total:'€119.99', totalStrike:'€179.97',  stickyPrice:'€119.99', label:'Add to Cart' }
+};
+
+/* ====== Cart display overrides — used by the premium drawer to render ====== */
+window.KW_VARIANT_DISPLAY = {
+  '58376943993096': {
+    title: 'Apple Find My + Charger',
+    subtitle: 'Includes wireless charger',
+    image: 'https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_6._Aug._2026_17_04_04.png?v=1786028714'
+  },
+  '58376943960328': {
+    title: 'Apple & Android + Charger',
+    subtitle: 'Includes wireless charger',
+    image: 'https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_6._Aug._2026_17_04_04.png?v=1786028714'
+  },
+  '58377214591240': {
+    title: 'Buy 2 Get 1 FREE — Apple Find My + Charger',
+    subtitle: '3 cards · 2 paid + 1 FREE',
+    image: 'https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_7._Aug._2026_00_47_04.png?v=1786056451'
+  },
+  '58377219145992': {
+    title: 'Buy 2 Get 1 FREE — Apple & Android + Charger',
+    subtitle: '3 cards · 2 paid + 1 FREE',
+    image: 'https://cdn.shopify.com/s/files/1/1053/7543/2968/files/ChatGPT_Image_7._Aug._2026_00_36_34.png?v=1786055822'
+  }
+};
+
+
+/* Gift content shown in the explainer modal */
+var GIFT_DATA = {
+  '0': { tag:'<span class="strike">[$x.xx]</span>FREE', img:'https://placehold.co/300x300/fafafa/9ca3af?text=Gift+1', title:'[Gift 1 Title]', sub:'[Short value statement for gift 1.]',
+    sections:[{ type:'feats', items:['[Feature line one]','[Feature line two]','[Feature line three]'] }] },
+  '1': { tag:'<span class="strike">[$xx.xx]</span>FREE', img:'https://placehold.co/300x300/fafafa/9ca3af?text=Gift+2', title:'[Gift 2 Title]', sub:'[Short value statement for gift 2.]',
+    sections:[{ h:"What's inside", type:'rows', items:[
+      { name:'[Item A]', desc:'[Short blurb.]' },
+      { name:'[Item B]', desc:'[Short blurb.]' },
+      { name:'[Item C]', desc:'[Short blurb.]' }
+    ]}], foot:'[Delivery / unlock note]' },
+  '2': { tag:'<span class="strike">[$xx.xx]</span>FREE', img:'https://placehold.co/300x300/fafafa/9ca3af?text=Gift+3', title:'[Gift 3 Title]', sub:'[Short value statement for gift 3.]',
+    sections:[{ type:'feats', items:['[Spec one]','[Spec two]','[Spec three]','[Spec four]'] }], foot:'[Ships with your order]' },
+  '3': { tag:'<span class="strike">[$xx.xx]</span>FREE', img:'https://placehold.co/300x300/fafafa/9ca3af?text=Gift+4', title:'[Gift 4 Title]', sub:'[Short value statement for gift 4.]',
+    sections:[{ h:'[Section heading]', type:'rows', items:[
+      { name:'[Active 1]', dose:'[Xmg]', desc:'[What it does.]' },
+      { name:'[Active 2]', dose:'[Xmg]', desc:'[What it does.]' }
+    ]}], foot:'[Ships with your order]' }
+};
+
+/* Plan-dependent info-pill text */
+function infoQtyText(plan){ return plan === '2' ? '[Qty for Offer 2 — bundle]' : '[Qty for Offer 1 — single]'; }
+
+/* Bonus gift unlock rules. Offer 1 unlocks first 2 gifts; Offer 2 unlocks all four. */
+var GIFT_VALUES = [9.95, 29.99, 34.99, 39.99];
+var MAX_VALUE = 114.92;
+function isUnlocked(i, plan){
+  if(i === 0) return true;
+  if(i === 1) return true;
+  return plan === '2';
+}
+function unlockMessage(i, plan){
+  if(plan !== '2' && (i === 2 || i === 3)) return 'Upgrade to Offer 2';
+  return '';
+}
+
+/* ====================== ENGINE (optimized: DOM cached, no confetti, guarded) ====================== */
+var selectedPlan = '1';
+
+var cards = document.querySelectorAll('.kwo-card[data-plan], .kw-card[data-plan]');
+var gifts = document.querySelectorAll('.kw-gift');
+var cta = document.getElementById('kwCta');
+var ctaLabel = document.getElementById('kwCtaLabel');
+var ctaPrice = document.getElementById('kwCtaPrice');
+var ctaStrike = document.getElementById('kwCtaStrike');
+var claim = document.getElementById('kwClaim');
+var stickyCta = document.getElementById('kwStickyCta');
+var stickyPrice = document.getElementById('kwStickyPrice');
+var stickyName = document.getElementById('kwStickyName');
+var toast = document.getElementById('kwToast');
+var soldStrikeEl = document.getElementById('kwSoldStrike');
+var qtyTextEl = document.querySelector('#kwInfoQty .kw-info-qty-text');
+
+// Pre-cache price/strike/perunit/bill elements per plan
+var priceEls = {}, strikeEls = {}, perunitEls = {}, billEls = {};
+Object.keys(PLANS).forEach(function(d){
+  priceEls[d]   = document.querySelector('[data-price-'+d+']');
+  strikeEls[d]  = document.querySelector('[data-strike-'+d+']');
+  perunitEls[d] = document.querySelector('[data-perunit-'+d+']');
+  billEls[d]    = document.querySelector('[data-bill-'+d+']');
+});
+
+/* Confetti */
+var canvas = document.getElementById('kwConfetti');
+var ctx = canvas.getContext('2d');
+var pieces = [], running = false;
+function sizeCanvas(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+sizeCanvas(); window.addEventListener('resize', sizeCanvas);
+function fireConfetti(){
+  var colors = ['#9ca3af','#c0c0c0','#d1d5db','#6b7280','#a8a8a8','#111827'];
+  var cx = canvas.width/2, cy = canvas.height/3;
+  for(var i=0;i<140;i++){
+    var a = Math.random()*Math.PI*2, sp = 6+Math.random()*8;
+    pieces.push({ x:cx+(Math.random()-0.5)*200, y:cy, vx:Math.cos(a)*sp*(0.5+Math.random()), vy:Math.sin(a)*sp-4, g:0.18+Math.random()*0.08, sz:6+Math.random()*6, c:colors[Math.floor(Math.random()*colors.length)], rot:Math.random()*Math.PI, vr:(Math.random()-0.5)*0.3, life:1 });
+  }
+  if(!running){ running=true; animate(); }
+}
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  pieces = pieces.filter(function(p){ return p.life>0 && p.y<canvas.height+40; });
+  pieces.forEach(function(p){ p.vy+=p.g; p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr; p.life-=0.005; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillStyle=p.c; ctx.globalAlpha=Math.max(0,p.life); ctx.fillRect(-p.sz/2,-p.sz/4,p.sz,p.sz/2); ctx.restore(); });
+  if(pieces.length>0) requestAnimationFrame(animate); else running=false;
+}
+var SESSION_KEY='kwCelebrated', celebrated=false, toastTimer;
+try { celebrated = sessionStorage.getItem(SESSION_KEY)==='1'; } catch(e){}
+function celebrate(){
+  if(celebrated) return;
+  celebrated=true;
+  try { sessionStorage.setItem(SESSION_KEY,'1'); } catch(e){}
+  fireConfetti();
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2800);
+}
+toast.addEventListener('click', function(){ toast.classList.remove('show'); });
+
+function render(){
+  var p = PLANS[selectedPlan]; if(!p) return;
+
+  // 1) Selected card class toggle (fast loop)
+  for(var i=0;i<cards.length;i++){
+    cards[i].classList.toggle('is-selected', cards[i].dataset.plan === selectedPlan);
+  }
+
+  // 2) Update both cards' prices (cached refs — no DOM query in hot path)
+  for(var d in PLANS){
+    var pp = PLANS[d];
+    if(priceEls[d])   priceEls[d].textContent   = pp.price;
+    if(strikeEls[d])  strikeEls[d].textContent  = pp.strike;
+    if(perunitEls[d]) perunitEls[d].textContent = pp.perUnit;
+    if(billEls[d])    billEls[d].textContent    = pp.bill;
+  }
+
+  // 3) CTA + Sticky updates (synchronous, no reflow storms)
+  if(ctaLabel)  ctaLabel.textContent  = p.label;
+  if(ctaPrice)  ctaPrice.textContent  = p.total;
+  if(ctaStrike) ctaStrike.textContent = p.totalStrike;
+  if(soldStrikeEl) soldStrikeEl.textContent = p.totalStrike;
+  if(stickyPrice) stickyPrice.textContent = p.stickyPrice;
+  if(stickyName)  stickyName.textContent  = p.name;
+  if(qtyTextEl)   qtyTextEl.textContent   = infoQtyText(selectedPlan);
+
+  // Sync hidden variant inputs so both CTA forms POST the right variant on submit
+  var inputs = document.querySelectorAll('[data-kw-variant-input]');
+  for(var vi=0; vi<inputs.length; vi++){ inputs[vi].value = p.variantId; }
+}
+
+// Guard: don't re-render if the same plan is clicked
+for(var i=0;i<cards.length;i++){
+  (function(c){
+    c.addEventListener('click', function(){
+      if(selectedPlan === c.dataset.plan) return;
+      selectedPlan = c.dataset.plan;
+      render();
+    }, { passive: true });
+  })(cards[i]);
+}
+
+render();
+
+
+/* =========================================================
+   KWEFI PREMIUM CART BRIDGE
+   - Intercepts .kw-cta-form submits (capture phase)
+   - Adds to Shopify via /cart/add.js
+   - Renders premium drawer from /cart.js
+   - Handles qty +/-, remove, recommendations
+   - Backend/Shopify bundle logic untouched
+   ========================================================= */
+(function(){
+  var FREE_SHIP_THRESHOLD_CENTS = 10000; // €100 — adjust as needed
+  // Variant IDs that ALWAYS qualify for free shipping (bypass the threshold).
+  // When any of these is in the cart, the progress bar is hidden and shipping
+  // is shown as FREE regardless of subtotal. NOTE: the merchant must also
+  // configure a matching free-shipping rule in Shopify Admin → Settings →
+  // Shipping and delivery, otherwise the customer will still be charged at
+  // checkout. This constant only controls the DISPLAY in the drawer.
+  var FREE_SHIP_VARIANTS = {
+    '58377214591240': true, // Buy 2 Get 1 FREE — Apple Find My + Charger
+    '58377219145992': true  // Buy 2 Get 1 FREE — Apple & Android + Charger
+  };
+  var VARIANTS = window.KW_VARIANT_DISPLAY || {};
+
+  function cartQualifiesForFreeShip(cart){
+    if(!cart || !cart.items) return false;
+    for(var i=0;i<cart.items.length;i++){
+      var vid = String(cart.items[i].variant_id || cart.items[i].id || '');
+      if(FREE_SHIP_VARIANTS[vid]) return true;
+    }
+    return false;
+  }
+
+  var drawer   = document.getElementById('kwDrawer');
+  if(!drawer) return;
+  var body     = document.body;
+  var itemsEl  = document.getElementById('kwdItems');
+  var emptyEl  = document.getElementById('kwdEmpty');
+  var bodyEl   = document.getElementById('kwdBody');
+  var footerEl = document.getElementById('kwdFooter');
+  var subtotalEl  = document.getElementById('kwdSubtotal');
+  var savingsRow  = document.getElementById('kwdSavingsRow');
+  var savingsEl   = document.getElementById('kwdSavings');
+  var shippingEl  = document.getElementById('kwdShipping');
+  var totalEl     = document.getElementById('kwdTotal');
+  var subtitleEl  = document.getElementById('kwdSubtitle');
+  var progressEl  = document.getElementById('kwdProgress');
+  var progressMsg = document.getElementById('kwdProgressMsg');
+  var progressFill= document.getElementById('kwdProgressFill');
+  var checkoutBtn = document.getElementById('kwdCheckout');
+  var upsellSection = document.getElementById('kwdUpsell');
+  var upsellList    = document.getElementById('kwdUpsellList');
+
+  /* Formatting */
+  function money(cents, currency){
+    var symbol = { EUR:'€', USD:'$', GBP:'£', CHF:'CHF ' }[currency] || '€';
+    var n = (cents || 0) / 100;
+    return symbol + n.toFixed(2).replace('.', ',');
+  }
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  /* Open / close */
+  function openDrawer(){
+    drawer.classList.add('is-open');
+    drawer.setAttribute('aria-hidden','false');
+    body.classList.add('kwd-lock');
+  }
+  function closeDrawer(){
+    drawer.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden','true');
+    body.classList.remove('kwd-lock');
+  }
+  drawer.addEventListener('click', function(e){ if(e.target.closest('[data-kwd-close]')) closeDrawer(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && drawer.classList.contains('is-open')) closeDrawer(); });
+
+  /* Cart API */
+  function fetchCart(){ return fetch('/cart.js',{credentials:'same-origin'}).then(function(r){return r.json();}); }
+  function changeQty(key, qty){
+    return fetch('/cart/change.js',{
+      method:'POST', credentials:'same-origin',
+      headers:{'Content-Type':'application/json','Accept':'application/json','X-Requested-With':'XMLHttpRequest'},
+      body: JSON.stringify({ id:key, quantity:qty })
+    }).then(function(r){return r.json();});
+  }
+
+  /* Recommendations */
+  var upsellCache = {};
+  function loadUpsell(productId){
+    if(!productId){ upsellSection.hidden = true; return; }
+    if(upsellCache[productId]){ renderUpsell(upsellCache[productId]); return; }
+    fetch('/recommendations/products.json?product_id=' + encodeURIComponent(productId) + '&limit=3&intent=complementary',{credentials:'same-origin'})
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(data){
+        if(!data || !data.products || !data.products.length){ upsellSection.hidden = true; return; }
+        upsellCache[productId] = data.products;
+        renderUpsell(data.products);
+      })
+      .catch(function(){ upsellSection.hidden = true; });
+  }
+  function renderUpsell(products){
+    if(!products.length){ upsellSection.hidden = true; return; }
+    var html = '';
+    for(var i=0;i<products.length;i++){
+      var p = products[i];
+      var v = p.variants && p.variants[0];
+      if(!v) continue;
+      var img = (p.featured_image && (p.featured_image.url || p.featured_image)) || (p.images && p.images[0]) || '';
+      html += '<div class="kwd-upsell-item">'
+        + '<div class="kwd-upsell-img">' + (img ? '<img src="' + esc(img) + '" alt="' + esc(p.title) + '" loading="lazy">' : '') + '</div>'
+        + '<div class="kwd-upsell-info">'
+        +   '<p class="kwd-upsell-name">' + esc(p.title) + '</p>'
+        +   '<div class="kwd-upsell-price">' + money(v.price, 'EUR') + '</div>'
+        + '</div>'
+        + '<button type="button" class="kwd-upsell-add" data-kwd-upsell-add="' + esc(v.id) + '">'
+        +   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>'
+        +   'Add'
+        + '</button>'
+        + '</div>';
+    }
+    upsellList.innerHTML = html;
+    upsellSection.hidden = false;
+  }
+
+  /* Render drawer from cart data */
+  function renderDrawer(cart){
+    if(!cart) return;
+    var currency = cart.currency || 'EUR';
+    var items = cart.items || [];
+
+    // Subtitle count
+    subtitleEl.textContent = cart.item_count + ' ' + (cart.item_count === 1 ? 'item' : 'items');
+
+    // Empty state
+    if(!items.length){
+      itemsEl.innerHTML = '';
+      bodyEl.hidden = true;
+      footerEl.hidden = true;
+      emptyEl.hidden = false;
+      upsellSection.hidden = true;
+      progressEl.hidden = false;
+      updateProgress(0);
+      return;
+    }
+    bodyEl.hidden = false;
+    footerEl.hidden = false;
+    emptyEl.hidden = true;
+
+    // Items
+    var html = '';
+    for(var i=0;i<items.length;i++){
+      var it = items[i];
+      var vid = String(it.variant_id || it.id || '');
+      var custom = VARIANTS[vid] || {};
+      var title = custom.title || it.product_title || it.title;
+      var subtitle = custom.subtitle || (it.variant_title && it.variant_title !== 'Default Title' ? it.variant_title : '');
+      var img = custom.image || it.image || (it.featured_image && it.featured_image.url) || '';
+      var linePrice = it.final_line_price || it.line_price;
+      var originalPrice = it.original_line_price || linePrice;
+      var hasDiscount = originalPrice > linePrice;
+
+      html += '<li class="kwd-item" data-key="' + esc(it.key) + '">'
+        + '<div class="kwd-item-img">' + (img ? '<img src="' + esc(img) + '" alt="' + esc(title) + '" loading="lazy">' : '') + '</div>'
+        + '<div class="kwd-item-info">'
+        +   '<p class="kwd-item-title">' + esc(title) + '</p>'
+        +   (subtitle ? '<span class="kwd-item-sub">' + esc(subtitle) + '</span>' : '')
+        +   '<div class="kwd-item-qty">'
+        +     '<button type="button" class="kwd-qty-btn" data-kwd-qty="dec" aria-label="Decrease">&minus;</button>'
+        +     '<span class="kwd-qty-val">' + it.quantity + '</span>'
+        +     '<button type="button" class="kwd-qty-btn" data-kwd-qty="inc" aria-label="Increase">+</button>'
+        +   '</div>'
+        + '</div>'
+        + '<div class="kwd-item-right">'
+        +   '<button type="button" class="kwd-item-remove" data-kwd-remove aria-label="Remove item">'
+        +     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>'
+        +   '</button>'
+        +   '<div class="kwd-item-price-block">'
+        +     '<span class="kwd-item-price">' + money(linePrice, currency) + '</span>'
+        +     (hasDiscount ? '<span class="kwd-item-price-strike">' + money(originalPrice, currency) + '</span>' : '')
+        +   '</div>'
+        + '</div>'
+        + '</li>';
+    }
+    itemsEl.innerHTML = html;
+
+    // Summary
+    subtotalEl.textContent = money(cart.items_subtotal_price || cart.total_price, currency);
+    var savings = (cart.original_total_price || cart.items_subtotal_price || 0) - (cart.total_price || 0);
+    if(savings > 0){
+      savingsEl.textContent = '−' + money(savings, currency);
+      savingsRow.hidden = false;
+    } else {
+      savingsRow.hidden = true;
+    }
+    totalEl.textContent = money(cart.total_price, currency);
+
+    // Free shipping — either a qualifying bundle in cart, or threshold met
+    var freeByProduct = cartQualifiesForFreeShip(cart);
+    var freeShip = freeByProduct || (cart.total_price >= FREE_SHIP_THRESHOLD_CENTS);
+    if(freeShip){
+      shippingEl.textContent = 'FREE';
+      shippingEl.classList.add('is-free');
+    } else {
+      shippingEl.textContent = 'Calculated at checkout';
+      shippingEl.classList.remove('is-free');
+    }
+
+    // Progress bar — hidden entirely when a qualifying bundle is in the cart
+    if(freeByProduct){
+      progressEl.hidden = true;
+    } else {
+      progressEl.hidden = false;
+      updateProgress(cart.total_price);
+    }
+
+    // Recommendations (based on first cart item)
+    loadUpsell(items[0].product_id);
+  }
+
+  function updateProgress(totalCents){
+    var pct = Math.min(100, Math.round((totalCents / FREE_SHIP_THRESHOLD_CENTS) * 100));
+    progressFill.style.width = pct + '%';
+    if(totalCents >= FREE_SHIP_THRESHOLD_CENTS){
+      progressMsg.innerHTML = '🎉 You qualify for FREE Shipping!';
+      progressMsg.classList.add('is-met');
+      progressFill.classList.add('is-met');
+    } else {
+      var remaining = FREE_SHIP_THRESHOLD_CENTS - totalCents;
+      progressMsg.textContent = 'Add ' + money(remaining, 'EUR') + ' more for FREE Shipping';
+      progressMsg.classList.remove('is-met');
+      progressFill.classList.remove('is-met');
+    }
+  }
+
+  /* Item actions (qty +/-, remove) */
+  itemsEl.addEventListener('click', function(e){
+    var qBtn = e.target.closest('[data-kwd-qty]');
+    var rBtn = e.target.closest('[data-kwd-remove]');
+    var row = e.target.closest('.kwd-item');
+    if(!row) return;
+    var key = row.getAttribute('data-key');
+    if(!key || drawer.classList.contains('is-adding')) return;
+
+    if(rBtn){
+      drawer.classList.add('is-adding');
+      changeQty(key, 0)
+        .then(function(cart){ renderDrawer(cart); })
+        .catch(function(err){ console.error('[kwefi] remove failed', err); })
+        .then(function(){ drawer.classList.remove('is-adding'); });
+      return;
+    }
+    if(qBtn){
+      var dir = qBtn.getAttribute('data-kwd-qty');
+      var current = parseInt(row.querySelector('.kwd-qty-val').textContent, 10) || 1;
+      var next = dir === 'inc' ? current + 1 : Math.max(0, current - 1);
+      drawer.classList.add('is-adding');
+      changeQty(key, next)
+        .then(function(cart){ renderDrawer(cart); })
+        .catch(function(err){ console.error('[kwefi] qty change failed', err); })
+        .then(function(){ drawer.classList.remove('is-adding'); });
+    }
+  });
+
+  /* Upsell add */
+  upsellList.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-kwd-upsell-add]');
+    if(!btn || btn.disabled) return;
+    var vid = btn.getAttribute('data-kwd-upsell-add');
+    btn.disabled = true; var oldHtml = btn.innerHTML; btn.textContent = 'Adding...';
+    fetch('/cart/add.js',{
+      method:'POST', credentials:'same-origin',
+      headers:{'Content-Type':'application/json','Accept':'application/json','X-Requested-With':'XMLHttpRequest'},
+      body: JSON.stringify({ items:[{ id:vid, quantity:1 }] })
+    })
+    .then(function(){ return fetchCart(); })
+    .then(function(cart){ renderDrawer(cart); })
+    .catch(function(err){ console.error('[kwefi] upsell add failed', err); })
+    .then(function(){ btn.disabled = false; btn.innerHTML = oldHtml; });
+  });
+
+  /* Checkout */
+  checkoutBtn.addEventListener('click', function(){ window.location.href = '/checkout'; });
+
+  /* Intercept CTA form submits (capture phase to beat theme handlers) */
+  function handleSubmit(e){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    var form = e.currentTarget;
+    if(form.dataset.kwBusy === '1') return;
+    form.dataset.kwBusy = '1';
+
+    var labelEl = form.querySelector('.kw-cta-label');
+    var origLabel = labelEl ? labelEl.textContent : null;
+    if(labelEl) labelEl.textContent = 'Adding...';
+
+    var fd = new FormData(form);
+    var ctrl = new AbortController();
+    var timer = setTimeout(function(){ ctrl.abort(); }, 12000);
+
+    fetch('/cart/add.js',{
+      method:'POST', body: fd, credentials:'same-origin',
+      headers:{'Accept':'application/javascript','X-Requested-With':'XMLHttpRequest'},
+      signal: ctrl.signal
+    })
+    .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,data:j}; }); })
+    .then(function(res){
+      clearTimeout(timer);
+      if(!res.ok) throw new Error((res.data && res.data.description) || 'Add to cart failed');
+      return fetchCart();
+    })
+    .then(function(cart){
+      renderDrawer(cart);
+      openDrawer();
+    })
+    .catch(function(err){
+      console.error('[kwefi] add to cart failed', err);
+      if(err && err.name !== 'AbortError') alert('Sorry, we could not add this item. Please try again.');
+    })
+    .then(function(){
+      if(labelEl && origLabel != null) labelEl.textContent = origLabel;
+      form.dataset.kwBusy = '';
+    });
+  }
+
+  function bindForms(){
+    var forms = document.querySelectorAll('.kw-cta-form');
+    for(var i=0;i<forms.length;i++){
+      if(forms[i].dataset.kwBound === '1') continue;
+      forms[i].dataset.kwBound = '1';
+      forms[i].addEventListener('submit', handleSubmit, { capture: true });
+    }
+  }
+
+  function init(){
+    bindForms();
+    fetchCart().then(function(cart){
+      // Only render items so the header count is accurate; drawer stays closed until user opens it
+      renderDrawer(cart);
+    }).catch(function(){});
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+
+/* Rotating announcement bar — INJECTS INTO THE THEME'S ANNOUNCEMENT SLOT
+   Finds the theme's announcement bar (or the "Welcome to our store" element)
+   and replaces its inner content with our rotating messages. This lets the
+   bar sit at the very top of the store — exactly where the theme currently
+   shows "Welcome to our store" — without touching theme files. */
+(function(){
+  var SLIDES = [
+    { icon:'<rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',
+      html:'Secure Payment <em>·</em> <b>100% Safe Checkout</b>' },
+    { icon:'<rect x="1" y="6" width="15" height="11" rx="1"/><path d="M16 10h4l3 3v4h-7"/><circle cx="6" cy="19" r="2"/><circle cx="19" cy="19" r="2"/>',
+      html:'<b>Free Shipping</b> on Bundle Offers' },
+    { icon:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>',
+      html:'<b>30-Day</b> Money-Back Guarantee' },
+    { icon:'<rect x="6" y="2" width="12" height="20" rx="2"/><line x1="10" y1="18" x2="14" y2="18"/>',
+      html:'Works with <b>Apple Find My &amp; Android Find Hub</b>' },
+    { icon:'<polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>',
+      html:'<b>Buy 2 Get 1 FREE</b> <em>·</em> Best Value' },
+    { icon:'<path d="M12 2s-6 8-6 13a6 6 0 0 0 12 0c0-5-6-13-6-13z"/>',
+      html:'Waterproof <em>·</em> <b>Ultra-Thin 2 mm</b> <em>·</em> Durable' },
+    { icon:'<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>',
+      html:'<b>PayPal &amp; Klarna</b> Available at Checkout' }
+  ];
+  var INTERVAL = 2500;
+
+  function svgWrap(inner){
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inner + '</svg>';
+  }
+
+  function buildMarkup(){
+    var html = '<div class="kw-ann-track">';
+    for(var i=0;i<SLIDES.length;i++){
+      html += '<div class="kw-ann-slide' + (i===0?' is-active':'') + '">'
+        + svgWrap(SLIDES[i].icon)
+        + '<span>' + SLIDES[i].html + '</span>'
+        + '</div>';
+    }
+    return html + '</div>';
+  }
+
+  function injectStyles(){
+    if(document.getElementById('kwAnnStyles')) return;
+    var css = ''
+      + '.kw-ann-injected{background:#0a0f1a !important;color:#fff !important;font-family:"Inter","Helvetica Neue",sans-serif !important;overflow:hidden !important;padding:0 !important;margin:0 !important;min-height:0 !important;display:block !important}'
+      + '.kw-ann-injected *{box-sizing:border-box}'
+      + '.kw-ann-track{position:relative;height:44px;width:100%;max-width:100%}'
+      + '.kw-ann-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 24px;opacity:0;transform:translateY(6px);transition:opacity .55s ease,transform .55s ease;pointer-events:none;text-align:center;line-height:1}'
+      + '.kw-ann-slide.is-active{opacity:1;transform:translateY(0);pointer-events:auto}'
+      + '.kw-ann-slide svg{width:16px;height:16px;flex-shrink:0;color:#e2e8f0}'
+      + '.kw-ann-slide span{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#e2e8f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(100vw - 70px)}'
+      + '.kw-ann-slide b{color:#10b981;font-weight:800;letter-spacing:.09em}'
+      + '.kw-ann-slide em{font-style:normal;color:#475569;margin:0 3px}'
+      + '@media (max-width:520px){'
+      +   '.kw-ann-track{height:38px}'
+      +   '.kw-ann-slide{padding:0 14px;gap:7px}'
+      +   '.kw-ann-slide svg{width:13px;height:13px}'
+      +   '.kw-ann-slide span{font-size:11px;letter-spacing:.06em}'
+      + '}';
+    var style = document.createElement('style');
+    style.id = 'kwAnnStyles';
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  function findAnnouncementTarget(){
+    // 1) Try well-known Shopify theme selectors
+    var selectors = [
+      '.announcement-bar__message',
+      '.announcement-bar',
+      '.header__announcement',
+      '.announcement__wrapper',
+      '.utility-bar__message',
+      '.utility-bar',
+      '.header-announcement',
+      '.top-bar-message',
+      '#shopify-section-announcement-bar .announcement',
+      '#shopify-section-announcement-bar'
+    ];
+    for(var i=0;i<selectors.length;i++){
+      var el = document.querySelector(selectors[i]);
+      if(el && el.offsetParent !== null) return el; // must be visible
+    }
+    // 2) Fallback: find any element whose text is exactly "Welcome to our store"
+    //    (or common localized variants). Walk small nodes only to be safe.
+    var candidates = document.querySelectorAll('body [class*="announce"], body [class*="Announce"], body [id*="announce"], body header *');
+    var needle = /^(welcome to our store|welcome to the store)$/i;
+    for(var j=0;j<candidates.length;j++){
+      var c = candidates[j];
+      if(c.children.length === 0){
+        var t = (c.textContent || '').trim();
+        if(t && needle.test(t)) return c.closest('.announcement-bar, .announcement, [class*="announce"]') || c.parentElement;
+      }
+    }
+    return null;
+  }
+
+  function startRotation(root){
+    var slides = root.querySelectorAll('.kw-ann-slide');
+    if(slides.length < 2) return;
+    var idx = 0;
+    var timer = null;
+    function show(next){
+      slides[idx].classList.remove('is-active');
+      idx = next % slides.length;
+      slides[idx].classList.add('is-active');
+    }
+    function start(){ if(!timer) timer = setInterval(function(){ show(idx + 1); }, INTERVAL); }
+    function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    document.addEventListener('visibilitychange', function(){ if(document.hidden) stop(); else start(); });
+    start();
+  }
+
+  function tryInject(){
+    var target = findAnnouncementTarget();
+    if(!target) return false;
+    if(target.classList.contains('kw-ann-injected')) return true; // already done
+    injectStyles();
+    target.classList.add('kw-ann-injected');
+    target.innerHTML = buildMarkup();
+    startRotation(target);
+    return true;
+  }
+
+  function init(){
+    if(tryInject()) return;
+    // Theme header may render slightly after DOMContentLoaded; retry briefly
+    var attempts = 0;
+    var iv = setInterval(function(){
+      attempts++;
+      if(tryInject() || attempts >= 20) clearInterval(iv); // ~4s window
+    }, 200);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+
+/* Gallery — carousel track with real-time swipe */
+(function(){
+  var stageEl = document.querySelector('.kw-stage');
+  var stageTag = document.getElementById('kwStageTag');
+  var oldImg = document.getElementById('kwStage');
+  var thumbs = [].slice.call(document.querySelectorAll('.kw-thumb'));
+  if(!stageEl || !thumbs.length) return;
+
+  // Build the carousel track from thumbs (all images preloaded)
+  var track = document.createElement('div');
+  track.className = 'kw-stage-track';
+  thumbs.forEach(function(t){
+    var slide = document.createElement('div');
+    slide.className = 'kw-stage-slide';
+    var img = document.createElement('img');
+    img.src = t.dataset.img;
+    img.alt = '';
+    img.decoding = 'async';
+    slide.appendChild(img);
+    track.appendChild(slide);
+  });
+  if(oldImg) oldImg.remove();
+  stageEl.appendChild(track);
+
+  var currentIdx = 0;
+  var trackW = stageEl.offsetWidth;
+
+  function setTransform(x, animate){
+    if(animate){ track.classList.remove('is-dragging'); }
+    else { track.classList.add('is-dragging'); }
+    track.style.transform = 'translate3d(' + x + 'px, 0, 0)';
+  }
+
+  function goTo(index, animate, userInitiated){
+    if(index < 0) index = 0;
+    if(index >= thumbs.length) index = thumbs.length - 1;
+    currentIdx = index;
+    trackW = stageEl.offsetWidth;
+    setTransform(-index * trackW, animate !== false);
+    thumbs.forEach(function(x){ x.classList.remove('is-active'); });
+    var t = thumbs[index];
+    if(t){
+      t.classList.add('is-active');
+      if(stageTag) stageTag.textContent = t.dataset.tag;
+    }
+  }
+
+  thumbs.forEach(function(t, i){
+    t.addEventListener('click', function(){ goTo(i, true, true); });
+  });
+
+  window.addEventListener('resize', function(){ goTo(currentIdx, false, false); });
+
+  // Touch / pointer drag with real-time follow
+  var startX = 0, startY = 0, dx = 0, lockAxis = null, isDown = false, baseOffset = 0;
+
+  function onStart(x, y){
+    isDown = true; lockAxis = null; dx = 0;
+    startX = x; startY = y;
+    trackW = stageEl.offsetWidth;
+    baseOffset = -currentIdx * trackW;
+    track.classList.add('is-dragging');
+  }
+  function onMove(x, y, ev){
+    if(!isDown) return;
+    var nx = x - startX, ny = y - startY;
+    if(!lockAxis){
+      if(Math.abs(nx) > 6 || Math.abs(ny) > 6){
+        lockAxis = Math.abs(nx) > Math.abs(ny) ? 'x' : 'y';
+      }
+    }
+    if(lockAxis === 'x'){
+      if(ev && ev.cancelable) ev.preventDefault();
+      dx = nx;
+      var offset = baseOffset + dx;
+      // Rubber-band at edges
+      if((currentIdx === 0 && dx > 0) || (currentIdx === thumbs.length - 1 && dx < 0)){
+        offset = baseOffset + dx * 0.35;
+      }
+      setTransform(offset, false);
+    }
+  }
+  function onEnd(){
+    if(!isDown) return;
+    isDown = false;
+    if(lockAxis !== 'x'){ lockAxis = null; return; }
+    var absDx = Math.abs(dx);
+    if(absDx > trackW * 0.12){
+      goTo(currentIdx + (dx < 0 ? 1 : -1), true);
+    } else {
+      goTo(currentIdx, true);
+    }
+    dx = 0; lockAxis = null;
+  }
+
+  stageEl.addEventListener('touchstart', function(e){ var t = e.touches[0]; onStart(t.clientX, t.clientY); }, { passive:true });
+  stageEl.addEventListener('touchmove',  function(e){ var t = e.touches[0]; onMove(t.clientX, t.clientY, e); }, { passive:false });
+  stageEl.addEventListener('touchend',   onEnd, { passive:true });
+  stageEl.addEventListener('touchcancel',function(){ isDown = false; lockAxis = null; }, { passive:true });
+  stageEl.addEventListener('mousedown',  function(e){ e.preventDefault(); onStart(e.clientX, e.clientY); });
+  window.addEventListener('mousemove',   function(e){ onMove(e.clientX, e.clientY, e); });
+  window.addEventListener('mouseup',     onEnd);
+
+  goTo(0, false);
+})();
+
+/* Dynamic arrival date — today + 15 days */
+(function(){
+  var el = document.getElementById('kwShipDate'); if(!el) return;
+  var d = new Date(); d.setDate(d.getDate() + 15);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  el.textContent = months[d.getMonth()] + ' ' + d.getDate();
+})();
+
+/* Country flag from visitor IP */
+(function(){
+  var el = document.getElementById('kwFlag'); if(!el) return;
+  function flagEmoji(cc){
+    if(!cc || cc.length !== 2) return '';
+    var A = 0x1F1E6, base = 'A'.charCodeAt(0);
+    cc = cc.toUpperCase();
+    return String.fromCodePoint(A + cc.charCodeAt(0) - base) +
+           String.fromCodePoint(A + cc.charCodeAt(1) - base);
+  }
+  fetch('https://ipwho.is/?fields=country_code')
+    .then(function(r){ return r.json(); })
+    .then(function(d){ if(d && d.country_code) el.textContent = flagEmoji(d.country_code); })
+    .catch(function(){});
+})();
+
+/* Trust marquee duplication */
+var track = document.querySelector('.kw-trust-track');
+if(track){ track.innerHTML += track.innerHTML; }
+
+/* FAQ (one open at a time) */
+var faqs = document.querySelectorAll('.kw-faq-item');
+faqs.forEach(function(it){ it.addEventListener('toggle', function(){ if(it.open) faqs.forEach(function(o){ if(o!==it) o.open=false; }); }); });
+
+/* Feature icon cards use native scroll-snap on mobile — no JS needed */
+
+/* Rating row → scroll to studies */
+var ratingEl = document.getElementById('kwRating');
+var studies = document.getElementById('kwStudies');
+if(ratingEl && studies){
+  ratingEl.setAttribute('role','button');
+  ratingEl.setAttribute('tabindex','0');
+  var goStudies = function(){ studies.scrollIntoView({ behavior:'smooth', block:'start' }); };
+  ratingEl.addEventListener('click', goStudies);
+  ratingEl.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); goStudies(); } });
+}
+
+/* Gift explainer modal */
+(function(){
+  var modal = document.getElementById('kwGiftModal'); if(!modal) return;
+  var img = document.getElementById('kwGiftModalImg');
+  var imgWrap = modal.querySelector('.kw-giftmodal-img');
+  var title = document.getElementById('kwGiftModalTitle');
+  var tag = document.getElementById('kwGiftModalTag');
+  var sub = document.getElementById('kwGiftModalSub');
+  var body = document.getElementById('kwGiftModalBody');
+  var closeBtn = document.getElementById('kwGiftModalClose');
+  var lastFocus = null;
+
+  function renderBody(data){
+    var html = '';
+    (data.sections || []).forEach(function(s){
+      html += '<div class="kw-giftmodal-section">';
+      if(s.h) html += '<div class="kw-giftmodal-h">' + s.h + '</div>';
+      if(s.type === 'feats'){
+        html += '<ul class="kw-giftmodal-feats">';
+        s.items.forEach(function(it){ html += '<li>' + it + '</li>'; });
+        html += '</ul>';
+      } else if(s.type === 'rows'){
+        s.items.forEach(function(r){
+          var noDose = r.dose ? '' : ' no-dose';
+          html += '<div class="kw-giftmodal-row' + noDose + '"><div class="name">' + r.name + (r.desc ? '<small>' + r.desc + '</small>' : '') + '</div>';
+          if(r.dose) html += '<div class="dose">' + r.dose + '</div>';
+          html += '</div>';
+        });
+      }
+      html += '</div>';
+    });
+    if(data.foot){
+      html += '<div class="kw-giftmodal-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' + data.foot + '</div>';
+    }
+    body.innerHTML = html;
+  }
+
+  function open(k){
+    var d = GIFT_DATA[k]; if(!d) return;
+    tag.innerHTML = d.tag || 'FREE BONUS';
+    title.innerHTML = d.title;
+    sub.innerHTML = d.sub;
+    if(d.img){ img.src = d.img; img.alt = title.textContent; imgWrap.style.display = ''; } else { imgWrap.style.display = 'none'; }
+    renderBody(d);
+    lastFocus = document.activeElement;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function(){ closeBtn.focus(); }, 60);
+  }
+  function close(){
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  document.querySelectorAll('.kw-gift[data-gift]').forEach(function(g){
+    g.addEventListener('click', function(){ open(g.dataset.gift); });
+    g.setAttribute('role','button');
+    g.setAttribute('tabindex','0');
+    g.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(g.dataset.gift); } });
+  });
+
+  closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', function(e){ if(e.target === modal) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && modal.classList.contains('is-open')) close(); });
+})();
+
+})();
+
+function kwPlayVid(wrap){
+  var v = wrap.querySelector('video'); if(!v) return;
+  if(wrap.classList.contains('playing')){ v.pause(); wrap.classList.remove('playing'); return; }
+  document.querySelectorAll('.kw-vid-frame.playing').forEach(function(w){ var ov = w.querySelector('video'); if(ov){ ov.pause(); } w.classList.remove('playing'); });
+  wrap.classList.add('playing');
+  v.play().catch(function(){ wrap.classList.remove('playing'); });
+  v.onended = function(){ wrap.classList.remove('playing'); };
+}
+</script>
+{% endraw %}
+
+{% schema %}
+{
+  "name": "Kwefi Template",
+  "tag": "section",
+  "class": "kwefi-template-section",
+  "settings": [],
+  "presets": [{ "name": "Kwefi Template" }]
+}
+{% endschema %}

@@ -46,18 +46,17 @@ story = []
 
 # Header: sender left, receiver info follows
 story.append(Paragraph("<b>Ahmad Jumaa Almoustafa</b>", style_sender))
-story.append(Paragraph("[Straße und Hausnummer]", style_sender))
+story.append(Paragraph("Landshuter Straße 43", style_sender))
 story.append(Paragraph("84307 Eggenfelden", style_sender))
-story.append(Paragraph("Telefon: [Ihre Telefonnummer]", style_sender))
+story.append(Paragraph("Telefon: 0179 6774243", style_sender))
 story.append(Paragraph("E-Mail: [Ihre E-Mail-Adresse]", style_sender))
 story.append(Paragraph("Geburtsdatum: 15.01.2005", style_sender))
 story.append(Spacer(1, 1.2 * cm))
 
 # Recipient
-story.append(Paragraph("[Name der Einrichtung / des Unternehmens]", style_normal))
-story.append(Paragraph("[Ansprechpartner/in – falls bekannt]", style_normal))
-story.append(Paragraph("[Straße und Hausnummer]", style_normal))
-story.append(Paragraph("[PLZ und Ort]", style_normal))
+story.append(Paragraph("Pichlmayr Senioren-Zentrum Eggenfelden", style_normal))
+story.append(Paragraph("Personalabteilung", style_normal))
+story.append(Paragraph("84307 Eggenfelden", style_normal))
 story.append(Spacer(1, 1.0 * cm))
 
 # Date right-aligned
@@ -77,11 +76,12 @@ story.append(Spacer(1, 0.4 * cm))
 
 # Body paragraphs
 paragraphs = [
-    "mit großem Interesse habe ich von Ihrer Einrichtung erfahren und möchte "
-    "mich hiermit um eine Stelle als Pflegehilfskraft, Alltagsbegleiter oder "
-    "Betreuungskraft bewerben. Die Arbeit mit älteren Menschen bereitet mir "
-    "sehr viel Freude, und ich möchte gerne dazu beitragen, dass sich die "
-    "Bewohnerinnen und Bewohner bei Ihnen wohl und gut aufgehoben fühlen.",
+    "mit großem Interesse bin ich auf Ihr Senioren-Zentrum in Eggenfelden "
+    "aufmerksam geworden und möchte mich hiermit um eine Stelle als "
+    "Pflegehilfskraft, Alltagsbegleiter oder Betreuungskraft bewerben. Die "
+    "Arbeit mit älteren Menschen bereitet mir sehr viel Freude, und ich "
+    "möchte gerne dazu beitragen, dass sich die Bewohnerinnen und Bewohner "
+    "bei Ihnen wohl und gut aufgehoben fühlen.",
 
     "Ich bin ein zuverlässiger, geduldiger und hilfsbereiter Mensch und "
     "arbeite gerne im Team. Der respektvolle und freundliche Umgang mit "

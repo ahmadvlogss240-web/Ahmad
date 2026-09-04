@@ -39,17 +39,18 @@ doc = SimpleDocTemplate(
     leftMargin=2.5 * cm, rightMargin=2.5 * cm,
     topMargin=2 * cm, bottomMargin=2 * cm,
     title="Bewerbung als Pflegehelfer / Alltagsbegleiter",
-    author="[Ihr Name]",
+    author="Ahmad Jumaa Almoustafa",
 )
 
 story = []
 
 # Header: sender left, receiver info follows
-story.append(Paragraph("<b>[Ihr Vorname Nachname]</b>", style_sender))
-story.append(Paragraph("[Ihre Straße und Hausnummer]", style_sender))
-story.append(Paragraph("[PLZ und Ort]", style_sender))
+story.append(Paragraph("<b>Ahmad Jumaa Almoustafa</b>", style_sender))
+story.append(Paragraph("[Straße und Hausnummer]", style_sender))
+story.append(Paragraph("84307 Eggenfelden", style_sender))
 story.append(Paragraph("Telefon: [Ihre Telefonnummer]", style_sender))
 story.append(Paragraph("E-Mail: [Ihre E-Mail-Adresse]", style_sender))
+story.append(Paragraph("Geburtsdatum: 15.01.2005", style_sender))
 story.append(Spacer(1, 1.2 * cm))
 
 # Recipient
@@ -61,7 +62,7 @@ story.append(Spacer(1, 1.0 * cm))
 
 # Date right-aligned
 today = date.today().strftime("%d.%m.%Y")
-story.append(Paragraph(f"[Ort], den {today}", style_right))
+story.append(Paragraph(f"Eggenfelden, den {today}", style_right))
 story.append(Spacer(1, 0.8 * cm))
 
 # Subject
@@ -126,7 +127,7 @@ for p in more:
 story.append(Spacer(1, 0.5 * cm))
 story.append(Paragraph("Mit freundlichen Grüßen", style_normal))
 story.append(Spacer(1, 1.6 * cm))
-story.append(Paragraph("[Ihr Vorname Nachname]", style_normal))
+story.append(Paragraph("Ahmad Jumaa Almoustafa", style_normal))
 
 doc.build(story)
 print(f"Erstellt: {OUTPUT}")

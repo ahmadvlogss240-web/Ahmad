@@ -36,7 +36,7 @@ story.append(Paragraph("Ahmad Jumaa Almoustafa", style_sender))
 story.append(Paragraph("Landshuter Straße 43", style_sender))
 story.append(Paragraph("84307 Eggenfelden", style_sender))
 story.append(Paragraph("+49 179 6774243", style_sender))
-story.append(Paragraph("[Ihre E-Mail-Adresse]", style_sender))
+story.append(Paragraph("ahmadakumaa123@gmail.com", style_sender))
 story.append(Spacer(1, 1.0 * cm))
 
 # Subject
@@ -50,24 +50,27 @@ story.append(Paragraph("Sehr geehrte Damen und Herren,", style_normal))
 
 # Body
 paragraphs = [
-    "hiermit möchte ich mich bei Ihnen um eine Stelle als Pflegehilfskraft "
-    "bzw. als Unterstützung in Ihrer Einrichtung bewerben.",
+    "auf der Suche nach einer neuen Aufgabe bin ich auf Ihre Einrichtung "
+    "aufmerksam geworden und möchte mich bei Ihnen als Pflegehilfskraft "
+    "bzw. Betreuungskraft bewerben. Die Arbeit mit älteren Menschen liegt "
+    "mir sehr am Herzen, und ich möchte einen Beitrag dazu leisten, dass "
+    "sich Ihre Bewohnerinnen und Bewohner gut aufgehoben fühlen.",
 
-    "Auch wenn ich derzeit keine berufliche Ausbildung oder spezielle "
-    "Qualifikation im Pflegebereich habe, bin ich sehr motiviert, in diesem "
-    "Bereich zu arbeiten und neue Aufgaben zu lernen. Der Umgang mit älteren "
-    "Menschen ist für mich eine verantwortungsvolle und zugleich wertvolle "
-    "Tätigkeit. Ich bin geduldig, zuverlässig, hilfsbereit und gehe "
-    "respektvoll mit anderen Menschen um.",
+    "Ich bringe zwar noch keine abgeschlossene Ausbildung im Pflegebereich "
+    "mit, dafür aber viel Motivation, Herz und die Bereitschaft, mich "
+    "engagiert einzubringen. Gerne unterstütze ich bei alltäglichen "
+    "Aufgaben wie der Betreuung der Bewohner, der Zubereitung von "
+    "Mahlzeiten sowie bei Reinigungs- und Hauswirtschaftsarbeiten.",
 
-    "Ich bin bereit, mich schnell in neue Aufgaben einzuarbeiten und die "
-    "notwendigen Kenntnisse und Fähigkeiten durch praktische Erfahrung sowie "
-    "entsprechende Schulungen zu erwerben. Besonders wichtig sind mir ein "
-    "freundlicher Umgang, Respekt und ein verantwortungsbewusstes Arbeiten "
-    "im Team.",
+    "Zu meinen Stärken zählen Geduld, Zuverlässigkeit und ein respektvoller "
+    "Umgang mit anderen Menschen. Ich arbeite gerne im Team, bin körperlich "
+    "belastbar und auch bereit, im Schichtdienst sowie an Wochenenden zu "
+    "arbeiten. An Schulungen und Weiterbildungen nehme ich sehr gerne teil, "
+    "um mich Schritt für Schritt fachlich weiterzuentwickeln.",
 
-    "Über die Möglichkeit, mich persönlich bei Ihnen vorzustellen und mehr "
-    "über die Tätigkeit zu erfahren, würde ich mich sehr freuen.",
+    "Über eine Einladung zu einem persönlichen Gespräch würde ich mich "
+    "sehr freuen und bedanke mich schon jetzt für Ihre Zeit und Ihr "
+    "Interesse.",
 ]
 for p in paragraphs:
     story.append(Paragraph(p, style_justify))

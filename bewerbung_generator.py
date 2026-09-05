@@ -14,7 +14,7 @@ style_normal = ParagraphStyle(
     spaceAfter=8,
 )
 style_justify = ParagraphStyle(
-    "justify", parent=style_normal, alignment=TA_JUSTIFY, spaceAfter=10,
+    "justify", parent=style_normal, alignment=TA_LEFT, spaceAfter=10,
 )
 style_subject = ParagraphStyle(
     "subject", fontName="Helvetica-Bold", fontSize=12, leading=16,

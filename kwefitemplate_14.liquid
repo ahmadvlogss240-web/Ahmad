@@ -1346,11 +1346,6 @@ body.kwd-lock{overflow:hidden}
       </div>
     </div>
 
-    <div class="kwd-progress" id="kwdProgress">
-      <div class="kwd-progress-msg" id="kwdProgressMsg">Add &euro;100.00 more for FREE Shipping</div>
-      <div class="kwd-progress-track"><div class="kwd-progress-fill" id="kwdProgressFill" style="width:0%"></div></div>
-    </div>
-
     <div class="kwd-scroll">
       <div class="kwd-empty" id="kwdEmpty">
         <div class="kwd-empty-icon">
@@ -1738,7 +1733,7 @@ render();
       footerEl.hidden = true;
       emptyEl.hidden = false;
       upsellSection.hidden = true;
-      progressEl.hidden = false;
+      if(progressEl) progressEl.hidden = false;
       updateProgress(0);
       return;
     }
@@ -1807,9 +1802,9 @@ render();
 
     // Progress bar — hidden entirely when a qualifying bundle is in the cart
     if(freeByProduct){
-      progressEl.hidden = true;
+      if(progressEl) progressEl.hidden = true;
     } else {
-      progressEl.hidden = false;
+      if(progressEl) progressEl.hidden = false;
       updateProgress(cart.total_price);
     }
 
@@ -1818,6 +1813,7 @@ render();
   }
 
   function updateProgress(totalCents){
+    if(!progressFill || !progressMsg) return;
     var pct = Math.min(100, Math.round((totalCents / FREE_SHIP_THRESHOLD_CENTS) * 100));
     progressFill.style.width = pct + '%';
     if(totalCents >= FREE_SHIP_THRESHOLD_CENTS){

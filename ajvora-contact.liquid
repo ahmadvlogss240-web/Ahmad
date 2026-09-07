@@ -1,0 +1,299 @@
+{% comment %}
+================================================================================
+  AJVORA · CONTACT / CUSTOMER SERVICE PAGE
+  Drop-in Shopify section. Uses native {% form 'contact' %}.
+  NO WhatsApp. Matches Ajvora brand tokens from the main product template.
+================================================================================
+{% endcomment %}
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@500;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
+
+.ajc{
+  /* Brand tokens — mirror the Ajvora product template */
+  --accent:#374151;
+  --accent-deep:#111827;
+  --accent-soft:rgba(17,24,39,0.06);
+  --green:#16a34a;
+  --green-deep:#15803d;
+  --green-soft:rgba(22,163,74,0.08);
+  --red:#dc2626;
+  --bg:#ffffff;
+  --bg-soft:#f8f8f8;
+  --ink:#111827;
+  --tx:#4b5563;
+  --tx-dim:#9ca3af;
+  --card:#ffffff;
+  --card-line:#e5e7eb;
+
+  --display:'Anton',Impact,sans-serif;
+  --head:'Manrope',sans-serif;
+  --sans:'Inter',-apple-system,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.55;
+  width:100vw;max-width:100vw;
+  margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);
+}
+.ajc *,.ajc *::before,.ajc *::after{box-sizing:border-box}
+
+.ajc-wrap{max-width:1200px;margin:0 auto;padding:80px 24px 96px}
+
+/* Header block */
+.ajc-head{max-width:780px;margin:0 0 44px}
+.ajc-eyebrow{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--green-deep);background:var(--green-soft);border:1px solid rgba(22,163,74,0.32);padding:6px 13px;border-radius:100px;margin-bottom:22px}
+.ajc-title{font-family:var(--display);font-weight:400;font-size:72px;line-height:0.98;letter-spacing:0.005em;text-transform:uppercase;color:var(--ink);margin:0 0 18px}
+.ajc-title em{color:var(--accent);font-style:normal}
+.ajc-lead{font-size:16.5px;color:var(--tx);line-height:1.6;max-width:620px;margin:0;font-weight:500}
+.ajc-lead strong{color:var(--ink);font-weight:700}
+
+/* Two-column layout */
+.ajc-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:28px;align-items:start}
+
+/* Form card */
+.ajc-formcard{background:var(--card);border:1px solid var(--card-line);border-radius:20px;padding:38px 40px 40px;box-shadow:0 2px 6px rgba(17,24,39,0.03),0 20px 60px -30px rgba(17,24,39,0.15)}
+.ajc-form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ajc-field{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.ajc-field.full{grid-column:1/-1}
+.ajc-label{display:flex;align-items:center;gap:6px;font-family:var(--head);font-weight:800;font-size:12.5px;color:var(--ink);letter-spacing:0.01em;text-transform:none}
+.ajc-label .req{color:var(--red);font-weight:900}
+.ajc-label .opt{color:var(--tx-dim);font-weight:600;font-size:11.5px;letter-spacing:0.02em}
+.ajc-input,.ajc-select,.ajc-textarea{width:100%;background:var(--bg);border:1.5px solid var(--card-line);border-radius:12px;padding:14px 16px;font-family:var(--sans);font-size:14.5px;color:var(--ink);line-height:1.4;transition:border-color .15s ease,box-shadow .15s ease,background .15s ease;-webkit-appearance:none;appearance:none;outline:none}
+.ajc-input::placeholder,.ajc-textarea::placeholder{color:var(--tx-dim)}
+.ajc-input:hover,.ajc-select:hover,.ajc-textarea:hover{border-color:#cfd5dc}
+.ajc-input:focus,.ajc-select:focus,.ajc-textarea:focus{border-color:var(--accent-deep);box-shadow:0 0 0 4px rgba(17,24,39,0.08);background:#fff}
+.ajc-textarea{min-height:150px;resize:vertical;font-family:var(--sans)}
+
+/* Native select arrow (SVG data URI, brand grey) */
+.ajc-select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 16px center;background-size:14px 14px;padding-right:44px;cursor:pointer}
+
+/* Submit */
+.ajc-submit-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-top:8px;padding-top:22px;border-top:1px solid var(--card-line)}
+.ajc-privacy{font-size:12px;color:var(--tx-dim);line-height:1.5;max-width:340px}
+.ajc-privacy a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--card-line);text-underline-offset:2px;transition:text-decoration-color .15s ease}
+.ajc-privacy a:hover{text-decoration-color:var(--accent-deep)}
+.ajc-submit{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#111827 !important;color:#ffffff !important;-webkit-text-fill-color:#ffffff;border:none;border-radius:100px;padding:16px 32px;font-family:var(--head);font-weight:800;font-size:14px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;box-shadow:0 14px 32px -12px rgba(17,24,39,0.4);transition:transform .15s ease,background .15s ease;line-height:1}
+.ajc-submit:hover{transform:translateY(-2px);background:#000 !important}
+.ajc-submit:active{transform:translateY(0)}
+.ajc-submit svg{width:16px;height:16px}
+
+/* Success + error */
+.ajc-alert{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:14px;margin-bottom:24px;font-size:14px;line-height:1.5}
+.ajc-alert-ico{flex-shrink:0;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.ajc-alert-ico svg{width:16px;height:16px;color:#fff}
+.ajc-alert-body strong{display:block;font-family:var(--head);font-weight:800;font-size:14.5px;color:var(--ink);margin-bottom:2px}
+.ajc-alert-body p{margin:0;color:var(--tx);font-size:13.5px}
+.ajc-alert.ok{background:var(--green-soft);border:1px solid rgba(22,163,74,0.35)}
+.ajc-alert.ok .ajc-alert-ico{background:var(--green)}
+.ajc-alert.err{background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.3)}
+.ajc-alert.err .ajc-alert-ico{background:var(--red)}
+.ajc-err-list{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-direction:column;gap:4px}
+.ajc-err-list li{font-size:13px;color:var(--tx);position:relative;padding-left:16px}
+.ajc-err-list li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;background:var(--red);border-radius:50%}
+
+/* Right-side info cards */
+.ajc-side{display:flex;flex-direction:column;gap:14px}
+.ajc-info{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--card-line);border-radius:18px;padding:22px 22px;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;box-shadow:0 2px 6px rgba(17,24,39,0.03)}
+.ajc-info:hover{transform:translateY(-2px);border-color:#cfd5dc;box-shadow:0 14px 32px -14px rgba(17,24,39,0.12)}
+.ajc-info-ico{flex-shrink:0;width:46px;height:46px;border-radius:12px;background:var(--accent-soft);border:1px solid rgba(17,24,39,0.12);display:flex;align-items:center;justify-content:center;color:var(--accent-deep)}
+.ajc-info-ico svg{width:22px;height:22px}
+.ajc-info-body{min-width:0}
+.ajc-info-h{font-family:var(--head);font-weight:800;font-size:15.5px;color:var(--ink);margin:0 0 4px;letter-spacing:-0.005em}
+.ajc-info-sub{font-size:13px;color:var(--tx);line-height:1.5;margin:0 0 8px}
+.ajc-info-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--head);font-weight:800;font-size:14px;color:var(--ink);text-decoration:none;letter-spacing:0.005em;transition:color .15s ease}
+.ajc-info-link:hover{color:var(--accent-deep)}
+
+/* 24h reply card — accented green */
+.ajc-hours{background:var(--green-soft);border:1px solid rgba(22,163,74,0.35);border-radius:18px;padding:22px 22px;display:flex;gap:14px;align-items:flex-start}
+.ajc-hours-ico{flex-shrink:0;width:46px;height:46px;border-radius:12px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px -6px rgba(22,163,74,0.55)}
+.ajc-hours-ico svg{width:22px;height:22px}
+.ajc-hours-body{min-width:0}
+.ajc-hours-h{font-family:var(--head);font-weight:800;font-size:15.5px;color:var(--ink);margin:0 0 4px;display:flex;align-items:center;gap:8px}
+.ajc-hours-dot{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 0 4px rgba(22,163,74,0.15);animation:ajcPulse 1.8s ease-in-out infinite}
+@keyframes ajcPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(1.25)}}
+.ajc-hours-sub{font-size:13px;color:var(--tx);line-height:1.5;margin:0}
+.ajc-hours-sub strong{color:var(--ink);font-weight:700}
+
+/* Trust footer strip */
+.ajc-trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:16px;padding-top:18px;border-top:1px solid var(--card-line)}
+.ajc-trust span{display:inline-flex;align-items:center;gap:7px;font-family:var(--head);font-weight:700;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--tx)}
+.ajc-trust svg{width:14px;height:14px;color:var(--green);flex-shrink:0}
+
+/* Responsive */
+@media (max-width:960px){
+  .ajc-wrap{padding:64px 20px 80px}
+  .ajc-grid{grid-template-columns:1fr;gap:22px}
+  .ajc-title{font-size:56px}
+  .ajc-formcard{padding:32px 28px 34px}
+}
+@media (max-width:640px){
+  .ajc-wrap{padding:48px 16px 64px}
+  .ajc-head{margin-bottom:32px}
+  .ajc-eyebrow{margin-bottom:16px}
+  .ajc-title{font-size:42px;letter-spacing:0.01em}
+  .ajc-lead{font-size:15px}
+  .ajc-formcard{padding:26px 20px 28px;border-radius:16px}
+  .ajc-form-row{grid-template-columns:1fr;gap:0}
+  .ajc-field{margin-bottom:16px}
+  .ajc-input,.ajc-select,.ajc-textarea{padding:13px 14px;font-size:15px}
+  .ajc-submit-row{flex-direction:column;align-items:stretch;gap:16px}
+  .ajc-privacy{max-width:100%;order:2;text-align:center}
+  .ajc-submit{width:100%;order:1}
+  .ajc-info,.ajc-hours{padding:18px 18px;border-radius:14px}
+  .ajc-info-ico,.ajc-hours-ico{width:42px;height:42px}
+}
+</style>
+
+<section class="ajc">
+  <div class="ajc-wrap">
+
+    <div class="ajc-head">
+      <span class="ajc-eyebrow">Customer Service</span>
+      <h1 class="ajc-title">How can we <em>help?</em></h1>
+      <p class="ajc-lead">Reach out to our customer support team and we&rsquo;ll get back to you by email within <strong>24 hours</strong>, seven days a week.</p>
+    </div>
+
+    <div class="ajc-grid">
+
+      <!-- ========== LEFT: FORM CARD ========== -->
+      <div class="ajc-formcard">
+        {% form 'contact' %}
+
+          {% if form.posted_successfully? %}
+            <div class="ajc-alert ok" role="status">
+              <div class="ajc-alert-ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div class="ajc-alert-body">
+                <strong>Message received</strong>
+                <p>Thanks for reaching out. Our team will reply to your email within 24 hours.</p>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if form.errors %}
+            <div class="ajc-alert err" role="alert">
+              <div class="ajc-alert-ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <div class="ajc-alert-body">
+                <strong>Please check your details</strong>
+                <ul class="ajc-err-list">
+                  {% for field in form.errors %}
+                    <li>{{ form.errors.messages[field] }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          {% endif %}
+
+          <div class="ajc-form-row">
+            <div class="ajc-field">
+              <label class="ajc-label" for="ajc-name">Full name <span class="req">*</span></label>
+              <input type="text" id="ajc-name" name="contact[name]" class="ajc-input" required autocomplete="name" placeholder="Your full name" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+            </div>
+
+            <div class="ajc-field">
+              <label class="ajc-label" for="ajc-email">Email address <span class="req">*</span></label>
+              <input type="email" id="ajc-email" name="contact[email]" class="ajc-input" required autocomplete="email" placeholder="you@email.com" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+            </div>
+          </div>
+
+          <div class="ajc-form-row">
+            <div class="ajc-field">
+              <label class="ajc-label" for="ajc-topic">What can we help with? <span class="req">*</span></label>
+              <select id="ajc-topic" name="contact[topic]" class="ajc-select" required>
+                <option value="" disabled {% unless form.topic %}selected{% endunless %}>Select a topic</option>
+                <option value="Order status" {% if form.topic == 'Order status' %}selected{% endif %}>Order status &amp; tracking</option>
+                <option value="Product question" {% if form.topic == 'Product question' %}selected{% endif %}>Product question</option>
+                <option value="Shipping & delivery" {% if form.topic == 'Shipping & delivery' %}selected{% endif %}>Shipping &amp; delivery</option>
+                <option value="Return or refund" {% if form.topic == 'Return or refund' %}selected{% endif %}>Return or refund</option>
+                <option value="Warranty claim" {% if form.topic == 'Warranty claim' %}selected{% endif %}>Warranty claim</option>
+                <option value="Wholesale enquiry" {% if form.topic == 'Wholesale enquiry' %}selected{% endif %}>Wholesale enquiry</option>
+                <option value="Something else" {% if form.topic == 'Something else' %}selected{% endif %}>Something else</option>
+              </select>
+            </div>
+
+            <div class="ajc-field">
+              <label class="ajc-label" for="ajc-order">Order number <span class="opt">(optional)</span></label>
+              <input type="text" id="ajc-order" name="contact[order_number]" class="ajc-input" autocomplete="off" placeholder="e.g. #1234" value="{{ form.order_number }}">
+            </div>
+          </div>
+
+          <div class="ajc-field full">
+            <label class="ajc-label" for="ajc-msg">Your message <span class="req">*</span></label>
+            <textarea id="ajc-msg" name="contact[body]" class="ajc-textarea" required placeholder="Tell us how we can help&hellip;">{{ form.body }}</textarea>
+          </div>
+
+          <div class="ajc-submit-row">
+            <p class="ajc-privacy">By sending this message you agree to our <a href="/policies/privacy-policy">Privacy Policy</a>. We&rsquo;ll only use your details to reply to your enquiry.</p>
+            <button type="submit" class="ajc-submit">
+              Send message
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+
+        {% endform %}
+      </div>
+
+      <!-- ========== RIGHT: SUPPORT INFO ========== -->
+      <aside class="ajc-side" aria-label="Support information">
+
+        <div class="ajc-info">
+          <div class="ajc-info-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+          </div>
+          <div class="ajc-info-body">
+            <h3 class="ajc-info-h">Email support</h3>
+            <p class="ajc-info-sub">Prefer to email directly? Reach the Ajvora customer care team at:</p>
+            <a class="ajc-info-link" href="mailto:support@ajvora.com">
+              support@ajvora.com
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="ajc-info">
+          <div class="ajc-info-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="ajc-info-body">
+            <h3 class="ajc-info-h">Order &amp; delivery help</h3>
+            <p class="ajc-info-sub">Include your order number in the form and we&rsquo;ll track it down for you straight away.</p>
+          </div>
+        </div>
+
+        <div class="ajc-hours">
+          <div class="ajc-hours-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>
+          </div>
+          <div class="ajc-hours-body">
+            <h3 class="ajc-hours-h"><span class="ajc-hours-dot"></span>Replies within 24 hours</h3>
+            <p class="ajc-hours-sub">Our customer care team is available <strong>7 days a week</strong>. Most enquiries are answered in under a day.</p>
+          </div>
+        </div>
+
+        <div class="ajc-trust">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>Secure &amp; private</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Real human support</span>
+        </div>
+
+      </aside>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ajvora Contact",
+  "tag": "section",
+  "class": "ajvora-contact-section",
+  "settings": [],
+  "presets": [{ "name": "Ajvora Contact" }]
+}
+{% endschema %}

@@ -744,6 +744,93 @@ body.kwd-lock{overflow:hidden}
   .kw-meal-lbl{font-size:12px}
   .kw-meal-img{order:1;min-height:0;aspect-ratio:1/1}
 }
+
+/* ====== CUSTOMER SERVICE / CONTACT ====== */
+.kw-cs{padding:80px 24px 96px;background:var(--bg);border-top:1px solid var(--card-line)}
+.kw-cs-inner{max-width:1200px;margin:0 auto}
+.kw-cs-head{max-width:780px;margin:0 0 44px}
+.kw-cs-eyebrow{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--green-deep);background:var(--green-soft);border:1px solid rgba(22,163,74,0.32);padding:6px 13px;border-radius:100px;margin-bottom:22px}
+.kw-cs-title{font-family:var(--display);font-weight:400;font-size:72px;line-height:0.98;letter-spacing:0.005em;text-transform:uppercase;color:var(--ink);margin:0 0 18px}
+.kw-cs-title em{color:var(--accent);font-style:normal}
+.kw-cs-lead{font-size:16.5px;color:var(--tx);line-height:1.6;max-width:620px;margin:0;font-weight:500}
+.kw-cs-lead strong{color:var(--ink);font-weight:700}
+.kw-cs-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:28px;align-items:start}
+.kw-cs-formcard{background:var(--bg);border:1px solid var(--card-line);border-radius:20px;padding:38px 40px 40px;box-shadow:0 2px 6px rgba(17,24,39,0.03),0 20px 60px -30px rgba(17,24,39,0.15)}
+.kw-cs-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.kw-cs-field{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.kw-cs-field.full{grid-column:1/-1}
+.kw-cs-label{display:flex;align-items:center;gap:6px;font-family:var(--head);font-weight:800;font-size:12.5px;color:var(--ink);letter-spacing:0.01em}
+.kw-cs-label .req{color:var(--red);font-weight:900}
+.kw-cs-label .opt{color:var(--tx-dim);font-weight:600;font-size:11.5px;letter-spacing:0.02em}
+.kw-cs-input,.kw-cs-select,.kw-cs-textarea{width:100%;background:var(--bg);border:1.5px solid var(--card-line);border-radius:12px;padding:14px 16px;font-family:var(--sans);font-size:14.5px;color:var(--ink);line-height:1.4;transition:border-color .15s ease,box-shadow .15s ease,background .15s ease;-webkit-appearance:none;appearance:none;outline:none}
+.kw-cs-input::placeholder,.kw-cs-textarea::placeholder{color:var(--tx-dim)}
+.kw-cs-input:hover,.kw-cs-select:hover,.kw-cs-textarea:hover{border-color:#cfd5dc}
+.kw-cs-input:focus,.kw-cs-select:focus,.kw-cs-textarea:focus{border-color:var(--accent-deep);box-shadow:0 0 0 4px rgba(17,24,39,0.08);background:#fff}
+.kw-cs-textarea{min-height:150px;resize:vertical;font-family:var(--sans)}
+.kw-cs-select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 16px center;background-size:14px 14px;padding-right:44px;cursor:pointer}
+.kw-cs-submit-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-top:8px;padding-top:22px;border-top:1px solid var(--card-line)}
+.kw-cs-privacy{font-size:12px;color:var(--tx-dim);line-height:1.5;max-width:340px}
+.kw-cs-privacy a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--card-line);text-underline-offset:2px;transition:text-decoration-color .15s ease}
+.kw-cs-privacy a:hover{text-decoration-color:var(--accent-deep)}
+.kw-cs-submit{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#111827 !important;color:#ffffff !important;-webkit-text-fill-color:#ffffff;border:none;border-radius:100px;padding:16px 32px;font-family:var(--head);font-weight:800;font-size:14px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;box-shadow:0 14px 32px -12px rgba(17,24,39,0.4);transition:transform .15s ease,background .15s ease;line-height:1}
+.kw-cs-submit:hover{transform:translateY(-2px);background:#000 !important}
+.kw-cs-submit svg{width:16px;height:16px}
+.kw-cs-alert{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:14px;margin-bottom:24px;font-size:14px;line-height:1.5}
+.kw-cs-alert-ico{flex-shrink:0;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.kw-cs-alert-ico svg{width:16px;height:16px;color:#fff}
+.kw-cs-alert-body strong{display:block;font-family:var(--head);font-weight:800;font-size:14.5px;color:var(--ink);margin-bottom:2px}
+.kw-cs-alert-body p{margin:0;color:var(--tx);font-size:13.5px}
+.kw-cs-alert.ok{background:var(--green-soft);border:1px solid rgba(22,163,74,0.35)}
+.kw-cs-alert.ok .kw-cs-alert-ico{background:var(--green)}
+.kw-cs-alert.err{background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.3)}
+.kw-cs-alert.err .kw-cs-alert-ico{background:var(--red)}
+.kw-cs-err-list{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-direction:column;gap:4px}
+.kw-cs-err-list li{font-size:13px;color:var(--tx);position:relative;padding-left:16px}
+.kw-cs-err-list li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;background:var(--red);border-radius:50%}
+.kw-cs-side{display:flex;flex-direction:column;gap:14px}
+.kw-cs-info{display:flex;gap:16px;align-items:flex-start;background:var(--bg);border:1px solid var(--card-line);border-radius:18px;padding:22px 22px;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;box-shadow:0 2px 6px rgba(17,24,39,0.03)}
+.kw-cs-info:hover{transform:translateY(-2px);border-color:#cfd5dc;box-shadow:0 14px 32px -14px rgba(17,24,39,0.12)}
+.kw-cs-info-ico{flex-shrink:0;width:46px;height:46px;border-radius:12px;background:var(--accent-soft);border:1px solid rgba(17,24,39,0.12);display:flex;align-items:center;justify-content:center;color:var(--accent-deep)}
+.kw-cs-info-ico svg{width:22px;height:22px}
+.kw-cs-info-body{min-width:0}
+.kw-cs-info-h{font-family:var(--head);font-weight:800;font-size:15.5px;color:var(--ink);margin:0 0 4px;letter-spacing:-0.005em}
+.kw-cs-info-sub{font-size:13px;color:var(--tx);line-height:1.5;margin:0 0 8px}
+.kw-cs-info-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--head);font-weight:800;font-size:14px;color:var(--ink);text-decoration:none;letter-spacing:0.005em;word-break:break-all;transition:color .15s ease}
+.kw-cs-info-link:hover{color:var(--accent-deep)}
+.kw-cs-hours{background:var(--green-soft);border:1px solid rgba(22,163,74,0.35);border-radius:18px;padding:22px 22px;display:flex;gap:14px;align-items:flex-start}
+.kw-cs-hours-ico{flex-shrink:0;width:46px;height:46px;border-radius:12px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px -6px rgba(22,163,74,0.55)}
+.kw-cs-hours-ico svg{width:22px;height:22px}
+.kw-cs-hours-body{min-width:0}
+.kw-cs-hours-h{font-family:var(--head);font-weight:800;font-size:15.5px;color:var(--ink);margin:0 0 4px;display:flex;align-items:center;gap:8px}
+.kw-cs-hours-dot{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 0 4px rgba(22,163,74,0.15);animation:kwCsPulse 1.8s ease-in-out infinite}
+@keyframes kwCsPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(1.25)}}
+.kw-cs-hours-sub{font-size:13px;color:var(--tx);line-height:1.5;margin:0}
+.kw-cs-hours-sub strong{color:var(--ink);font-weight:700}
+.kw-cs-trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:16px;padding-top:18px;border-top:1px solid var(--card-line)}
+.kw-cs-trust span{display:inline-flex;align-items:center;gap:7px;font-family:var(--head);font-weight:700;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--tx)}
+.kw-cs-trust svg{width:14px;height:14px;color:var(--green);flex-shrink:0}
+@media (max-width:960px){
+  .kw-cs{padding:64px 20px 80px}
+  .kw-cs-grid{grid-template-columns:1fr;gap:22px}
+  .kw-cs-title{font-size:56px}
+  .kw-cs-formcard{padding:32px 28px 34px}
+}
+@media (max-width:640px){
+  .kw-cs{padding:48px 16px 64px}
+  .kw-cs-head{margin-bottom:32px}
+  .kw-cs-eyebrow{margin-bottom:16px}
+  .kw-cs-title{font-size:42px;letter-spacing:0.01em}
+  .kw-cs-lead{font-size:15px}
+  .kw-cs-formcard{padding:26px 20px 28px;border-radius:16px}
+  .kw-cs-row{grid-template-columns:1fr;gap:0}
+  .kw-cs-field{margin-bottom:16px}
+  .kw-cs-input,.kw-cs-select,.kw-cs-textarea{padding:13px 14px;font-size:15px}
+  .kw-cs-submit-row{flex-direction:column;align-items:stretch;gap:16px}
+  .kw-cs-privacy{max-width:100%;order:2;text-align:center}
+  .kw-cs-submit{width:100%;order:1}
+  .kw-cs-info,.kw-cs-hours{padding:18px 18px;border-radius:14px}
+  .kw-cs-info-ico,.kw-cs-hours-ico{width:42px;height:42px}
+}
 </style>
 
 <div class="kw"><div class="kw-wrap">
@@ -1277,6 +1364,143 @@ body.kwd-lock{overflow:hidden}
       </details>
     </div>
   </div></section>
+
+  {% endraw %}
+  <section class="kw-cs" id="kwContact">
+    <div class="kw-cs-inner">
+
+      <div class="kw-cs-head">
+        <span class="kw-cs-eyebrow">Customer Service</span>
+        <h2 class="kw-cs-title">How can we <em>help?</em></h2>
+        <p class="kw-cs-lead">Reach out to our customer support team and we&rsquo;ll get back to you by email within <strong>24 hours</strong>, seven days a week.</p>
+      </div>
+
+      <div class="kw-cs-grid">
+
+        <div class="kw-cs-formcard">
+          {% form 'contact', id: 'ajvora-contact-form' %}
+
+            {% if form.posted_successfully? %}
+              <div class="kw-cs-alert ok" role="status">
+                <div class="kw-cs-alert-ico">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div class="kw-cs-alert-body">
+                  <strong>Message received</strong>
+                  <p>Thanks for reaching out. Our team will reply to your email within 24 hours.</p>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if form.errors %}
+              <div class="kw-cs-alert err" role="alert">
+                <div class="kw-cs-alert-ico">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </div>
+                <div class="kw-cs-alert-body">
+                  <strong>Please check your details</strong>
+                  <ul class="kw-cs-err-list">
+                    {% for field in form.errors %}
+                      <li>{{ form.errors.messages[field] }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            {% endif %}
+
+            <div class="kw-cs-row">
+              <div class="kw-cs-field">
+                <label class="kw-cs-label" for="kwCsName">Full name <span class="req">*</span></label>
+                <input type="text" id="kwCsName" name="contact[name]" class="kw-cs-input" required autocomplete="name" placeholder="Your full name" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+              </div>
+              <div class="kw-cs-field">
+                <label class="kw-cs-label" for="kwCsEmail">Email address <span class="req">*</span></label>
+                <input type="email" id="kwCsEmail" name="contact[email]" class="kw-cs-input" required autocomplete="email" placeholder="you@email.com" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+              </div>
+            </div>
+
+            <div class="kw-cs-row">
+              <div class="kw-cs-field">
+                <label class="kw-cs-label" for="kwCsTopic">What can we help with? <span class="req">*</span></label>
+                <select id="kwCsTopic" name="contact[topic]" class="kw-cs-select" required>
+                  <option value="" disabled {% unless form.topic %}selected{% endunless %}>Select a topic</option>
+                  <option value="Order status & tracking" {% if form.topic == 'Order status & tracking' %}selected{% endif %}>Order status &amp; tracking</option>
+                  <option value="Product question" {% if form.topic == 'Product question' %}selected{% endif %}>Product question</option>
+                  <option value="Shipping & delivery" {% if form.topic == 'Shipping & delivery' %}selected{% endif %}>Shipping &amp; delivery</option>
+                  <option value="Return or refund" {% if form.topic == 'Return or refund' %}selected{% endif %}>Return or refund</option>
+                  <option value="Warranty claim" {% if form.topic == 'Warranty claim' %}selected{% endif %}>Warranty claim</option>
+                  <option value="Wholesale enquiry" {% if form.topic == 'Wholesale enquiry' %}selected{% endif %}>Wholesale enquiry</option>
+                  <option value="Something else" {% if form.topic == 'Something else' %}selected{% endif %}>Something else</option>
+                </select>
+              </div>
+              <div class="kw-cs-field">
+                <label class="kw-cs-label" for="kwCsOrder">Order number <span class="opt">(optional)</span></label>
+                <input type="text" id="kwCsOrder" name="contact[order_number]" class="kw-cs-input" autocomplete="off" placeholder="e.g. #1234" value="{{ form.order_number }}">
+              </div>
+            </div>
+
+            <div class="kw-cs-field full">
+              <label class="kw-cs-label" for="kwCsMsg">Your message <span class="req">*</span></label>
+              <textarea id="kwCsMsg" name="contact[body]" class="kw-cs-textarea" required placeholder="Tell us how we can help&hellip;">{{ form.body }}</textarea>
+            </div>
+
+            <div class="kw-cs-submit-row">
+              <p class="kw-cs-privacy">By sending this message you agree to our <a href="/policies/privacy-policy">Privacy Policy</a>. We&rsquo;ll only use your details to reply to your enquiry.</p>
+              <button type="submit" class="kw-cs-submit">
+                Send message
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+
+          {% endform %}
+        </div>
+
+        <aside class="kw-cs-side" aria-label="Support information">
+
+          <div class="kw-cs-info">
+            <div class="kw-cs-info-ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+            </div>
+            <div class="kw-cs-info-body">
+              <h3 class="kw-cs-info-h">Email support</h3>
+              <p class="kw-cs-info-sub">Prefer to email directly? Reach our customer care team at:</p>
+              <a class="kw-cs-info-link" href="mailto:{{ shop.email }}">
+                {{ shop.email }}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="kw-cs-info">
+            <div class="kw-cs-info-ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="kw-cs-info-body">
+              <h3 class="kw-cs-info-h">Order &amp; delivery help</h3>
+              <p class="kw-cs-info-sub">Include your order number in the form and we&rsquo;ll track it down for you straight away.</p>
+            </div>
+          </div>
+
+          <div class="kw-cs-hours">
+            <div class="kw-cs-hours-ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>
+            </div>
+            <div class="kw-cs-hours-body">
+              <h3 class="kw-cs-hours-h"><span class="kw-cs-hours-dot"></span>Replies within 24 hours</h3>
+              <p class="kw-cs-hours-sub">Our customer care team is available <strong>7 days a week</strong>. Most enquiries are answered in under a day.</p>
+            </div>
+          </div>
+
+          <div class="kw-cs-trust">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>Secure &amp; private</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Real human support</span>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+  </section>
+  {% raw %}
 
   <section class="kw-foot"><div class="kw-foot-inner">
     <p class="kw-foot-tag">[Tagline.] <span>[Hero word.]</span> [Closer.]</p>

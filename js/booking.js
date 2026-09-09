@@ -1,5 +1,5 @@
 /**
- * Buchungssystem – Massagepraxis Serenità
+ * Buchungssystem – RuhePunkt.Massagen · Sandro Notz
  * -------------------------------------------------------------------
  * Vollständig funktionsfähige Client-seitige Buchung mit:
  *  – Auswahl der Massage

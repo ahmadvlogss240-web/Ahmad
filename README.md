@@ -1,8 +1,8 @@
-# Massagepraxis Serenità – Website
+# RuhePunkt.Massagen · Sandro Notz – Website
 
-Moderne, elegante Website für eine selbstständige Massagepraxis mit
-funktionierendem Online-Buchungssystem, Admin-Bereich und
-responsive Design für Handy, Tablet und Desktop.
+Moderne, elegante Website für die Massagepraxis von **Sandro Notz**
+(RuhePunkt.Massagen) mit funktionierendem Online-Buchungssystem,
+Admin-Bereich und responsivem Design für Handy, Tablet und Desktop.
 
 ## Struktur
 
@@ -20,9 +20,8 @@ responsive Design für Handy, Tablet und Desktop.
 
 Die wichtigsten Inhalte lassen sich schnell tauschen:
 
-- **Name, Adresse, Telefon, E-Mail** → in `index.html` per Suche/Ersetzen
-  (`Musterstraße 12`, `+49 123 4567890`, `hallo@serenita-massage.de`,
-  `Serenità`)
+- **Adresse, Telefon, E-Mail** → in `index.html` per Suche/Ersetzen
+  (`Musterstraße 12`, `+49 123 4567890`, `hallo@ruhepunkt-massagen.de`)
 - **Massagen & Preise** → in `js/data.js`, Array `services`
 - **Öffnungszeiten & Buchungsregeln** → in `js/data.js`, `openingHours`
   bzw. über `admin.html`

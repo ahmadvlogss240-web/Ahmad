@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Massagepraxis Serenità – Stylesheet
+   RuhePunkt.Massagen · Sandro Notz – Stylesheet
    Warme, ruhige Farben · elegante Typografie · Responsive First
    ========================================================================== */
 
@@ -206,8 +206,10 @@ em { font-style: italic; color: var(--color-accent-dark); font-family: var(--fon
 .brand:hover { color: var(--color-primary-dark); }
 .brand-mark { color: var(--color-primary); display: inline-flex; }
 .brand-text { display: inline-flex; flex-direction: column; line-height: 1; }
-.brand-name { font-family: var(--font-serif); font-size: 1.5rem; letter-spacing: 0.02em; }
+.brand-name { font-family: var(--font-serif); font-size: 1.5rem; letter-spacing: 0.005em; font-weight: 500; }
+.brand-dot { color: var(--color-accent); font-weight: 600; margin: 0 1px; }
 .brand-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.28em; color: var(--color-muted); margin-top: 3px; }
+.site-footer .brand-dot { color: var(--color-accent); }
 
 .site-nav { display: flex; align-items: center; }
 .nav-list {

@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verwaltung · Massagepraxis Serenità</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        body { padding-top: 5rem; }
+        .admin-header { background: var(--color-ink); color: #fff; padding: 1.25rem 0; }
+        .admin-header .container { display: flex; align-items: center; justify-content: space-between; }
+        .admin-header h1 { color: #fff; font-family: var(--font-serif); font-size: 1.5rem; margin: 0; }
+        .admin-header a { color: #fff; opacity: 0.75; font-size: 0.9rem; }
+        .admin-header a:hover { opacity: 1; }
+        .admin-main { padding: 3rem 0; background: var(--color-bg); min-height: 100vh; }
+        .admin-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        @media (max-width: 900px) { .admin-panels { grid-template-columns: 1fr; } }
+
+        .panel { background: var(--color-surface); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--color-line); box-shadow: var(--shadow-sm); }
+        .panel h2 { font-size: 1.35rem; font-family: var(--font-serif); margin-bottom: 1.5rem; }
+        .panel h3 { font-size: 1rem; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-ink-soft); font-weight: 600; margin: 1.75rem 0 .75rem; }
+
+        .hours-table { width: 100%; border-collapse: collapse; }
+        .hours-table td { padding: .55rem .35rem; border-bottom: 1px solid var(--color-line); font-size: 0.95rem; }
+        .hours-table td:first-child { font-weight: 500; }
+        .hours-table input[type="time"] { padding: .5rem .6rem; border-radius: 8px; border: 1.5px solid var(--color-line); font-family: inherit; }
+        .hours-table label.closed { display: inline-flex; align-items: center; gap: .35rem; font-size: 0.85rem; color: var(--color-ink-soft); }
+
+        .config-row { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; margin-bottom: .75rem; padding: .5rem 0; border-bottom: 1px solid var(--color-line); font-size: 0.95rem; }
+        .config-row input { padding: .5rem .75rem; border-radius: 8px; border: 1.5px solid var(--color-line); width: 90px; text-align: center; }
+
+        .booking-list { display: flex; flex-direction: column; gap: .75rem; max-height: 550px; overflow-y: auto; padding-right: .5rem; }
+        .booking-item {
+            padding: 1rem 1.25rem;
+            background: var(--color-bg-alt);
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--color-primary);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1rem;
+            align-items: center;
+        }
+        .booking-item.past { opacity: 0.55; border-left-color: var(--color-muted); }
+        .booking-when { font-family: var(--font-serif); font-size: 1.05rem; color: var(--color-ink); }
+        .booking-when small { display: block; font-family: var(--font-sans); font-size: 0.8rem; color: var(--color-muted); margin-top: 2px; }
+        .booking-details { font-size: 0.9rem; color: var(--color-ink-soft); }
+        .booking-details strong { color: var(--color-ink); }
+        .booking-delete { background: transparent; color: #b04747; padding: .4rem .75rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; border: 1.5px solid transparent; }
+        .booking-delete:hover { background: #fbe9e9; border-color: #f0c8c8; }
+
+        .filters { display: flex; gap: .5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+        .filter-btn { padding: .5rem 1rem; border-radius: 999px; border: 1.5px solid var(--color-line); font-size: 0.85rem; font-weight: 500; background: var(--color-surface); color: var(--color-ink-soft); }
+        .filter-btn.is-active { background: var(--color-ink); color: #fff; border-color: var(--color-ink); }
+
+        .empty { text-align: center; padding: 3rem 1rem; color: var(--color-muted); font-style: italic; }
+
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+        .stat { background: var(--color-cream); padding: 1.25rem; border-radius: var(--radius-sm); text-align: center; }
+        .stat dt { font-family: var(--font-serif); font-size: 1.75rem; color: var(--color-primary-dark); }
+        .stat dd { font-size: 0.8rem; color: var(--color-ink-soft); margin: 0; text-transform: uppercase; letter-spacing: 0.06em; }
+
+        .save-note { margin-top: 1.25rem; font-size: 0.85rem; color: var(--color-primary-dark); }
+
+        .export-actions { display: flex; gap: .75rem; margin-top: 1rem; flex-wrap: wrap; }
+        .export-actions .btn { padding: .65rem 1.25rem; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <header class="admin-header">
+        <div class="container">
+            <h1>Serenità · Verwaltung</h1>
+            <a href="index.html">← Zurück zur Website</a>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        <div class="container">
+            <dl class="stat-grid">
+                <div class="stat"><dt id="statTotal">0</dt><dd>Buchungen gesamt</dd></div>
+                <div class="stat"><dt id="statUpcoming">0</dt><dd>Kommend</dd></div>
+                <div class="stat"><dt id="statRevenue">0 €</dt><dd>Umsatz (kommend)</dd></div>
+            </dl>
+
+            <div class="admin-panels">
+                <section class="panel">
+                    <h2>Buchungen</h2>
+                    <div class="filters">
+                        <button type="button" class="filter-btn is-active" data-filter="upcoming">Kommend</button>
+                        <button type="button" class="filter-btn" data-filter="past">Vergangen</button>
+                        <button type="button" class="filter-btn" data-filter="all">Alle</button>
+                    </div>
+                    <div class="booking-list" id="bookingList"></div>
+                    <div class="export-actions">
+                        <button type="button" class="btn btn-ghost" id="exportJSON">Als JSON exportieren</button>
+                        <button type="button" class="btn btn-ghost" id="clearAll">Alle löschen</button>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <h2>Öffnungszeiten</h2>
+                    <table class="hours-table">
+                        <tbody id="hoursTable"></tbody>
+                    </table>
+
+                    <h3>Buchungsregeln</h3>
+                    <div class="config-row"><span>Slot-Raster (Minuten)</span><input type="number" min="15" step="5" id="cfgInterval" /></div>
+                    <div class="config-row"><span>Puffer zwischen Terminen (Minuten)</span><input type="number" min="0" step="5" id="cfgBuffer" /></div>
+                    <div class="config-row"><span>Vorlaufzeit (Stunden)</span><input type="number" min="0" step="1" id="cfgLead" /></div>
+                    <div class="config-row"><span>Buchbar in Tagen im Voraus</span><input type="number" min="1" step="1" id="cfgWindow" /></div>
+
+                    <button type="button" class="btn btn-primary" id="saveConfig" style="margin-top: 1.25rem;">Einstellungen speichern</button>
+                    <p class="save-note" id="saveNote"></p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script>
+    (function () {
+        const CFG_KEY = "serenita.config.v1";
+        const BK_KEY = "serenita.bookings.v1";
+        const DAYS = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
+        const MONATE = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+
+        /* Config laden (falls in localStorage überschrieben) */
+        function loadConfig() {
+            try {
+                const stored = JSON.parse(localStorage.getItem(CFG_KEY));
+                if (stored) Object.assign(window.PRAXIS_CONFIG, stored);
+            } catch (e) {}
+            return window.PRAXIS_CONFIG;
+        }
+        function saveConfig(cfg) { localStorage.setItem(CFG_KEY, JSON.stringify(cfg)); }
+        function loadBookings() { try { return JSON.parse(localStorage.getItem(BK_KEY) || "[]"); } catch (e) { return []; } }
+        function saveBookings(b) { localStorage.setItem(BK_KEY, JSON.stringify(b)); }
+
+        const cfg = loadConfig();
+        let filter = "upcoming";
+
+        function renderHours() {
+            const tbody = document.getElementById("hoursTable");
+            /* Reihenfolge Mo..So */
+            const order = [1,2,3,4,5,6,0];
+            tbody.innerHTML = order.map(d => {
+                const h = cfg.openingHours[d];
+                const closed = !h;
+                return `
+                <tr data-day="${d}">
+                    <td>${DAYS[d]}</td>
+                    <td><input type="time" data-field="open" value="${closed ? "09:00" : h.open}" ${closed ? "disabled" : ""}></td>
+                    <td><input type="time" data-field="close" value="${closed ? "18:00" : h.close}" ${closed ? "disabled" : ""}></td>
+                    <td><label class="closed"><input type="checkbox" data-field="closed" ${closed ? "checked" : ""}> geschlossen</label></td>
+                </tr>`;
+            }).join("");
+
+            tbody.querySelectorAll('input[data-field="closed"]').forEach(cb => {
+                cb.addEventListener("change", () => {
+                    const row = cb.closest("tr");
+                    row.querySelectorAll('input[type="time"]').forEach(t => t.disabled = cb.checked);
+                });
+            });
+        }
+
+        function renderConfigInputs() {
+            document.getElementById("cfgInterval").value = cfg.slotInterval;
+            document.getElementById("cfgBuffer").value = cfg.bufferAfter;
+            document.getElementById("cfgLead").value = cfg.minLeadTimeHours;
+            document.getElementById("cfgWindow").value = cfg.bookingWindowDays;
+        }
+
+        function formatDate(iso) {
+            const [y,m,d] = iso.split("-").map(Number);
+            return `${d}. ${MONATE[m-1]} ${y}`;
+        }
+
+        function renderBookings() {
+            const list = loadBookings();
+            const today = new Date().toISOString().slice(0,10);
+            const now = new Date();
+
+            const withDateTime = list.map(b => {
+                const [y,m,d] = b.date.split("-").map(Number);
+                const [hh,mm] = b.time.split(":").map(Number);
+                return { ...b, _dt: new Date(y, m-1, d, hh, mm) };
+            });
+
+            const filtered = withDateTime.filter(b => {
+                if (filter === "upcoming") return b._dt >= now;
+                if (filter === "past") return b._dt < now;
+                return true;
+            }).sort((a,b) => filter === "past" ? b._dt - a._dt : a._dt - b._dt);
+
+            const el = document.getElementById("bookingList");
+            if (!filtered.length) {
+                el.innerHTML = `<div class="empty">Keine Buchungen in dieser Ansicht.</div>`;
+            } else {
+                el.innerHTML = filtered.map(b => `
+                    <div class="booking-item ${b._dt < now ? "past" : ""}">
+                        <div class="booking-when">
+                            ${formatDate(b.date)}
+                            <small>${b.time} Uhr</small>
+                        </div>
+                        <div class="booking-details">
+                            <strong>${b.serviceName}</strong> · ${b.serviceDuration} Min. · ${b.servicePrice} €<br>
+                            ${b.customer.name} · <a href="tel:${b.customer.phone}">${b.customer.phone}</a> · <a href="mailto:${b.customer.email}">${b.customer.email}</a>
+                            ${b.customer.notes ? `<br><em>${b.customer.notes}</em>` : ""}
+                        </div>
+                        <button class="booking-delete" data-id="${b.id}" aria-label="Buchung löschen">Löschen</button>
+                    </div>
+                `).join("");
+                el.querySelectorAll(".booking-delete").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        if (!confirm("Diese Buchung wirklich löschen?")) return;
+                        const all = loadBookings().filter(b => b.id !== btn.dataset.id);
+                        saveBookings(all);
+                        renderBookings();
+                        renderStats();
+                    });
+                });
+            }
+        }
+
+        function renderStats() {
+            const list = loadBookings();
+            const now = new Date();
+            const upcoming = list.filter(b => {
+                const [y,m,d] = b.date.split("-").map(Number);
+                const [hh,mm] = b.time.split(":").map(Number);
+                return new Date(y, m-1, d, hh, mm) >= now;
+            });
+            document.getElementById("statTotal").textContent = list.length;
+            document.getElementById("statUpcoming").textContent = upcoming.length;
+            const revenue = upcoming.reduce((sum, b) => sum + (b.servicePrice || 0), 0);
+            document.getElementById("statRevenue").textContent = `${revenue.toLocaleString("de-DE")} €`;
+        }
+
+        /* Speichern */
+        document.getElementById("saveConfig").addEventListener("click", () => {
+            const newHours = {};
+            document.querySelectorAll("#hoursTable tr").forEach(row => {
+                const day = Number(row.dataset.day);
+                const closed = row.querySelector('input[data-field="closed"]').checked;
+                if (closed) { newHours[day] = null; return; }
+                newHours[day] = {
+                    open: row.querySelector('input[data-field="open"]').value,
+                    close: row.querySelector('input[data-field="close"]').value
+                };
+            });
+            cfg.openingHours = newHours;
+            cfg.slotInterval = Number(document.getElementById("cfgInterval").value) || 30;
+            cfg.bufferAfter = Number(document.getElementById("cfgBuffer").value) || 0;
+            cfg.minLeadTimeHours = Number(document.getElementById("cfgLead").value) || 0;
+            cfg.bookingWindowDays = Number(document.getElementById("cfgWindow").value) || 30;
+            saveConfig(cfg);
+            const note = document.getElementById("saveNote");
+            note.textContent = "✓ Einstellungen gespeichert.";
+            setTimeout(() => note.textContent = "", 2500);
+        });
+
+        /* Filter */
+        document.querySelectorAll(".filter-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("is-active"));
+                btn.classList.add("is-active");
+                filter = btn.dataset.filter;
+                renderBookings();
+            });
+        });
+
+        document.getElementById("exportJSON").addEventListener("click", () => {
+            const data = JSON.stringify(loadBookings(), null, 2);
+            const blob = new Blob([data], { type: "application/json" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = `serenita-buchungen-${new Date().toISOString().slice(0,10)}.json`;
+            document.body.appendChild(a); a.click(); a.remove();
+        });
+
+        document.getElementById("clearAll").addEventListener("click", () => {
+            if (!confirm("Wirklich ALLE Buchungen löschen? Das lässt sich nicht rückgängig machen.")) return;
+            saveBookings([]);
+            renderBookings();
+            renderStats();
+        });
+
+        renderHours();
+        renderConfigInputs();
+        renderBookings();
+        renderStats();
+    })();
+    </script>
+</body>
+</html>

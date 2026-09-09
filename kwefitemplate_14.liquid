@@ -326,6 +326,22 @@ html,body{overflow-x:hidden;max-width:100%}
 .kw-gift-info{position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.92);color:var(--ink);font-family:var(--head);font-weight:900;font-size:11px;display:flex;align-items:center;justify-content:center;z-index:4;border:1px solid var(--card-line);transition:all .15s;font-style:italic;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
 .kw-gift:hover .kw-gift-info{background:var(--accent);border-color:var(--accent);color:#fff;transform:scale(1.1)}
 
+/* Coming-soon gift state — same card shape, refined lock treatment */
+.kw-gift--soon{cursor:default}
+.kw-gift-card--soon{background:linear-gradient(180deg,#fafbfc 0%,#f3f4f6 100%);border:1.5px dashed #d5d9df;padding:16px 12px;overflow:hidden;position:relative}
+.kw-gift-card--soon::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(17,24,39,0.018) 0px,rgba(17,24,39,0.018) 8px,transparent 8px,transparent 16px);pointer-events:none}
+.kw-gift-soon{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;width:100%;height:100%;padding:6px 4px}
+.kw-gift-soon-lock{width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px -6px rgba(17,24,39,0.35);margin-bottom:2px}
+.kw-gift-soon-lock svg{width:20px;height:20px}
+.kw-gift-soon-title{font-family:var(--mono);font-weight:700;font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink);line-height:1}
+.kw-gift-soon-sub{font-family:var(--sans);font-weight:500;font-size:10.5px;color:var(--tx);line-height:1.4;letter-spacing:0.005em;max-width:170px;margin-top:2px}
+@media (max-width:640px){
+  .kw-gift-soon-lock{width:38px;height:38px}
+  .kw-gift-soon-lock svg{width:17px;height:17px}
+  .kw-gift-soon-title{font-size:9.5px;letter-spacing:0.14em}
+  .kw-gift-soon-sub{font-size:9.5px;max-width:140px}
+}
+
 .kw-claim{margin-top:14px;text-align:center;font-family:var(--head);font-size:13px;color:var(--ink);font-weight:700}
 .kw-claim .val{color:var(--ink);font-weight:900}
 .kw-upgrade-link{color:var(--ink);font-weight:800;cursor:pointer;border-bottom:2px solid var(--ink);padding-bottom:1px;transition:.2s;text-transform:uppercase;letter-spacing:0.04em;font-family:var(--head);font-size:11.5px}
@@ -902,30 +918,28 @@ body.kwd-lock{overflow:hidden}
         </div>
 
         <div class="kw-gifts" id="kwGifts">
-          <div class="kw-gift" data-gift="0">
-            <div class="kw-gift-card">
-              <div class="kw-gift-tag"><span class="strike">[$x.xx]</span>FREE</div>
-              <div class="kw-gift-img"><img src="https://placehold.co/200x200/fafafa/9ca3af?text=Gift+1" alt="Free bonus gift 1" loading="lazy"></div>
-              <div class="kw-gift-lock">
-                <div class="kw-gift-lock-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
-                <div class="kw-gift-unlock-msg"></div>
+          <div class="kw-gift kw-gift--soon">
+            <div class="kw-gift-card kw-gift-card--soon">
+              <div class="kw-gift-soon">
+                <div class="kw-gift-soon-lock">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
+                </div>
+                <div class="kw-gift-soon-title">Coming Soon</div>
+                <div class="kw-gift-soon-sub">Free gifts will be available soon.</div>
               </div>
-              <span class="kw-gift-info">i</span>
             </div>
-            <div class="kw-gift-label">[Gift 1 Name]</div>
           </div>
 
-          <div class="kw-gift" data-gift="1">
-            <div class="kw-gift-card">
-              <div class="kw-gift-tag"><span class="strike">[$xx.xx]</span>FREE</div>
-              <div class="kw-gift-img"><img src="https://placehold.co/200x200/fafafa/9ca3af?text=Gift+2" alt="Free bonus gift 2" loading="lazy"></div>
-              <div class="kw-gift-lock">
-                <div class="kw-gift-lock-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
-                <div class="kw-gift-unlock-msg"></div>
+          <div class="kw-gift kw-gift--soon">
+            <div class="kw-gift-card kw-gift-card--soon">
+              <div class="kw-gift-soon">
+                <div class="kw-gift-soon-lock">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
+                </div>
+                <div class="kw-gift-soon-title">Coming Soon</div>
+                <div class="kw-gift-soon-sub">Free gifts will be available soon.</div>
               </div>
-              <span class="kw-gift-info">i</span>
             </div>
-            <div class="kw-gift-label">[Gift 2 Name]</div>
           </div>
 
         </div>
